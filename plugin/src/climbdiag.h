@@ -8,7 +8,7 @@ namespace cm
         int  logLevel = 1;
         bool hookPointClimb = true;
         bool equipScan = true;
-        int  maxScans = 6;
+        int  maxScans = 8;
         int  nodeBudget = 600;
         bool animSwap = false;   // not implemented in this build; see README
         bool keepAxesDrawn = false; // not implemented in this build
