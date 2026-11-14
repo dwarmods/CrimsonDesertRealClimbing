@@ -113,3 +113,24 @@ Resources already shipped unrouted in gear pack 0.3.0:
   on the wall (stamina drain).
 - [names] climb/axe/weapon-like strings reachable from ctrl, flagged ONLY-ON-WALL.
 Still unproven, so not implemented: animation selector hook, hand-prop attach, stamina scaling, rope regen.
+
+## 0.1.3-diag (Nov 15 2026)
+
+What the 0.1.2-diag run (01:34-01:38, 5 sessions) proved:
+- The actor at [climb+0x20] has 57 components; [actor+0x68][+0xB8] = ClientInventoryActorComponent,
+  [+0x20] = ClientStatusActorComponent, [+0x38] = equip, [+0x40] = character control.
+- 0 hits for 1990000/1/2 under the inventory in all sessions, but 0.1.2 had no control: it never
+  checked that ANY item key was reachable, so "not carried" and "search can't reach the item list"
+  were indistinguishable.
+- Item keys are plain u32 in memory: off the wall [equip+0x40] = 1000771 (the in-hand item key),
+  while on the wall it is -1 (hand emptied = the vanilla stow on climb).
+- Wall-vs-off leads: [[ctrl+0x140]+0x10] = 4 on the wall vs 3 off (movement mode);
+  ClientStatusActorComponent +0x477 byte = 1 on the wall, 0 off (3 of 3 sessions);
+  [ctrl+0x110] is not an RTTI object (no diffs there); the names probe found nothing (names are hashed).
+  Stamina is not inside the first 0x800 bytes of ClientStatusActorComponent.
+
+0.1.3-diag: [inv] walks the inventory 6 levels / 6000 blocks, lists every item-key-like value
+(1000000..2099999) with count and path, uses the in-hand key as a control, and logs keys added/removed
+since the previous climb; [equip] logs key-like values in the equip component on and off the wall;
+[state] diffs ctrl/move/stat subtrees (2 levels) on the wall x2 vs off x2: small-int fields that
+flip (anim node / mode / stow), and values that fall on the wall and rise off it (stamina candidates).
