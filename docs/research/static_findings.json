@@ -1,0 +1,164 @@
+{
+ "exe_sha256": "c94ad6c3ea54970a6d2da7a2719753210a7728a91698ed3405dd9125470ed98f",
+ "TimeDateStamp": "0x6aed2e85",
+ "SizeOfImage": "0x13cc4000",
+ "CheckSum": "0x137c1424",
+ "vtables": {
+  ".?AVPointClimbMovementMethod@pa@@": [
+   {
+    "rva": "0x5926780",
+    "slots": [
+     "0x760fe0",
+     "0x761a30",
+     "0xbbda10",
+     "0x761f90",
+     "0x761fa0",
+     "0x3a3730",
+     "0x762350",
+     "0x761070",
+     "0x761480",
+     "0x3a3730",
+     "0x618dc38",
+     "0x75c6d0"
+    ]
+   }
+  ],
+  ".?AVLadderClimbMovementMethod@pa@@": [
+   {
+    "rva": "0x59267d8",
+    "slots": [
+     "0x75c6d0",
+     "0x75ced0",
+     "0xbbda10",
+     "0x75cfe0",
+     "0x3a3730",
+     "0x3a3730",
+     "0x3a3730",
+     "0x75c760",
+     "0x75cdf0",
+     "0x3a3730",
+     "0x618dbc0",
+     "0x752170"
+    ]
+   }
+  ],
+  ".?AVICharacterMovementMethod@pa@@": [
+   {
+    "rva": "0x5926998",
+    "slots": [
+     "0x74f3b0",
+     "0x3a3730",
+     "0xbbda10",
+     "0x3a3730",
+     "0x3a3730",
+     "0x3a3730",
+     "0x3a3730",
+     "0x3a9ed0",
+     "0x3a3730",
+     "0x3a3730",
+     "0x618dbe8",
+     "0x74f4c0"
+    ]
+   }
+  ],
+  ".?AVClientEquipSlotActorComponent@pa@@": [
+   {
+    "rva": "0x594d478",
+    "slots": [
+     "0xa82a00",
+     "0x2285010",
+     "0x2285220",
+     "0x25f99f0",
+     "0xa837f0",
+     "0xa83820",
+     "0x3a8890",
+     "0x3a8890",
+     "0x3a8890",
+     "0x3a8890",
+     "0x2285380",
+     "0xa831c0"
+    ]
+   }
+  ],
+  ".?AVCommonEquipSlotActorComponent@pa@@": [
+   {
+    "rva": "0x5cc7960",
+    "slots": [
+     "0x2284de0",
+     "0x2285010",
+     "0x2285220",
+     "0x25f99f0",
+     "0x2285230",
+     "0x2285300",
+     "0x3a8890",
+     "0x3a8890",
+     "0x3a8890",
+     "0x3a8890",
+     "0x2285380",
+     "0x2287370"
+    ]
+   }
+  ],
+  ".?AVServerEquipSlotActorComponent@pa@@": [
+   {
+    "rva": "0x5ef28b0",
+    "slots": [
+     "0x2d64310",
+     "0x2285010",
+     "0x2285220",
+     "0x25f99f0",
+     "0x2d65610",
+     "0x2285300",
+     "0x3a8890",
+     "0x3a8890",
+     "0x3a8890",
+     "0x2d643e0",
+     "0x2285380",
+     "0x2287370"
+    ]
+   }
+  ],
+  ".?AVClientSkillActorComponent@pa@@": [
+   {
+    "rva": "0x5954400",
+    "slots": [
+     "0xb1b4e0",
+     "0xa7a810",
+     "0x1789c80",
+     "0x25f99f0",
+     "0xb1b600",
+     "0x3a3730",
+     "0xb1bab0",
+     "0x3a8890",
+     "0xb1bc90",
+     "0x3a8890",
+     "0x3a8890",
+     "0x23be340"
+    ]
+   }
+  ],
+  ".?AVAICondition_CheckEquipSlotNameItem@pa@@": [
+   {
+    "rva": "0x5c7ce28",
+    "slots": [
+     "0x2037140",
+     "0x24c2560",
+     "0x24c22a0",
+     "0x24c2400",
+     "0x24c24e0",
+     "0x24c22b0",
+     "0x629daf0",
+     "0x2036af0",
+     "0x24c3500",
+     "0x24c3280",
+     "0x24c33d0",
+     "0x24c3480"
+    ]
+   }
+  ]
+ },
+ "equip_condition_worker": {
+  "rva": "0x1837150",
+  "reads": "actor->[+0x68]->[+0x38] then calls 0x228a440"
+ }
+}
