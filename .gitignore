@@ -1,0 +1,28 @@
+# build output
+plugin/dist/
+plugin/obj/
+*.o
+__pycache__/
+*.pyc
+# Blender autosaves
+*.blend1
+*.blend2
+# never commit game files / game-derived data / dumps / logs
+*.exe
+*.dll
+*.dmp
+*.paz
+*.pamt
+*.pac
+*.pab
+*.pabgb
+*.pabgh
+*.paac
+*.paa
+*.pami
+*.staticinfobody
+*.log
+game/
+gamedata/
+local/
+.env
