@@ -79,3 +79,37 @@ to the motion player.
 ## Build
 `./build.sh` (Linux, `pip install ziglang`) -> dist/ClimbmodASI.asi.
 
+## 0.1.2-diag (Nov 15 2026)
+
+What the 0.1.1 run (exe 3663, 01:03-01:05 log) proved:
+- Hooks fine. `begin` (slot 7) fires on EVERY grab/reposition (54x in ~2 min), `end` (slot 8) only once;
+  `update2`/`post_update` tick ~25-37/s only while on the wall; slot 1 `update` never fires for PointClimb.
+  So "on the wall" = update2 ticking; a climb session ends when update2 stops for >1.5 s.
+- climb object is persistent (same `this`), owner [climb+0x18] = ClientCharacterControlActorComponent,
+  [climb+0x20] = the character actor (ClientChildOnlyInGameActor), its component array [actor+0x68],
+  entry [+0x38] = ClientEquipSlotActorComponent (RTTI-verified, matches static actor->+0x68->+0x38).
+- Item keys 1990000-2 were NOT found as dwords in the equip component, one raw hop, or 600 objects of
+  graph walk. Equip-slot detection is not established (and is now moot: design is inventory presence).
+
+Design (Stas, Nov 15): no equipping. Presence in INVENTORY drives everything:
+- one axe (1990000 or 1990001) -> single-hand plant/hold clip + one hand prop; both -> dual clip + both props;
+  crampons (1990002) -> boot visual/foot benefit independently. Props shown only while climbing, hidden after.
+  Player equipment is never modified.
+- climb-skill stamina costs scaled per item present (INI multipliers, stacked; one axe < two axes, + crampons),
+  Stamina Master style scaling of the resource use restricted to climb skills. Replaces equip stat 1000037
+  (which should later be removed from the gear pack items so the bonus is not double-counted when equipped).
+- rope rest (authored rope_rest clips, animation-only, no items) slowly regenerates stamina, INI rate relative
+  to ground regen.
+Resources already shipped unrouted in gear pack 0.3.0:
+`character/motion/1_pc/1_phm/climbmod/climbmod_piolet_{dual,left,right}_plant_hold_00.paa`.
+
+0.1.2-diag probes (read-only, worker thread, LogLevel 1 is targeted; no graph dumps):
+- [presence] component list of the climbing actor by RTTI, *InventoryActorComponent found by name, deep
+  key search (4000 blocks) under inventory and equip components, verdict per item + 64-byte context
+  around each key (count/slot fields).
+- [diff] snapshots of climb, ctrl, [ctrl+0x110] anim, [ctrl+0x140] mover, equip, stat components and key
+  blocks at +0.6 s and +1.4 s on the wall and again off the wall; logs only fields stable on the wall and
+  different off it (animation node/index, stow state). [drift] logs stat-component fields changing while
+  on the wall (stamina drain).
+- [names] climb/axe/weapon-like strings reachable from ctrl, flagged ONLY-ON-WALL.
+Still unproven, so not implemented: animation selector hook, hand-prop attach, stamina scaling, rope regen.
