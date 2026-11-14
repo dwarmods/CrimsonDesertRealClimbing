@@ -11,6 +11,7 @@
 #include <cwchar>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 extern "C" uintptr_t cm_orig[8] = {};
 extern "C" void cm_thunk0(); extern "C" void cm_thunk1(); extern "C" void cm_thunk2();
@@ -58,10 +59,10 @@ namespace
     void ReadSettings()
     {
         g_set.enabled        = IniInt(L"Enabled", 1) != 0;
-        g_set.logLevel       = IniInt(L"LogLevel", 2);
+        g_set.logLevel       = IniInt(L"LogLevel", 1);
         g_set.hookPointClimb = IniInt(L"HookPointClimb", 1) != 0;
-        g_set.equipScan      = IniInt(L"EquipScan", 1) != 0;
-        g_set.maxScans       = IniInt(L"MaxScans", 8);
+        g_set.equipScan      = IniInt(L"Probe", 1) != 0;
+        g_set.maxScans       = IniInt(L"MaxProbes", 6);
         g_set.nodeBudget     = IniInt(L"ScanNodeBudget", 600);
         g_set.animSwap       = IniInt(L"AnimSwap", 0) != 0;
         g_set.keepAxesDrawn  = IniInt(L"KeepAxesDrawn", 0) != 0;
@@ -140,29 +141,23 @@ namespace cm
 {
 namespace
 {
-    // ---- worker-side scan ------------------------------------------------------
-    struct Node { uintptr_t addr; int depth; std::string path; const char* rtti; };
-
-    struct KeyHit { uint32_t key; std::string where; bool underEquip; };
-
-    void ScanBuffer(const uint8_t* b, size_t n, const std::string& path, bool underEquip, std::vector<KeyHit>& hits)
-    {
-        for (size_t o = 0; o + 4 <= n; o += 4)
-        {
-            uint32_t v; memcpy(&v, b + o, 4);
-            if (v == kItemAxeAdze || v == kItemAxeHammer || v == kItemBoots)
-            {
-                char t[32]; snprintf(t, sizeof t, "+0x%zX", o);
-                hits.push_back({ v, path + t, underEquip });
-            }
-        }
-    }
-
-    bool IsEquipVt(uintptr_t vt)
-    {
-        const uintptr_t b = mem::Game().base;
-        return vt == b + g_b->clientEquipSlot.rva || vt == b + g_b->commonEquipSlot.rva || vt == b + g_b->serverEquipSlot.rva;
-    }
+    // ======================================================================
+    // 0.1.2-diag probes. Everything below runs on our worker thread and only
+    // READS game memory through mem::Read (VirtualQuery + ReadProcessMemory),
+    // so a stale pointer fails the read instead of faulting. Nothing is written.
+    //
+    //  A  presence probe: find the inventory (and equip) actor components by
+    //     RTTI name and deep-search them for item keys 1990000/1/2.
+    //  B  state diff: snapshot climb/control/anim/equip objects while holding
+    //     (twice, to drop per-frame noise) and after leaving the wall; log only
+    //     fields that are stable on the wall and differ off it. That is where the
+    //     current action-chart node / animation index and the stow state live.
+    //  C  strings: printable names reachable from the control component that
+    //     look like climb animation/node names, hold vs off.
+    // ======================================================================
+    bool IsKey(uint32_t v) { return v == kItemAxeAdze || v == kItemAxeHammer || v == kItemBoots; }
+    std::string Short(const char* r) { return r ? std::string(r + 4, strcspn(r + 4, "@")) : std::string("?"); }
+    bool RttiHas(uintptr_t obj, const char* needle) { const char* r = mem::RttiOfObject(obj); return r && strstr(r, needle); }
 
     size_t ReadUpTo(uintptr_t a, uint8_t* out, size_t want)
     {
@@ -170,89 +165,265 @@ namespace
         return 0;
     }
 
-    // Breadth-first over RTTI-typed objects reachable from the climb method,
-    // read-only and bounded. Reports every RTTI class seen (verbose), every
-    // EquipSlot component found, and every place a climbmod item key appears.
-    void ScanFrom(uintptr_t self, int scanNo)
-    {
-        std::vector<Node> q; q.reserve(g_set.nodeBudget);
-        std::vector<uintptr_t> seen; seen.reserve(g_set.nodeBudget * 2);
-        std::vector<KeyHit> hits;
-        std::vector<std::string> equipPaths;
-        auto visited = [&](uintptr_t a) { for (auto s : seen) if (s == a) return true; seen.push_back(a); return false; };
+    struct Hit { uint32_t key; std::string chain; uintptr_t block; size_t off; };
 
-        q.push_back({ self, 0, "climb", mem::RttiOfObject(self) });
-        visited(self);
-        static uint8_t buf[0x1000], sub[0x400];
-        for (size_t qi = 0; qi < q.size() && (int)q.size() < g_set.nodeBudget && !g_stop; ++qi)
+    // Deep bounded search below one root: follows every plausible heap pointer
+    // (typed or not) to `maxDepth`, reading 0x200 bytes per block (root: 0x1000).
+    void KeySearch(uintptr_t root, const std::string& rootName, int maxDepth, int budget, std::vector<Hit>& hits)
+    {
+        struct N { uintptr_t a; int d; std::string chain; };
+        std::vector<N> q; q.push_back({ root, 0, rootName });
+        std::vector<uintptr_t> seen; seen.push_back(root);
+        static uint8_t buf[0x1000];
+        for (size_t qi = 0; qi < q.size() && !g_stop; ++qi)
         {
-            const Node nd = q[qi];
-            uintptr_t vt = 0; mem::Get(nd.addr, vt);
-            const bool equip = IsEquipVt(vt);
-            const bool underEquip = equip || nd.path.find("EquipSlot") != std::string::npos;
-            const size_t want = equip ? 0x1000 : 0x400;
-            const size_t n = ReadUpTo(nd.addr, buf, want);
+            const N nd = q[qi];
+            const size_t n = ReadUpTo(nd.a, buf, nd.d == 0 ? 0x1000 : 0x200);
             if (!n) continue;
-            if (equip) { equipPaths.push_back(nd.path); LOGI("[scan %d] %s component at %s (%p)", scanNo, nd.rtti + 4, nd.path.c_str(), (void*)nd.addr); }
-            ScanBuffer(buf, n, nd.path, underEquip, hits);
-            for (size_t o = 8; o + 8 <= n; o += 8)
+            for (size_t o = 0; o + 4 <= n; o += 4)
+            {
+                uint32_t v; memcpy(&v, buf + o, 4);
+                if (IsKey(v) && hits.size() < 64)
+                {
+                    char t[24]; snprintf(t, sizeof t, "+0x%zX", o);
+                    hits.push_back({ v, nd.chain + t, nd.a, o });
+                }
+            }
+            if (nd.d >= maxDepth) continue;
+            for (size_t o = 0; o + 8 <= n && (int)q.size() < budget; o += 8)
             {
                 uintptr_t p; memcpy(&p, buf + o, 8);
-                if (!mem::PlausibleHeap(p) || mem::InImage(p) || visited(p)) continue;
-                char off[24]; snprintf(off, sizeof off, "+0x%zX", o);
-                if (const char* r = mem::RttiOfObject(p))
+                if (!mem::PlausibleHeap(p) || mem::InImage(p)) continue;
+                bool dup = false; for (auto s : seen) if (s == p) { dup = true; break; }
+                if (dup) continue;
+                seen.push_back(p);
+                const char* r = mem::RttiOfObject(p);
+                // Do not wander into unrelated managers/UI/physics through typed objects.
+                if (r && (strstr(r, "UIGamePlay") || strstr(r, "Manager") || strstr(r, "hk") || strstr(r, "Scene") ||
+                          strstr(r, "Actor@") || strstr(r, "Lock"))) continue;
+                char t[24]; snprintf(t, sizeof t, "+0x%zX>", o);
+                q.push_back({ p, nd.d + 1, nd.chain + t + (r ? Short(r) : std::string("[raw]")) });
+            }
+        }
+    }
+
+    struct Comps { uintptr_t actor = 0, equip = 0, inv = 0, ctrl = 0; std::string invPath, equipPath; uintptr_t stat[3] = {}; int nStat = 0; };
+
+    Comps FindComps(uintptr_t self, bool logList)
+    {
+        Comps c;
+        mem::Get(self + g_b->ownerOffset, c.ctrl);
+        mem::Get(self + 0x20, c.actor);
+        uintptr_t arr = 0; uint32_t cnt = 0;
+        mem::Get(c.actor + 0x68, arr); mem::Get(c.actor + 0x70, cnt);
+        if (logList) LOGI("[probe] actor=[climb+0x20]=%p (%s) components=[actor+0x68]=%p count?=[actor+0x70]=%u",
+                          (void*)c.actor, Short(mem::RttiOfObject(c.actor)).c_str(), (void*)arr, cnt);
+        for (unsigned i = 0; i < 96; ++i)
+        {
+            uintptr_t p = 0; if (!mem::Get(arr + 8u * i, p)) break;
+            const char* r = mem::RttiOfObject(p);
+            if (!r) { if (i >= cnt && cnt) break; continue; }
+            if (logList) LOGI("[probe]   comp[%u] actor+0x68>[+0x%X] = %s", i, 8u * i, Short(r).c_str());
+            char path[64]; snprintf(path, sizeof path, "climb+0x20>actor+0x68>[+0x%X]", 8u * i);
+            if (!c.equip && strstr(r, "EquipSlotActorComponent")) { c.equip = p; c.equipPath = path; }
+            if (!c.inv && strstr(r, "InventoryActorComponent")) { c.inv = p; c.invPath = path; }
+            if (c.nStat < 3 && (strstr(r, "Stat") || strstr(r, "Status")) && strstr(r, "Component")) c.stat[c.nStat++] = p;
+        }
+        if (!c.inv)
+        {
+            // Bounded typed walk from actor and climb object for an inventory component.
+            struct N { uintptr_t a; int d; std::string path; };
+            std::vector<N> q{ { c.actor, 0, "climb+0x20" }, { self, 0, "climb" } };
+            std::vector<uintptr_t> seen{ c.actor, self };
+            static uint8_t buf[0x800];
+            for (size_t qi = 0; qi < q.size() && q.size() < 2500 && !c.inv; ++qi)
+            {
+                const N nd = q[qi]; const size_t n = ReadUpTo(nd.a, buf, 0x800); if (!n) continue;
+                for (size_t o = 8; o + 8 <= n; o += 8)
                 {
-                    if (nd.depth < 4)
-                    {
-                        std::string path = nd.path + off + ">" + std::string(r + 4, strcspn(r + 4, "@"));
-                        q.push_back({ p, nd.depth + 1, path, r });
-                        LOGV("[scan %d] d%d %s", scanNo, nd.depth + 1, path.c_str());
-                    }
-                }
-                else if (underEquip || nd.depth < 2)
-                {
-                    // Untyped block (an array or an item record): look for keys in it,
-                    // and for typed objects one hop further.
-                    const size_t m = ReadUpTo(p, sub, sizeof sub);
-                    if (!m) continue;
-                    std::string path = nd.path + off + ">[raw]";
-                    ScanBuffer(sub, m, path, underEquip, hits);
-                    for (size_t k = 0; k + 8 <= m && nd.depth < 3; k += 8)
-                    {
-                        uintptr_t c; memcpy(&c, sub + k, 8);
-                        if (!mem::PlausibleHeap(c) || visited(c)) continue;
-                        if (const char* r = mem::RttiOfObject(c))
-                        {
-                            char o2[24]; snprintf(o2, sizeof o2, "+0x%zX>", k);
-                            q.push_back({ c, nd.depth + 1, path + o2 + std::string(r + 4, strcspn(r + 4, "@")), r });
-                        }
-                    }
+                    uintptr_t p; memcpy(&p, buf + o, 8);
+                    if (!mem::PlausibleHeap(p) || mem::InImage(p)) continue;
+                    bool dup = false; for (auto s : seen) if (s == p) { dup = true; break; } if (dup) continue; seen.push_back(p);
+                    const char* r = mem::RttiOfObject(p); if (!r) continue;
+                    char t[24]; snprintf(t, sizeof t, "+0x%zX>", o);
+                    std::string path = nd.path + t + Short(r);
+                    if (strstr(r, "InventoryActorComponent")) { c.inv = p; c.invPath = path; break; }
+                    if (nd.d < 4 && !strstr(r, "UIGamePlay")) q.push_back({ p, nd.d + 1, path });
                 }
             }
         }
-        bool adze = false, hammer = false, boots = false;
-        for (auto& h : hits)
-        {
-            LOGI("[scan %d] item key %u at %s%s", scanNo, h.key, h.where.c_str(), h.underEquip ? "  (under an EquipSlot component)" : "");
-            if (h.underEquip) { adze |= h.key == kItemAxeAdze; hammer |= h.key == kItemAxeHammer; boots |= h.key == kItemBoots; }
-        }
-        LOGI("[scan %d] visited %zu typed objects, %zu EquipSlot component(s), %zu key hit(s). Heuristic equip "
-             "verdict: AxeAdze(1990000)=%s AxeHammer(1990001)=%s Boots(1990002)=%s",
-             scanNo, q.size(), equipPaths.size(), hits.size(), adze ? "seen" : "not seen",
-             hammer ? "seen" : "not seen", boots ? "seen" : "not seen");
-        if (equipPaths.empty())
-            LOGI("[scan %d] no EquipSlot component was reachable within the budget; raise ScanNodeBudget or "
-                 "send this log back.", scanNo);
+        return c;
     }
 
+    struct PresenceResult { bool adze = false, hammer = false, boots = false; std::vector<Hit> hits; };
+
+    PresenceResult Presence(const Comps& c, int sess)
+    {
+        PresenceResult pr;
+        if (c.inv)
+        {
+            LOGI("[presence %d] inventory component %s at %s (%p)", sess, Short(mem::RttiOfObject(c.inv)).c_str(), c.invPath.c_str(), (void*)c.inv);
+            KeySearch(c.inv, "inv", 5, 4000, pr.hits);
+        }
+        else LOGI("[presence %d] no *InventoryActorComponent reachable from the climbing actor (checked its component list and a 2500-object walk).", sess);
+        const size_t invHits = pr.hits.size();
+        if (c.equip) KeySearch(c.equip, "equip", 4, 2500, pr.hits);
+        for (size_t i = 0; i < pr.hits.size() && i < 16; ++i)
+            LOGI("[presence %d] key %u at %s", sess, pr.hits[i].key, pr.hits[i].chain.c_str());
+        for (size_t i = 0; i < invHits && i < 6; ++i)
+        {
+            // Context around each inventory hit: the item count / slot fields sit next to the key.
+            uint32_t ctx[16] = {}; const uintptr_t at = pr.hits[i].block + pr.hits[i].off;
+            if (mem::Read(at - 0x20, ctx, sizeof ctx))
+                LOGI("[presence %d] ctx key %u @%s: [-0x20..+0x20) %08X %08X %08X %08X %08X %08X %08X %08X | %08X %08X %08X %08X %08X %08X %08X %08X",
+                     sess, pr.hits[i].key, pr.hits[i].chain.c_str(), ctx[0], ctx[1], ctx[2], ctx[3], ctx[4], ctx[5], ctx[6], ctx[7],
+                     ctx[8], ctx[9], ctx[10], ctx[11], ctx[12], ctx[13], ctx[14], ctx[15]);
+        }
+        for (size_t i = 0; i < invHits; ++i)
+        {
+            pr.adze |= pr.hits[i].key == kItemAxeAdze; pr.hammer |= pr.hits[i].key == kItemAxeHammer; pr.boots |= pr.hits[i].key == kItemBoots;
+        }
+        LOGI("[presence %d] inventory verdict: AxeAdze(1990000)=%s AxeHammer(1990001)=%s Crampons(1990002)=%s  (%zu inventory hit(s), %zu equip hit(s))",
+             sess, pr.adze ? "PRESENT" : "not found", pr.hammer ? "PRESENT" : "not found", pr.boots ? "PRESENT" : "not found",
+             invHits, pr.hits.size() - invHits);
+        return pr;
+    }
+
+    // ---- B: snapshots --------------------------------------------------------
+    struct Snap { std::string name; uintptr_t addr = 0; size_t n = 0; std::vector<uint8_t> d; };
+    using SnapSet = std::vector<Snap>;
+
+    void Add(SnapSet& s, const char* name, uintptr_t a, size_t want)
+    {
+        Snap sn; sn.name = name; sn.addr = a; sn.d.resize(want);
+        if (a) sn.n = ReadUpTo(a, sn.d.data(), want);
+        if (a && mem::RttiOfObject(a)) sn.name += std::string(" (") + Short(mem::RttiOfObject(a)) + ")";
+        s.push_back(std::move(sn));
+    }
+
+    SnapSet TakeSnaps(uintptr_t self, const Comps& c, const PresenceResult* pr)
+    {
+        SnapSet s;
+        uintptr_t anim = 0, mover = 0; mem::Get(c.ctrl + 0x110, anim); mem::Get(c.ctrl + 0x140, mover);
+        Add(s, "climb", self, 0x400);
+        Add(s, "ctrl=[climb+0x18]", c.ctrl, 0x800);
+        Add(s, "anim=[ctrl+0x110]", anim, 0x400);
+        Add(s, "move=[ctrl+0x140]", mover, 0x400);
+        Add(s, "equip", c.equip, 0x1000);
+        for (int i = 0; i < c.nStat; ++i) { char nm[24]; snprintf(nm, sizeof nm, "stat%d", i); Add(s, nm, c.stat[i], 0x800); }
+        if (pr)
+        {
+            int k = 0;
+            for (auto& h : pr->hits) if (k < 4) { char nm[96]; snprintf(nm, sizeof nm, "keyblock(%u @ %s)", h.key, h.chain.c_str()); Add(s, nm, h.block, 0x200); ++k; }
+        }
+        return s;
+    }
+
+    // Log fields that are identical in h1/h2 (stable while holding) and differ in off.
+    void DiffSnaps(int sess, const SnapSet& h1, const SnapSet& h2, const SnapSet& off)
+    {
+        for (size_t i = 0; i < h1.size() && i < h2.size() && i < off.size(); ++i)
+        {
+            const Snap &a = h1[i], &b = h2[i], &o = off[i];
+            if (!a.n) { LOGI("[diff %d] %s: unreadable", sess, a.name.c_str()); continue; }
+            if (a.addr != o.addr || a.addr != b.addr) { LOGI("[diff %d] %s: object moved hold=%p/%p off=%p", sess, a.name.c_str(), (void*)a.addr, (void*)b.addr, (void*)o.addr); continue; }
+            const size_t n = std::min(std::min(a.n, b.n), o.n);
+            int shown = 0, noise = 0, stable = 0;
+            for (size_t off4 = 0; off4 + 4 <= n; off4 += 4)
+            {
+                uint32_t va, vb, vo; memcpy(&va, &a.d[off4], 4); memcpy(&vb, &b.d[off4], 4); memcpy(&vo, &o.d[off4], 4);
+                if (va != vb)
+                {
+                    ++noise;
+                    // Stat components: per-frame drift while on the wall is exactly what stamina drain looks like.
+                    if (a.name.find("stat") == 0 && noise <= 24)
+                    {
+                        float fa, fb, fo; memcpy(&fa, &va, 4); memcpy(&fb, &vb, 4); memcpy(&fo, &vo, 4);
+                        LOGI("[drift %d] %s +0x%03zX  hold1=%08X (%d, %g)  hold2=%08X (%d, %g)  off=%08X (%d, %g)", sess, a.name.c_str(), off4,
+                             va, (int)va, (double)fa, vb, (int)vb, (double)fb, vo, (int)vo, (double)fo);
+                    }
+                    continue;
+                }
+                if (va == vo) continue;
+                ++stable;
+                if (shown < 40)
+                {
+                    float f; memcpy(&f, &va, 4); float fo; memcpy(&fo, &vo, 4);
+                    LOGI("[diff %d] %s +0x%03zX  hold=%08X (%d, %g)  off=%08X (%d, %g)", sess, a.name.c_str(), off4,
+                         va, (int)va, (double)f, vo, (int)vo, (double)fo);
+                    ++shown;
+                }
+            }
+            LOGI("[diff %d] %s: %d stable hold-vs-off change(s), %d per-frame noisy dword(s) ignored", sess, a.name.c_str(), stable, noise);
+        }
+    }
+
+    // ---- C: names --------------------------------------------------------------
+    bool Interesting(const char* s)
+    {
+        static const char* kw[] = { "climb", "Climb", "CLIMB", ".paa", "hang", "Hang", "piolet", "axe", "Axe", "stow", "Weapon" };
+        for (auto k : kw) if (strstr(s, k)) return true;
+        return false;
+    }
+    void Names(uintptr_t root, std::vector<std::string>& out)
+    {
+        struct N { uintptr_t a; int d; std::string chain; };
+        std::vector<N> q{ { root, 0, "ctrl" } }; std::vector<uintptr_t> seen{ root };
+        static uint8_t buf[0x400];
+        for (size_t qi = 0; qi < q.size() && q.size() < 2500 && out.size() < 200; ++qi)
+        {
+            const N nd = q[qi]; const size_t n = ReadUpTo(nd.a, buf, 0x400); if (!n) continue;
+            // inline strings
+            for (size_t i = 0; i < n; )
+            {
+                size_t j = i; while (j < n && buf[j] >= 0x20 && buf[j] < 0x7F) ++j;
+                if (j - i >= 6) { std::string s((const char*)buf + i, j - i); if (Interesting(s.c_str())) { char t[24]; snprintf(t, sizeof t, "+0x%zX", i); out.push_back(nd.chain + t + " \"" + s + "\""); } }
+                i = j + 1;
+            }
+            if (nd.d >= 3) continue;
+            for (size_t o = 0; o + 8 <= n; o += 8)
+            {
+                uintptr_t p; memcpy(&p, buf + o, 8);
+                if (!mem::PlausibleHeap(p) && !(p && mem::InImage(p))) continue;
+                bool dup = false; for (auto s : seen) if (s == p) { dup = true; break; } if (dup) continue; seen.push_back(p);
+                char t[24]; snprintf(t, sizeof t, "+0x%zX>", o);
+                if (mem::InImage(p)) continue; // vtables / static strings: not per-character state
+                const char* r = mem::RttiOfObject(p);
+                if (r && (strstr(r, "UIGamePlay") || strstr(r, "Manager") || strstr(r, "hk") || strstr(r, "Actor@"))) continue;
+                q.push_back({ p, nd.d + 1, nd.chain + t + (r ? Short(r) : std::string("[raw]")) });
+            }
+        }
+    }
+
+    void LogNames(int sess, const std::vector<std::string>& hold, const std::vector<std::string>& off)
+    {
+        int k = 0;
+        for (auto& h : hold)
+        {
+            bool inOff = false; for (auto& o : off) if (o == h) { inOff = true; break; }
+            if (inOff && sess > 1) continue;
+            if (k++ >= 40) break;
+            LOGI("[names %d] %s%s", sess, inOff ? "" : "ONLY-ON-WALL ", h.c_str());
+        }
+        LOGI("[names %d] %zu name(s) on the wall, %zu off it", sess, hold.size(), off.size());
+    }
+
+    // ---- worker --------------------------------------------------------------
     DWORD WINAPI Worker(LPVOID)
     {
-        int scans = 0; DWORD beganAt = 0; uintptr_t lastSelf = 0;
-        DWORD lastSummary = GetTickCount();
-        long prev[kSlots] = {};
+        constexpr unsigned kU2 = 1; // index of update2 in kSlotLabel
+        DWORD lastSummary = GetTickCount(), lastU2Change = 0, sessStart = 0;
+        long prev[kSlots] = {}, lastU2 = 0;
+        bool climbing = false; int sess = 0, grabs = 0, probed = 0;
+        uintptr_t self = 0;
+        Comps comps; PresenceResult pres; SnapSet h1, h2; std::vector<std::string> namesHold;
+        enum { Idle, WantH1, WantH2, WantOff } phase = Idle;
         while (!g_stop)
         {
-            WaitForSingleObject(g_event, 1000);
+            WaitForSingleObject(g_event, 100);
+            const DWORD now = GetTickCount();
+            const long u2 = g_calls[kU2].load();
+            if (u2 != lastU2) { lastU2 = u2; lastU2Change = now; }
             while (g_tail.load(std::memory_order_acquire) != g_head.load(std::memory_order_acquire))
             {
                 unsigned t = g_tail.load(std::memory_order_relaxed);
@@ -260,20 +431,48 @@ namespace
                 g_tail.store(t + 1, std::memory_order_release);
                 if (e.kind == 7)
                 {
-                    beganAt = e.tick; lastSelf = e.self;
-                    const char* r = mem::RttiOfObject(e.self);
-                    uintptr_t owner = 0; mem::Get(e.self + g_b->ownerOffset, owner);
-                    LOGI("[climb] PointClimb begin  this=%p (%s) owner=[this+0x18]=%p (%s)", (void*)e.self,
-                         r ? r : "?", (void*)owner, mem::RttiOfObject(owner) ? mem::RttiOfObject(owner) : "untyped");
-                    if (g_set.equipScan && scans < g_set.maxScans) ScanFrom(e.self, ++scans);
+                    self = e.self; ++grabs; lastU2Change = now;
+                    if (!climbing)
+                    {
+                        climbing = true; ++sess; grabs = 1; sessStart = e.tick;
+                        LOGI("[climb] session %d: PointClimb begin this=%p", sess, (void*)e.self);
+                        if (g_set.equipScan && probed < g_set.maxScans && phase == Idle) phase = WantH1;
+                    }
+                    else LOGV("[climb] grab/begin #%d this=%p", grabs, (void*)e.self);
                 }
-                else
-                    LOGI("[climb] PointClimb end    this=%p after %lu ms%s", (void*)e.self,
-                         (unsigned long)(e.tick - beganAt), e.self == lastSelf ? "" : " (different object than begin)");
+                else LOGV("[climb] PointClimb end this=%p", (void*)e.self);
             }
-            if (GetTickCount() - lastSummary >= 10000)
+            if (climbing && phase == WantH1 && now - sessStart >= 600)
             {
-                lastSummary = GetTickCount();
+                ++probed;
+                comps = FindComps(self, probed == 1);
+                pres = Presence(comps, sess);
+                h1 = TakeSnaps(self, comps, &pres);
+                namesHold.clear(); if (comps.ctrl) Names(comps.ctrl, namesHold);
+                phase = WantH2;
+            }
+            else if (climbing && phase == WantH2 && now - sessStart >= 1400)
+            {
+                h2 = TakeSnaps(self, comps, &pres);
+                phase = WantOff;
+            }
+            if (climbing && now - lastU2Change > 1500)
+            {
+                climbing = false;
+                LOGI("[climb] session %d ended: %lu ms on the wall, %d grab(s)", sess, (unsigned long)(lastU2Change - sessStart), grabs);
+                if (phase == WantOff)
+                {
+                    SnapSet off = TakeSnaps(self, comps, &pres);
+                    DiffSnaps(sess, h1, h2, off);
+                    std::vector<std::string> namesOff; if (comps.ctrl) Names(comps.ctrl, namesOff);
+                    LogNames(sess, namesHold, namesOff);
+                }
+                else if (phase != Idle) LOGI("[climb] session %d too short for the hold-vs-off diff (need >1.4 s on the wall).", sess);
+                phase = Idle;
+            }
+            if (now - lastSummary >= 10000)
+            {
+                lastSummary = now;
                 bool any = false; char line[256]; int p = 0;
                 for (unsigned i = 0; i < kSlots; ++i)
                 {
@@ -302,8 +501,8 @@ void Start(HMODULE self)
     ReadSettings();
     log::Open((g_dir + L"ClimbmodASI.log").c_str(), g_set.logLevel);
     LOGI("[mod] Climbmod ASI %s (accepts exe 1.0.0.3663 and 1.0.0.3576 only). LogLevel=%d Enabled=%d HookPointClimb=%d "
-         "EquipScan=%d MaxScans=%d ScanNodeBudget=%d AnimSwap=%d KeepAxesDrawn=%d", kVersion, g_set.logLevel, g_set.enabled, g_set.hookPointClimb,
-         g_set.equipScan, g_set.maxScans, g_set.nodeBudget, g_set.animSwap, g_set.keepAxesDrawn);
+         "Probe=%d MaxProbes=%d AnimSwap=%d KeepAxesDrawn=%d", kVersion, g_set.logLevel, g_set.enabled, g_set.hookPointClimb,
+         g_set.equipScan, g_set.maxScans, g_set.animSwap, g_set.keepAxesDrawn);
     if (!g_set.enabled) { LOGI("[mod] Enabled=0, doing nothing."); return; }
 
     char why[256];
@@ -316,7 +515,7 @@ void Start(HMODULE self)
 
     if (g_set.animSwap || g_set.keepAxesDrawn)
         LOGI("[mod] AnimSwap/KeepAxesDrawn requested but this is the diagnostic build: the animation selector "
-             "and part-draw hooks are not proven yet, so neither is applied. Vanilla animation is unchanged.");
+             "and hand-prop attach are not proven yet, so neither is applied. Vanilla animation is unchanged.");
 
     if (!g_set.hookPointClimb) { LOGI("[mod] HookPointClimb=0, nothing hooked."); return; }
     g_event = CreateEventW(nullptr, FALSE, FALSE, nullptr);
