@@ -49,6 +49,14 @@ class BuildTable(unittest.TestCase):
         for key in ("AnimSwap", "KeepAxesDrawn"):
             self.assertRegex(INI, rf"(?m)^{key}=0\s*$")
 
+    def test_ini_keys_are_read_by_plugin(self):
+        src = (ROOT / "src" / "climbdiag.cpp").read_text()
+        for key in re.findall(r"(?m)^([A-Za-z]+)=", INI):
+            self.assertIn(f'L"{key}"', src, f"INI key {key} is not read by the plugin")
+
+    def test_default_log_level_is_targeted(self):
+        self.assertRegex(INI, r"(?m)^LogLevel=1\s*$")
+
 
 if __name__ == "__main__":
     unittest.main()
