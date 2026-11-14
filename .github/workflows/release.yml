@@ -1,0 +1,37 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check "ziglang==0.17.1" pefile
+      - run: python tools/check_no_game_files.py
+      - run: python -m unittest discover -s plugin/tests -p "test_*.py" -v
+      - run: ZIG="python -m ziglang" bash plugin/build.sh
+      - run: python plugin/tests/check_dll.py
+      - name: DMM-ready zip (ASI + INI flat, as DMM expects)
+        run: |
+          mkdir -p out
+          cp plugin/dist/ClimbmodASI.asi plugin/dist/ClimbmodASI.ini out/
+          cp LICENSE out/LICENSE.txt
+          cp THIRD_PARTY_NOTICES.md out/
+          cp plugin/README.md out/ClimbmodASI-README.md
+          (cd out && zip -9 "../ClimbmodASI-${GITHUB_REF_NAME}-DMM.zip" *)
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "ClimbmodASI-${GITHUB_REF_NAME}-DMM.zip" \
+            --title "ClimbmodASI $GITHUB_REF_NAME" --generate-notes \
+            $([[ "$GITHUB_REF_NAME" == *-* ]] && echo --prerelease)
