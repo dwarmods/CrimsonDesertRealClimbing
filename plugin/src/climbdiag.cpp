@@ -270,6 +270,25 @@ namespace
     void InventoryProbe(const Comps& c, int sess)
     {
         if (!c.inv) { LOGI("[inv %d] no ClientInventoryActorComponent on the climbing actor", sess); return; }
+        static bool layoutDone = false;
+        if (!layoutDone)
+        {
+            // One-time layout of the component: typed pointers, raw pointers (+ the dword after
+            // them, often an array count) and small ints, so the item list can be found by hand
+            // if the walk below misses it.
+            layoutDone = true;
+            uint8_t hdr[0x200] = {};
+            const size_t n = ReadUpTo(c.inv, hdr, sizeof hdr);
+            for (size_t o = 8; o + 8 <= n; o += 8)
+            {
+                uintptr_t p; memcpy(&p, hdr + o, 8);
+                uint32_t lo = (uint32_t)p, hi = (uint32_t)(p >> 32);
+                if (mem::PlausibleHeap(p) && !mem::InImage(p))
+                    LOGI("[inv layout] +0x%03zX ptr %p %s next=%u", o, (void*)p, Short(mem::RttiOfObject(p)).c_str(), o + 12 <= n ? *(uint32_t*)(hdr + o + 8) : 0);
+                else if (p && (lo <= 100000 || hi <= 100000) && !mem::InImage(p))
+                    LOGI("[inv layout] +0x%03zX ints %u %u", o, lo, hi);
+            }
+        }
         auto blks = Walk(c.inv, "inv", 6, 6000, 0x200, 0x1000);
         auto keys = KeyScan(blks);
         LOGI("[inv %d] %s at %s: walked %zu blocks, %zu distinct item-key-like values (1000000..2099999)",
@@ -483,6 +502,13 @@ void Start(HMODULE self)
     LOGI("[mod] Climbmod ASI %s (accepts exe 1.0.0.3663 and 1.0.0.3576 only). LogLevel=%d Enabled=%d HookPointClimb=%d "
          "Probe=%d MaxProbes=%d AnimSwap=%d KeepAxesDrawn=%d", kVersion, g_set.logLevel, g_set.enabled, g_set.hookPointClimb,
          g_set.equipScan, g_set.maxScans, g_set.animSwap, g_set.keepAxesDrawn);
+    {
+        // DMM may leave an older INI next to a newer ASI (or the reverse); say so loudly.
+        char head[160] = {}; FILE* f = _wfopen(IniPath().c_str(), L"rb");
+        if (f) { fread(head, 1, sizeof head - 1, f); fclose(f); }
+        if (!strstr(head, kVersion))
+            LOGI("[mod] WARNING: ClimbmodASI.ini next to this ASI is not the %s INI (stale deploy?). Defaults are used for missing keys.", kVersion);
+    }
     if (!g_set.enabled) { LOGI("[mod] Enabled=0, doing nothing."); return; }
 
     char why[256];
