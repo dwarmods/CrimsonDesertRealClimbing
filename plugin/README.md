@@ -134,3 +134,17 @@ What the 0.1.2-diag run (01:34-01:38, 5 sessions) proved:
 since the previous climb; [equip] logs key-like values in the equip component on and off the wall;
 [state] diffs ctrl/move/stat subtrees (2 levels) on the wall x2 vs off x2: small-int fields that
 flip (anim node / mode / stow), and values that fall on the wall and rise off it (stamina candidates).
+
+## 0.1.4-diag (Nov 15 2026)
+
+The 12:28 run meant for 0.1.3 actually ran **0.1.2-diag**: its log header says 0.1.2-diag, and the
+game folder held the 0.1.2 ASI next to the 0.1.1 INI (LogLevel=2, MaxProbes defaulted). The DMM copy
+was 0.1.3 but was never mounted into the game folder. Result of that run (5 climbs, protocol 1-4
+plus one extra): the 0.1.2 key search reported 1990000/1/2 "not found" in every climb, including
+the ones where Stas carried the gear, so that search cannot see the inventory items. 0.1.3's
+controlled walk never ran. Stamina: no candidate (0.1.2 only sampled the status component header);
+the GamePlayState +0x240..+0x268 drifts are per-frame vectors, not stamina.
+
+0.1.4-diag = 0.1.3 probes plus: a warning when the INI next to the ASI is from another version
+(stale deploy), and a one-time [inv layout] dump of the inventory component (typed/raw pointers with
+the following count dword, small ints) so the item list can be located even if the walk misses it.

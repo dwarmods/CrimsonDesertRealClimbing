@@ -1,0 +1,515 @@
+12:28:44.814 [info] [mod] Climbmod ASI 0.1.2-diag (accepts exe 1.0.0.3663 and 1.0.0.3576 only). LogLevel=2 Enabled=1 HookPointClimb=1 Probe=1 MaxProbes=6 AnimSwap=0 KeepAxesDrawn=0
+12:28:44.818 [info] [mod] game build recognised: CrimsonDesert.exe 1.0.0.3663 (Nov 9 2026 update)
+12:28:44.818 [info] [mod] build identity and 6 RTTI vtables verified.
+12:28:44.822 [verb] [hook] PointClimb slot 1 (update) -> thunk 0
+12:28:44.822 [verb] [hook] PointClimb slot 4 (update2) -> thunk 1
+12:28:44.822 [verb] [hook] PointClimb slot 6 (post_update) -> thunk 2
+12:28:44.822 [verb] [hook] PointClimb slot 7 (begin) -> thunk 3
+12:28:44.826 [verb] [hook] PointClimb slot 8 (end) -> thunk 4
+12:28:44.826 [info] [mod] 5 of 5 PointClimbMovementMethod vtable slots observed (log-only, original always called).
+12:33:57.728 [info] [climb] session 1: PointClimb begin this=000005E729AF4B00
+12:33:58.331 [info] [probe] actor=[climb+0x20]=000005E7D5768400 (ClientChildOnlyInGameActor) components=[actor+0x68]=000005E748BFAA00 count?=[actor+0x70]=57
+12:33:58.332 [info] [probe]   comp[1] actor+0x68>[+0x8] = ClientUserLoginActorComponent
+12:33:58.334 [info] [probe]   comp[3] actor+0x68>[+0x18] = ClientChildContainerActorComponent
+12:33:58.335 [info] [probe]   comp[4] actor+0x68>[+0x20] = ClientStatusActorComponent
+12:33:58.336 [info] [probe]   comp[5] actor+0x68>[+0x28] = ClientSubLevelActorComponent
+12:33:58.337 [info] [probe]   comp[7] actor+0x68>[+0x38] = ClientEquipSlotActorComponent
+12:33:58.338 [info] [probe]   comp[8] actor+0x68>[+0x40] = ClientCharacterControlActorComponent
+12:33:58.339 [info] [probe]   comp[9] actor+0x68>[+0x48] = ClientVehicleActorComponent
+12:33:58.340 [info] [probe]   comp[10] actor+0x68>[+0x50] = ClientDetectActorComponent
+12:33:58.341 [info] [probe]   comp[11] actor+0x68>[+0x58] = ClientAiActorComponent
+12:33:58.343 [info] [probe]   comp[12] actor+0x68>[+0x60] = ClientEffectActorComponent
+12:33:58.344 [info] [probe]   comp[13] actor+0x68>[+0x68] = ClientFrameEventActorComponent
+12:33:58.345 [info] [probe]   comp[14] actor+0x68>[+0x70] = ClientCatchActorComponent
+12:33:58.346 [info] [probe]   comp[15] actor+0x68>[+0x78] = ClientRemoteCatchActorComponent
+12:33:58.347 [info] [probe]   comp[16] actor+0x68>[+0x80] = ClientAttackActorComponent
+12:33:58.348 [info] [probe]   comp[17] actor+0x68>[+0x88] = ClientProjectileActorComponent
+12:33:58.349 [info] [probe]   comp[18] actor+0x68>[+0x90] = ClientTargetActorComponent
+12:33:58.350 [info] [probe]   comp[19] actor+0x68>[+0x98] = ClientInteractionActorComponent
+12:33:58.351 [info] [probe]   comp[20] actor+0x68>[+0xA0] = ClientSelfGameEventHandlerActorComponent
+12:33:58.352 [info] [probe]   comp[21] actor+0x68>[+0xA8] = ClientSelfSequencerActorComponent
+12:33:58.353 [info] [probe]   comp[22] actor+0x68>[+0xB0] = ClientSequencerPlayDataActorComponent
+12:33:58.354 [info] [probe]   comp[23] actor+0x68>[+0xB8] = ClientInventoryActorComponent
+12:33:58.355 [info] [probe]   comp[26] actor+0x68>[+0xD0] = ClientStoreActorComponent
+12:33:58.356 [info] [probe]   comp[27] actor+0x68>[+0xD8] = ClientRepairItemActorComponent
+12:33:58.357 [info] [probe]   comp[28] actor+0x68>[+0xE0] = ClientItemExchangeActorComponent
+12:33:58.357 [info] [probe]   comp[30] actor+0x68>[+0xF0] = ClientSkillActorComponent
+12:33:58.359 [info] [probe]   comp[31] actor+0x68>[+0xF8] = ClientSelfQuestDialogActorComponent
+12:33:58.359 [info] [probe]   comp[32] actor+0x68>[+0x100] = ClientGuildActorComponent
+12:33:58.361 [info] [probe]   comp[33] actor+0x68>[+0x108] = ClientPartyActorComponent
+12:33:58.361 [info] [probe]   comp[34] actor+0x68>[+0x110] = ClientMercenaryClanActorComponent
+12:33:58.362 [info] [probe]   comp[36] actor+0x68>[+0x120] = ClientSelfWantedActorComponent
+12:33:58.363 [info] [probe]   comp[39] actor+0x68>[+0x138] = ClientSelfQuestActorComponent
+12:33:58.364 [info] [probe]   comp[40] actor+0x68>[+0x140] = ClientSelfFriendlyActorComponent
+12:33:58.366 [info] [probe]   comp[41] actor+0x68>[+0x148] = ClientSelfJournalActorComponent
+12:33:58.367 [info] [probe]   comp[42] actor+0x68>[+0x150] = ClientKnowledgeActorComponent
+12:33:58.368 [info] [probe]   comp[43] actor+0x68>[+0x158] = ClientSelfQuickTimeEventActorComponent
+12:33:58.369 [info] [probe]   comp[44] actor+0x68>[+0x160] = ClientMinimapActorComponent
+12:33:58.370 [info] [probe]   comp[45] actor+0x68>[+0x168] = ClientSelfContentsMiscActorComponent
+12:33:58.371 [info] [probe]   comp[46] actor+0x68>[+0x170] = ClientDockingActorComponent
+12:33:58.372 [info] [probe]   comp[47] actor+0x68>[+0x178] = ClientSpecialModeActorComponent
+12:33:58.373 [info] [probe]   comp[48] actor+0x68>[+0x180] = ClientForceFieldActorComponent
+12:33:58.374 [info] [probe]   comp[49] actor+0x68>[+0x188] = ClientSelfFactionActorComponent
+12:33:58.376 [info] [probe]   comp[50] actor+0x68>[+0x190] = CommonTargetFormationActorComponent
+12:33:58.376 [info] [probe]   comp[51] actor+0x68>[+0x198] = CommonGamePlayContentsActorComponent
+12:33:58.377 [info] [probe]   comp[52] actor+0x68>[+0x1A0] = ClientTransformSyncActorComponent
+12:33:58.378 [info] [probe]   comp[53] actor+0x68>[+0x1A8] = ClientNavigationActorComponent
+12:33:58.379 [info] [probe]   comp[54] actor+0x68>[+0x1B0] = ClientInputActorComponent
+12:33:58.380 [info] [probe]   comp[55] actor+0x68>[+0x1B8] = ClientHierarchyActorComponent
+12:33:58.381 [info] [probe]   comp[56] actor+0x68>[+0x1C0] = ClientGamePlayStateActorComponent
+12:33:58.382 [info] [presence 1] inventory component ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8] (000005E734C53700)
+12:33:59.668 [info] [presence 1] inventory verdict: AxeAdze(1990000)=not found AxeHammer(1990001)=not found Crampons(1990002)=not found  (0 inventory hit(s), 0 equip hit(s))
+12:33:59.986 [verb] [climb] grab/begin #2 this=000005E729AF4B00
+12:34:00.449 [verb] [climb] grab/begin #3 this=000005E729AF4B00
+12:34:05.868 [verb] [calls/10s] update=0 update2=199 post_update=199 begin=3 end=0 dropped=0
+12:34:06.820 [verb] [climb] grab/begin #4 this=000005E729AF4B00
+12:34:10.301 [verb] [climb] PointClimb end this=000005E729AF4B00
+12:34:11.906 [info] [climb] session 1 ended: 12578 ms on the wall, 4 grab(s)
+12:34:11.908 [info] [diff 1] climb (PointClimbMovementMethod) +0x02C  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:11.909 [info] [diff 1] climb (PointClimbMovementMethod) +0x034  hold=00000000 (0, 0)  off=00000001 (1, 1.4013e-45)
+12:34:11.910 [info] [diff 1] climb (PointClimbMovementMethod) +0x050  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:11.911 [info] [diff 1] climb (PointClimbMovementMethod) +0x090  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:34:11.912 [info] [diff 1] climb (PointClimbMovementMethod) +0x0A4  hold=3C90339C (1016083356, 0.0176027)  off=00000000 (0, 0)
+12:34:11.912 [info] [diff 1] climb (PointClimbMovementMethod) +0x0A8  hold=3F7B2FD0 (1065037776, 0.981198)  off=00000000 (0, 0)
+12:34:11.913 [info] [diff 1] climb (PointClimbMovementMethod) +0x0AC  hold=BDDFA89C (-1109415780, -0.109208)  off=00000000 (0, 0)
+12:34:11.914 [info] [diff 1] climb (PointClimbMovementMethod) +0x0B0  hold=3E21F357 (1042412375, 0.158155)  off=3F800000 (1065353216, 1)
+12:34:11.915 [info] [diff 1] climb (PointClimbMovementMethod) +0x0B4  hold=C632C7C3 (-969750589, -11441.9)  off=00000000 (0, 0)
+12:34:11.916 [info] [diff 1] climb (PointClimbMovementMethod) +0x0B8  hold=441E875D (1142851421, 634.115)  off=00000000 (0, 0)
+12:34:11.917 [info] [diff 1] climb (PointClimbMovementMethod) +0x0BC  hold=C59062B3 (-980393293, -4620.34)  off=00000000 (0, 0)
+12:34:11.917 [info] [diff 1] climb (PointClimbMovementMethod) +0x0CC  hold=3C90339C (1016083356, 0.0176027)  off=00000000 (0, 0)
+12:34:11.919 [info] [diff 1] climb (PointClimbMovementMethod) +0x0D0  hold=3F7B2FD0 (1065037776, 0.981198)  off=00000000 (0, 0)
+12:34:11.920 [info] [diff 1] climb (PointClimbMovementMethod) +0x0D4  hold=BDDFA89C (-1109415780, -0.109208)  off=00000000 (0, 0)
+12:34:11.921 [info] [diff 1] climb (PointClimbMovementMethod) +0x0D8  hold=3E21F357 (1042412375, 0.158155)  off=3F800000 (1065353216, 1)
+12:34:11.922 [info] [diff 1] climb (PointClimbMovementMethod) +0x0DC  hold=C632C7C3 (-969750589, -11441.9)  off=00000000 (0, 0)
+12:34:11.923 [info] [diff 1] climb (PointClimbMovementMethod) +0x0E0  hold=441E875D (1142851421, 634.115)  off=00000000 (0, 0)
+12:34:11.923 [info] [diff 1] climb (PointClimbMovementMethod) +0x0E4  hold=C59062B3 (-980393293, -4620.34)  off=00000000 (0, 0)
+12:34:11.924 [info] [diff 1] climb (PointClimbMovementMethod) +0x0F4  hold=3C90339C (1016083356, 0.0176027)  off=00000000 (0, 0)
+12:34:11.925 [info] [diff 1] climb (PointClimbMovementMethod) +0x0F8  hold=3F7B2FD0 (1065037776, 0.981198)  off=00000000 (0, 0)
+12:34:11.926 [info] [diff 1] climb (PointClimbMovementMethod) +0x0FC  hold=BDDFA89C (-1109415780, -0.109208)  off=00000000 (0, 0)
+12:34:11.927 [info] [diff 1] climb (PointClimbMovementMethod) +0x100  hold=3E21F357 (1042412375, 0.158155)  off=3F800000 (1065353216, 1)
+12:34:11.927 [info] [diff 1] climb (PointClimbMovementMethod) +0x104  hold=C632C790 (-969750640, -11441.9)  off=00000000 (0, 0)
+12:34:11.928 [info] [diff 1] climb (PointClimbMovementMethod) +0x108  hold=441E22AD (1142825645, 632.542)  off=00000000 (0, 0)
+12:34:11.929 [info] [diff 1] climb (PointClimbMovementMethod) +0x10C  hold=C59063E6 (-980392986, -4620.49)  off=00000000 (0, 0)
+12:34:11.930 [info] [diff 1] climb (PointClimbMovementMethod) +0x11C  hold=FFFCFFF5 (-196619, -nan)  off=00000000 (0, 0)
+12:34:11.931 [info] [diff 1] climb (PointClimbMovementMethod) +0x130  hold=00000002 (2, 2.8026e-45)  off=FFFFFFFF (-1, -nan)
+12:34:11.932 [info] [diff 1] climb (PointClimbMovementMethod) +0x134  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:34:11.933 [info] [diff 1] climb (PointClimbMovementMethod) +0x144  hold=3C90339C (1016083356, 0.0176027)  off=00000000 (0, 0)
+12:34:11.933 [info] [diff 1] climb (PointClimbMovementMethod) +0x148  hold=3F7B2FD0 (1065037776, 0.981198)  off=00000000 (0, 0)
+12:34:11.934 [info] [diff 1] climb (PointClimbMovementMethod) +0x14C  hold=BDDFA89C (-1109415780, -0.109208)  off=00000000 (0, 0)
+12:34:11.936 [info] [diff 1] climb (PointClimbMovementMethod) +0x150  hold=3E21F357 (1042412375, 0.158155)  off=3F800000 (1065353216, 1)
+12:34:11.937 [info] [diff 1] climb (PointClimbMovementMethod) +0x154  hold=C632C7C3 (-969750589, -11441.9)  off=00000000 (0, 0)
+12:34:11.937 [info] [diff 1] climb (PointClimbMovementMethod) +0x158  hold=441E875D (1142851421, 634.115)  off=00000000 (0, 0)
+12:34:11.939 [info] [diff 1] climb (PointClimbMovementMethod) +0x15C  hold=C59062B3 (-980393293, -4620.34)  off=00000000 (0, 0)
+12:34:11.939 [info] [diff 1] climb (PointClimbMovementMethod) +0x170  hold=00000002 (2, 2.8026e-45)  off=00000000 (0, 0)
+12:34:11.940 [info] [diff 1] climb (PointClimbMovementMethod) +0x184  hold=B40B9769 (-1274308759, -1.30005e-07)  off=00000000 (0, 0)
+12:34:11.941 [info] [diff 1] climb (PointClimbMovementMethod) +0x188  hold=3F7A4474 (1064977524, 0.977607)  off=00000000 (0, 0)
+12:34:11.942 [info] [diff 1] climb (PointClimbMovementMethod) +0x18C  hold=B528A29A (-1255628134, -6.28215e-07)  off=00000000 (0, 0)
+12:34:11.943 [info] [diff 1] climb (PointClimbMovementMethod) +0x190  hold=3E577CD7 (1045920983, 0.210437)  off=3F800000 (1065353216, 1)
+12:34:11.944 [info] [diff 1] climb (PointClimbMovementMethod): 85 stable hold-vs-off change(s), 4 per-frame noisy dword(s) ignored
+12:34:11.944 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x098  hold=00000019 (25, 3.50325e-44)  off=08000021 (134217761, 3.85188e-34)
+12:34:11.945 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x09C  hold=00008000 (32768, 4.59177e-41)  off=00000000 (0, 0)
+12:34:11.946 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x15C  hold=00000000 (0, 0)  off=00000001 (1, 1.4013e-45)
+12:34:11.947 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x180  hold=3C5BF1DE (1012658654, 0.0134244)  off=BB5BA88C (-1151620980, -0.00335172)
+12:34:11.949 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x184  hold=3F699584 (1063884164, 0.912438)  off=BE15BEBF (-1105871169, -0.146235)
+12:34:11.950 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x188  hold=BCF60107 (-1124728569, -0.0300298)  off=BA01E267 (-1174281625, -0.00049547)
+12:34:11.951 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x18C  hold=3ED0D72A (1053873962, 0.407892)  off=3F7D3F1A (1065172762, 0.989244)
+12:34:11.952 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x198  hold=00000000 (0, 0)  off=C591C800 (-980301824, -4665)
+12:34:11.953 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1DC  hold=00000001 (1, 1.4013e-45)  off=441EEB79 (1142877049, 635.679)
+12:34:11.954 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1E0  hold=9EB80000 (-1632108544, -1.94818e-20)  off=C5900000 (-980418560, -4608)
+12:34:11.955 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1E4  hold=000005E8 (1512, 2.11876e-42)  off=BF58E7DD (-1084692515, -0.847288)
+12:34:11.956 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1F8  hold=00000001 (1, 1.4013e-45)  off=00000002 (2, 2.8026e-45)
+12:34:11.957 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x29C  hold=3E1C499E (1042041246, 0.152625)  off=00000000 (0, 0)
+12:34:11.957 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A4  hold=3CB29D47 (1018338631, 0.0218035)  off=00000000 (0, 0)
+12:34:11.959 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2F8  hold=BED2A997 (-1093490281, -0.41145)  off=BE3F23F7 (-1103158281, -0.186661)
+12:34:11.960 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x300  hold=3F6953A0 (1063867296, 0.911432)  off=3F7B802B (1065058347, 0.982424)
+12:34:11.961 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x358  hold=3EB5DAD4 (1052105428, 0.355185)  off=BE3F23F7 (-1103158281, -0.186661)
+12:34:11.962 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x360  hold=3F6F4ECA (1064259274, 0.934796)  off=3F7B802B (1065058347, 0.982424)
+12:34:11.962 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x3A8  hold=FFFFFF2F (-209, -nan)  off=FFFFFF62 (-158, -nan)
+12:34:11.963 [info] [diff 1] ctrl=[climb+0x18] (ClientCharacterControlActorComponent): 19 stable hold-vs-off change(s), 11 per-frame noisy dword(s) ignored
+12:34:11.964 [info] [diff 1] anim=[ctrl+0x110]: 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:11.965 [info] [diff 1] move=[ctrl+0x140] +0x1B8  hold=0000001B (27, 3.78351e-44)  off=0000001E (30, 4.2039e-44)
+12:34:11.966 [info] [diff 1] move=[ctrl+0x140] +0x2A4  hold=3E800000 (1048576000, 0.25)  off=3E8AF550 (1049294160, 0.271403)
+12:34:11.967 [info] [diff 1] move=[ctrl+0x140] +0x2A8  hold=3F99999A (1067030938, 1.2)  off=3F82735C (1065513820, 1.01915)
+12:34:11.967 [info] [diff 1] move=[ctrl+0x140] +0x2B0  hold=DD40050B (-583006965, -8.6478e+17)  off=7DA00206 (2107638278, 2.65859e+37)
+12:34:11.969 [info] [diff 1] move=[ctrl+0x140] +0x2B4  hold=05E8B5BF (99136959, 2.18839e-35)  off=05E8B5C7 (99136967, 2.18839e-35)
+12:34:11.969 [info] [diff 1] move=[ctrl+0x140] +0x2CC  hold=BF800000 (-1082130432, -1)  off=3E19999A (1041865114, 0.15)
+12:34:11.970 [info] [diff 1] move=[ctrl+0x140] +0x310  hold=C3E0E85B (-1008670629, -449.815)  off=C3DCF5C0 (-1008929344, -441.92)
+12:34:11.971 [info] [diff 1] move=[ctrl+0x140] +0x314  hold=441DBFFF (1142800383, 631)  off=441EEB69 (1142877033, 635.678)
+12:34:11.972 [info] [diff 1] move=[ctrl+0x140] +0x318  hold=C41B91EF (-1004826129, -622.28)  off=C41B0580 (-1004862080, -620.086)
+12:34:11.973 [info] [diff 1] move=[ctrl+0x140]: 9 stable hold-vs-off change(s), 19 per-frame noisy dword(s) ignored
+12:34:11.974 [info] [diff 1] equip (ClientEquipSlotActorComponent) +0x7F4  hold=00000516 (1302, 1.82449e-42)  off=00000543 (1347, 1.88755e-42)
+12:34:11.974 [info] [diff 1] equip (ClientEquipSlotActorComponent): 1 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:11.975 [info] [diff 1] stat0 (ClientStatusActorComponent) +0x0A0  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:11.976 [info] [diff 1] stat0 (ClientStatusActorComponent) +0x474  hold=01000000 (16777216, 2.35099e-38)  off=00000000 (0, 0)
+12:34:11.977 [info] [drift 1] stat0 (ClientStatusActorComponent) +0x4C8  hold1=00045FAC (286636, 4.01663e-40)  hold2=000460D7 (286935, 4.02082e-40)  off=00048E75 (298613, 4.18446e-40)
+12:34:11.978 [info] [diff 1] stat0 (ClientStatusActorComponent): 2 stable hold-vs-off change(s), 1 per-frame noisy dword(s) ignored
+12:34:11.979 [info] [drift 1] stat1 (ClientGamePlayStateActorComponent) +0x240  hold1=00000000 (0, 0)  hold2=C0D11EC6 (-1060036922, -6.53501)  off=00000000 (0, 0)
+12:34:11.980 [info] [drift 1] stat1 (ClientGamePlayStateActorComponent) +0x244  hold1=BA7BDAD0 (-1166288176, -0.00096075)  hold2=3E855340 (1048924992, 0.260401)  off=3E693900 (1047083264, 0.227757)
+12:34:11.981 [info] [drift 1] stat1 (ClientGamePlayStateActorComponent) +0x248  hold1=41C36431 (1103324209, 24.4239)  hold2=3F378B2E (1060604718, 0.716967)  off=00000000 (0, 0)
+12:34:11.982 [info] [diff 1] stat1 (ClientGamePlayStateActorComponent) +0x250  hold=00000000 (0, 0)  off=3E2532D7 (1042625239, 0.161327)
+12:34:11.983 [info] [drift 1] stat1 (ClientGamePlayStateActorComponent) +0x258  hold1=4206CCB5 (1107741877, 33.6999)  hold2=40F33840 (1089681472, 7.60062)  off=BEF54AB1 (-1091220815, -0.479085)
+12:34:11.983 [info] [drift 1] stat1 (ClientGamePlayStateActorComponent) +0x260  hold1=41ADE414 (1101915156, 21.7364)  hold2=C130E2D6 (-1053760810, -11.0554)  off=411822D5 (1092100821, 9.5085)
+12:34:11.984 [info] [drift 1] stat1 (ClientGamePlayStateActorComponent) +0x268  hold1=C22A0B7A (-1037431942, -42.5112)  hold2=4051C3D9 (1079100377, 3.27758)  off=40AB1942 (1084954946, 5.34683)
+12:34:11.985 [info] [diff 1] stat1 (ClientGamePlayStateActorComponent) +0x338  hold=1F4BA620 (525051424, 4.31243e-20)  off=1F4BA7D0 (525051856, 4.31257e-20)
+12:34:11.986 [info] [diff 1] stat1 (ClientGamePlayStateActorComponent) +0x3B0  hold=34B10000 (884015104, 3.29688e-07)  off=34B10100 (884015360, 3.29695e-07)
+12:34:11.987 [info] [diff 1] stat1 (ClientGamePlayStateActorComponent): 3 stable hold-vs-off change(s), 6 per-frame noisy dword(s) ignored
+12:34:12.265 [info] [names 1] 0 name(s) on the wall, 0 off it
+12:34:15.877 [verb] [calls/10s] update=0 update2=103 post_update=103 begin=1 end=1 dropped=0
+12:34:20.344 [info] [climb] session 2: PointClimb begin this=000005E729AF4B00
+12:34:20.960 [info] [presence 2] inventory component ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8] (000005E734C53700)
+12:34:22.204 [info] [presence 2] inventory verdict: AxeAdze(1990000)=not found AxeHammer(1990001)=not found Crampons(1990002)=not found  (0 inventory hit(s), 0 equip hit(s))
+12:34:22.504 [verb] [climb] grab/begin #2 this=000005E729AF4B00
+12:34:23.513 [verb] [climb] grab/begin #3 this=000005E729AF4B00
+12:34:25.929 [verb] [calls/10s] update=0 update2=129 post_update=129 begin=3 end=0 dropped=0
+12:34:26.425 [verb] [climb] PointClimb end this=000005E729AF4B00
+12:34:28.031 [info] [climb] session 2 ended: 6078 ms on the wall, 3 grab(s)
+12:34:28.034 [info] [diff 2] climb (PointClimbMovementMethod) +0x034  hold=00000000 (0, 0)  off=00000001 (1, 1.4013e-45)
+12:34:28.035 [info] [diff 2] climb (PointClimbMovementMethod) +0x050  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:28.036 [info] [diff 2] climb (PointClimbMovementMethod) +0x090  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:34:28.037 [info] [diff 2] climb (PointClimbMovementMethod) +0x114  hold=441DE359 (1142809433, 631.552)  off=00000000 (0, 0)
+12:34:28.038 [info] [diff 2] climb (PointClimbMovementMethod) +0x11C  hold=FFFCFFF5 (-196619, -nan)  off=00000000 (0, 0)
+12:34:28.039 [info] [diff 2] climb (PointClimbMovementMethod) +0x134  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:34:28.040 [info] [diff 2] climb (PointClimbMovementMethod) +0x260  hold=05010000 (83951616, 6.06555e-36)  off=05000000 (83886080, 6.01853e-36)
+12:34:28.041 [info] [diff 2] climb (PointClimbMovementMethod) +0x2B8  hold=9F50ADC0 (-1622102592, -4.41894e-20)  off=00000000 (0, 0)
+12:34:28.042 [info] [diff 2] climb (PointClimbMovementMethod) +0x2BC  hold=000005E8 (1512, 2.11876e-42)  off=00000000 (0, 0)
+12:34:28.043 [info] [diff 2] climb (PointClimbMovementMethod): 9 stable hold-vs-off change(s), 76 per-frame noisy dword(s) ignored
+12:34:28.044 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x168  hold=C632C826 (-969750490, -11442)  off=C632CBAE (-969749586, -11442.9)
+12:34:28.045 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x16C  hold=441DE367 (1142809447, 631.553)  off=441D81E5 (1142784485, 630.03)
+12:34:28.046 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x170  hold=C59062CF (-980393265, -4620.35)  off=C5906698 (-980392296, -4620.82)
+12:34:28.047 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x174  hold=3FB427AB (1068771243, 1.40746)  off=00000000 (0, 0)
+12:34:28.047 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x178  hold=400F8EB1 (1074761393, 2.24308)  off=7F7FFFFF (2139095039, 3.40282e+38)
+12:34:28.048 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x17C  hold=1DB8911E (498635038, 4.88544e-21)  off=BBE30773 (-1142749325, -0.00692838)
+12:34:28.049 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1F8  hold=00000001 (1, 1.4013e-45)  off=00000005 (5, 7.00649e-45)
+12:34:28.050 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A8  hold=3F7D6D55 (1065184597, 0.98995)  off=BF72289F (-1083037537, -0.945932)
+12:34:28.051 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2B0  hold=3E10D0C3 (1041289411, 0.141421)  off=BEA6130A (-1096412406, -0.324364)
+12:34:28.052 [info] [diff 2] ctrl=[climb+0x18] (ClientCharacterControlActorComponent): 9 stable hold-vs-off change(s), 18 per-frame noisy dword(s) ignored
+12:34:28.053 [info] [diff 2] anim=[ctrl+0x110]: 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:28.054 [info] [diff 2] move=[ctrl+0x140] +0x0B8  hold=C3DD04C0 (-1008925504, -442.037)  off=C3DD96FF (-1008888065, -443.18)
+12:34:28.054 [info] [diff 2] move=[ctrl+0x140] +0x0BC  hold=441DE359 (1142809433, 631.552)  off=441D81E5 (1142784485, 630.03)
+12:34:28.055 [info] [diff 2] move=[ctrl+0x140] +0x0C0  hold=C41B1678 (-1004857736, -620.351)  off=C41B3A7D (-1004848515, -620.914)
+12:34:28.056 [info] [diff 2] move=[ctrl+0x140] +0x2A4  hold=3E800000 (1048576000, 0.25)  off=3EEC52D6 (1055675094, 0.461569)
+12:34:28.057 [info] [diff 2] move=[ctrl+0x140] +0x2A8  hold=3F99999A (1067030938, 1.2)  off=3FF19342 (1072796482, 1.88731)
+12:34:28.058 [info] [diff 2] move=[ctrl+0x140] +0x2B0  hold=5B40050B (1530922251, 5.40487e+16)  off=21200102 (555745538, 5.42114e-19)
+12:34:28.059 [info] [diff 2] move=[ctrl+0x140] +0x2B4  hold=05E89F50 (99131216, 2.18757e-35)  off=05E8B594 (99136916, 2.18839e-35)
+12:34:28.061 [info] [diff 2] move=[ctrl+0x140] +0x2FC  hold=00020100 (131328, 1.8403e-40)  off=00000100 (256, 3.58732e-43)
+12:34:28.062 [info] [diff 2] move=[ctrl+0x140] +0x368  hold=402DEC4F (1076751439, 2.71755)  off=3F9F07B8 (1067386808, 1.24242)
+12:34:28.062 [info] [diff 2] move=[ctrl+0x140] +0x39C  hold=C3DD04C0 (-1008925504, -442.037)  off=C3DD96FF (-1008888065, -443.18)
+12:34:28.063 [info] [diff 2] move=[ctrl+0x140] +0x3A0  hold=441DE359 (1142809433, 631.552)  off=441D8224 (1142784548, 630.033)
+12:34:28.064 [info] [diff 2] move=[ctrl+0x140] +0x3A4  hold=C41B1678 (-1004857736, -620.351)  off=C41B3A7D (-1004848515, -620.914)
+12:34:28.065 [info] [diff 2] move=[ctrl+0x140] +0x3F8  hold=00000000 (0, 0)  off=3D2466FF (1025795839, 0.0401373)
+12:34:28.066 [info] [diff 2] move=[ctrl+0x140]: 13 stable hold-vs-off change(s), 11 per-frame noisy dword(s) ignored
+12:34:28.067 [info] [diff 2] equip (ClientEquipSlotActorComponent): 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:28.068 [info] [diff 2] stat0 (ClientStatusActorComponent) +0x0A0  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:28.069 [info] [diff 2] stat0 (ClientStatusActorComponent) +0x474  hold=00000000 (0, 0)  off=01000000 (16777216, 2.35099e-38)
+12:34:28.069 [info] [diff 2] stat0 (ClientStatusActorComponent) +0x4C8  hold=0004B394 (308116, 4.31762e-40)  off=0004CE4B (314955, 4.41346e-40)
+12:34:28.070 [info] [diff 2] stat0 (ClientStatusActorComponent): 3 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:28.071 [info] [drift 2] stat1 (ClientGamePlayStateActorComponent) +0x240  hold1=3F1DD8FD (1058920701, 0.616592)  hold2=3E8B87CC (1049331660, 0.27252)  off=00000000 (0, 0)
+12:34:28.072 [info] [drift 2] stat1 (ClientGamePlayStateActorComponent) +0x244  hold1=B9B1C4DA (-1179532070, -0.000339067)  hold2=B99CED55 (-1180897963, -0.000299315)  off=3E40B05E (1044426846, 0.188173)
+12:34:28.073 [info] [drift 2] stat1 (ClientGamePlayStateActorComponent) +0x250  hold1=3D25EC89 (1025895561, 0.0405088)  hold2=00000000 (0, 0)  off=3C6F512F (1013928239, 0.0146068)
+12:34:28.074 [info] [drift 2] stat1 (ClientGamePlayStateActorComponent) +0x258  hold1=BF4CA2EE (-1085496594, -0.799361)  hold2=BE16E891 (-1105794927, -0.147372)  off=C18BF1A7 (-1047793241, -17.493)
+12:34:28.075 [info] [drift 2] stat1 (ClientGamePlayStateActorComponent) +0x260  hold1=4116C09B (1092010139, 9.42202)  hold2=411DA7B3 (1092462515, 9.85344)  off=4094F2EE (1083503342, 4.65465)
+12:34:28.076 [info] [drift 2] stat1 (ClientGamePlayStateActorComponent) +0x268  hold1=3F94D672 (1066718834, 1.16279)  hold2=BE7F4481 (-1098955647, -0.249285)  off=BFC1C9B8 (-1077818952, -1.51397)
+12:34:28.077 [info] [diff 2] stat1 (ClientGamePlayStateActorComponent): 0 stable hold-vs-off change(s), 6 per-frame noisy dword(s) ignored
+12:34:28.325 [info] [names 2] 0 name(s) on the wall, 0 off it
+12:34:35.944 [verb] [calls/10s] update=0 update2=11 post_update=11 begin=0 end=1 dropped=0
+12:34:41.817 [info] [climb] session 3: PointClimb begin this=000005E729AF4B00
+12:34:42.434 [info] [presence 3] inventory component ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8] (000005E734C53700)
+12:34:43.935 [info] [presence 3] inventory verdict: AxeAdze(1990000)=not found AxeHammer(1990001)=not found Crampons(1990002)=not found  (0 inventory hit(s), 0 equip hit(s))
+12:34:44.237 [verb] [climb] grab/begin #2 this=000005E729AF4B00
+12:34:44.238 [verb] [climb] grab/begin #3 this=000005E729AF4B00
+12:34:45.219 [verb] [climb] PointClimb end this=000005E729AF4B00
+12:34:46.022 [verb] [calls/10s] update=0 update2=78 post_update=78 begin=3 end=1 dropped=0
+12:34:46.735 [info] [climb] session 3 ended: 3406 ms on the wall, 3 grab(s)
+12:34:46.737 [info] [diff 3] climb (PointClimbMovementMethod) +0x050  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:46.738 [info] [diff 3] climb (PointClimbMovementMethod) +0x090  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:34:46.739 [info] [diff 3] climb (PointClimbMovementMethod) +0x0A4  hold=3C94EC7C (1016392828, 0.0181792)  off=00000000 (0, 0)
+12:34:46.740 [info] [diff 3] climb (PointClimbMovementMethod) +0x0A8  hold=3F7B15AB (1065031083, 0.980799)  off=00000000 (0, 0)
+12:34:46.741 [info] [diff 3] climb (PointClimbMovementMethod) +0x0AC  hold=BDE71736 (-1108928714, -0.112837)  off=00000000 (0, 0)
+12:34:46.742 [info] [diff 3] climb (PointClimbMovementMethod) +0x0B0  hold=3E21CF19 (1042403097, 0.158017)  off=3F800000 (1065353216, 1)
+12:34:46.742 [info] [diff 3] climb (PointClimbMovementMethod) +0x0B4  hold=C632C77E (-969750658, -11441.9)  off=00000000 (0, 0)
+12:34:46.743 [info] [diff 3] climb (PointClimbMovementMethod) +0x0B8  hold=441E875F (1142851423, 634.115)  off=00000000 (0, 0)
+12:34:46.744 [info] [diff 3] climb (PointClimbMovementMethod) +0x0BC  hold=C5906285 (-980393339, -4620.31)  off=00000000 (0, 0)
+12:34:46.745 [info] [diff 3] climb (PointClimbMovementMethod) +0x0CC  hold=3C94EC7C (1016392828, 0.0181792)  off=00000000 (0, 0)
+12:34:46.746 [info] [diff 3] climb (PointClimbMovementMethod) +0x0D0  hold=3F7B15AB (1065031083, 0.980799)  off=00000000 (0, 0)
+12:34:46.747 [info] [diff 3] climb (PointClimbMovementMethod) +0x0D4  hold=BDE71736 (-1108928714, -0.112837)  off=00000000 (0, 0)
+12:34:46.747 [info] [diff 3] climb (PointClimbMovementMethod) +0x0D8  hold=3E21CF19 (1042403097, 0.158017)  off=3F800000 (1065353216, 1)
+12:34:46.748 [info] [diff 3] climb (PointClimbMovementMethod) +0x0DC  hold=C632C77E (-969750658, -11441.9)  off=00000000 (0, 0)
+12:34:46.749 [info] [diff 3] climb (PointClimbMovementMethod) +0x0E0  hold=441E875F (1142851423, 634.115)  off=00000000 (0, 0)
+12:34:46.750 [info] [diff 3] climb (PointClimbMovementMethod) +0x0E4  hold=C5906285 (-980393339, -4620.31)  off=00000000 (0, 0)
+12:34:46.751 [info] [diff 3] climb (PointClimbMovementMethod) +0x0F4  hold=3C94EC7C (1016392828, 0.0181792)  off=00000000 (0, 0)
+12:34:46.752 [info] [diff 3] climb (PointClimbMovementMethod) +0x0F8  hold=3F7B15AB (1065031083, 0.980799)  off=00000000 (0, 0)
+12:34:46.752 [info] [diff 3] climb (PointClimbMovementMethod) +0x0FC  hold=BDE71736 (-1108928714, -0.112837)  off=00000000 (0, 0)
+12:34:46.753 [info] [diff 3] climb (PointClimbMovementMethod) +0x100  hold=3E21CF19 (1042403097, 0.158017)  off=3F800000 (1065353216, 1)
+12:34:46.754 [info] [diff 3] climb (PointClimbMovementMethod) +0x104  hold=C632C74F (-969750705, -11441.8)  off=00000000 (0, 0)
+12:34:46.755 [info] [diff 3] climb (PointClimbMovementMethod) +0x108  hold=441E229D (1142825629, 632.541)  off=00000000 (0, 0)
+12:34:46.756 [info] [diff 3] climb (PointClimbMovementMethod) +0x10C  hold=C59063A2 (-980393054, -4620.45)  off=00000000 (0, 0)
+12:34:46.757 [info] [diff 3] climb (PointClimbMovementMethod) +0x110  hold=C3DCE9E0 (-1008932384, -441.827)  off=00000000 (0, 0)
+12:34:46.757 [info] [diff 3] climb (PointClimbMovementMethod) +0x114  hold=441E229D (1142825629, 632.541)  off=00000000 (0, 0)
+12:34:46.759 [info] [diff 3] climb (PointClimbMovementMethod) +0x118  hold=C41B1D10 (-1004856048, -620.454)  off=00000000 (0, 0)
+12:34:46.759 [info] [diff 3] climb (PointClimbMovementMethod) +0x11C  hold=FFFCFFF5 (-196619, -nan)  off=00000000 (0, 0)
+12:34:46.760 [info] [diff 3] climb (PointClimbMovementMethod) +0x130  hold=00000002 (2, 2.8026e-45)  off=FFFFFFFF (-1, -nan)
+12:34:46.761 [info] [diff 3] climb (PointClimbMovementMethod) +0x134  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:34:46.762 [info] [diff 3] climb (PointClimbMovementMethod) +0x144  hold=3C94EC7C (1016392828, 0.0181792)  off=00000000 (0, 0)
+12:34:46.763 [info] [diff 3] climb (PointClimbMovementMethod) +0x148  hold=3F7B15AB (1065031083, 0.980799)  off=00000000 (0, 0)
+12:34:46.764 [info] [diff 3] climb (PointClimbMovementMethod) +0x14C  hold=BDE71736 (-1108928714, -0.112837)  off=00000000 (0, 0)
+12:34:46.765 [info] [diff 3] climb (PointClimbMovementMethod) +0x150  hold=3E21CF19 (1042403097, 0.158017)  off=3F800000 (1065353216, 1)
+12:34:46.766 [info] [diff 3] climb (PointClimbMovementMethod) +0x154  hold=C632C77E (-969750658, -11441.9)  off=00000000 (0, 0)
+12:34:46.767 [info] [diff 3] climb (PointClimbMovementMethod) +0x158  hold=441E875F (1142851423, 634.115)  off=00000000 (0, 0)
+12:34:46.767 [info] [diff 3] climb (PointClimbMovementMethod) +0x15C  hold=C5906285 (-980393339, -4620.31)  off=00000000 (0, 0)
+12:34:46.768 [info] [diff 3] climb (PointClimbMovementMethod) +0x170  hold=00000002 (2, 2.8026e-45)  off=00000000 (0, 0)
+12:34:46.769 [info] [diff 3] climb (PointClimbMovementMethod) +0x184  hold=3C94EC7C (1016392828, 0.0181792)  off=00000000 (0, 0)
+12:34:46.771 [info] [diff 3] climb (PointClimbMovementMethod) +0x188  hold=3F7B15A7 (1065031079, 0.980799)  off=00000000 (0, 0)
+12:34:46.772 [info] [diff 3] climb (PointClimbMovementMethod) +0x18C  hold=BDE71733 (-1108928717, -0.112837)  off=00000000 (0, 0)
+12:34:46.773 [info] [diff 3] climb (PointClimbMovementMethod): 83 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:46.774 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x098  hold=00000111 (273, 3.82554e-43)  off=08000021 (134217761, 3.85188e-34)
+12:34:46.776 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x15C  hold=00000000 (0, 0)  off=00000001 (1, 1.4013e-45)
+12:34:46.777 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x168  hold=C632C74F (-969750705, -11441.8)  off=C632C767 (-969750681, -11441.9)
+12:34:46.777 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x16C  hold=441E229D (1142825629, 632.541)  off=441EEBB8 (1142877112, 635.683)
+12:34:46.779 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x170  hold=C59063A2 (-980393054, -4620.45)  off=C5906095 (-980393835, -4620.07)
+12:34:46.780 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x174  hold=401B5E32 (1075535410, 2.42762)  off=00000000 (0, 0)
+12:34:46.781 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x178  hold=3FD78BF5 (1071090677, 1.68396)  off=7F7FFFFF (2139095039, 3.40282e+38)
+12:34:46.782 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x180  hold=3C5BF1DE (1012658654, 0.0134244)  off=BB5BA88C (-1151620980, -0.00335172)
+12:34:46.783 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x184  hold=3F699584 (1063884164, 0.912438)  off=BE15BEBF (-1105871169, -0.146235)
+12:34:46.784 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x188  hold=BCF60107 (-1124728569, -0.0300298)  off=BA01E267 (-1174281625, -0.00049547)
+12:34:46.785 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x18C  hold=3ED0D72A (1053873962, 0.407892)  off=3F7D3F1A (1065172762, 0.989244)
+12:34:46.785 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1F8  hold=00000001 (1, 1.4013e-45)  off=00000002 (2, 2.8026e-45)
+12:34:46.786 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x29C  hold=3DEC2A32 (1038887474, 0.115315)  off=00000000 (0, 0)
+12:34:46.787 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A0  hold=3F738B84 (1064536964, 0.951348)  off=00000000 (0, 0)
+12:34:46.788 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A4  hold=BD6C2A32 (-1116984782, -0.0576574)  off=00000000 (0, 0)
+12:34:46.789 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2F8  hold=BEA0CD86 (-1096757882, -0.314068)  off=BE40A31E (-1103060194, -0.188122)
+12:34:46.790 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x300  hold=3F730BE9 (1064504297, 0.9494)  off=3F7B6DE5 (1065053669, 0.982146)
+12:34:46.790 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x358  hold=BEA0CD86 (-1096757882, -0.314068)  off=BE40A31E (-1103060194, -0.188122)
+12:34:46.791 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x360  hold=3F730BE9 (1064504297, 0.9494)  off=3F7B6DE5 (1065053669, 0.982146)
+12:34:46.792 [info] [diff 3] ctrl=[climb+0x18] (ClientCharacterControlActorComponent): 19 stable hold-vs-off change(s), 6 per-frame noisy dword(s) ignored
+12:34:46.793 [info] [diff 3] anim=[ctrl+0x110]: 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:46.794 [info] [diff 3] move=[ctrl+0x140] +0x0A8  hold=3C94EC7F (1016392831, 0.0181792)  off=00000000 (0, 0)
+12:34:46.795 [info] [diff 3] move=[ctrl+0x140] +0x0AC  hold=3F7B15B1 (1065031089, 0.9808)  off=3F7EDAD2 (1065278162, 0.995526)
+12:34:46.796 [info] [diff 3] move=[ctrl+0x140] +0x0B0  hold=BDE7173B (-1108928709, -0.112837)  off=00000000 (0, 0)
+12:34:46.797 [info] [diff 3] move=[ctrl+0x140] +0x0B4  hold=3E21CF1D (1042403101, 0.158017)  off=3DC180C2 (1036091586, 0.0944839)
+12:34:46.797 [info] [diff 3] move=[ctrl+0x140] +0x0B8  hold=C3DCE9E0 (-1008932384, -441.827)  off=C3DCECE0 (-1008931616, -441.851)
+12:34:46.799 [info] [diff 3] move=[ctrl+0x140] +0x0BC  hold=441E229D (1142825629, 632.541)  off=441EEBC9 (1142877129, 635.684)
+12:34:46.799 [info] [diff 3] move=[ctrl+0x140] +0x0C0  hold=C41B1D10 (-1004856048, -620.454)  off=C41B04AC (-1004862292, -620.073)
+12:34:46.801 [info] [diff 3] move=[ctrl+0x140] +0x1B8  hold=0000001B (27, 3.78351e-44)  off=0000001E (30, 4.2039e-44)
+12:34:46.801 [info] [diff 3] move=[ctrl+0x140] +0x2A4  hold=3E800000 (1048576000, 0.25)  off=3E8AF550 (1049294160, 0.271403)
+12:34:46.802 [info] [diff 3] move=[ctrl+0x140] +0x2A8  hold=3F99999A (1067030938, 1.2)  off=3F82735C (1065513820, 1.01915)
+12:34:46.803 [info] [diff 3] move=[ctrl+0x140] +0x2B0  hold=D3E0050B (-740293365, -1.92431e+12)  off=71200206 (1897923078, 7.92321e+29)
+12:34:46.804 [info] [diff 3] move=[ctrl+0x140] +0x2B4  hold=05E8B538 (99136824, 2.18837e-35)  off=05E8B55D (99136861, 2.18838e-35)
+12:34:46.805 [info] [diff 3] move=[ctrl+0x140] +0x2CC  hold=BF800000 (-1082130432, -1)  off=3E19999A (1041865114, 0.15)
+12:34:46.806 [info] [diff 3] move=[ctrl+0x140] +0x310  hold=C3E2FC07 (-1008534521, -453.969)  off=C3DCECE0 (-1008931616, -441.851)
+12:34:46.807 [info] [diff 3] move=[ctrl+0x140] +0x314  hold=441E1D66 (1142824294, 632.459)  off=441EEBB8 (1142877112, 635.683)
+12:34:46.807 [info] [diff 3] move=[ctrl+0x140] +0x318  hold=C419A6AB (-1004951893, -614.604)  off=C41B04A8 (-1004862296, -620.073)
+12:34:46.808 [info] [diff 3] move=[ctrl+0x140] +0x368  hold=40349D95 (1077190037, 2.82212)  off=403CF32F (1077736239, 2.95234)
+12:34:46.809 [info] [diff 3] move=[ctrl+0x140] +0x38C  hold=3C94EC7F (1016392831, 0.0181792)  off=00000000 (0, 0)
+12:34:46.809 [info] [diff 3] move=[ctrl+0x140] +0x390  hold=3F7B15B1 (1065031089, 0.9808)  off=3F7EDAD2 (1065278162, 0.995526)
+12:34:46.811 [info] [diff 3] move=[ctrl+0x140] +0x394  hold=BDE7173B (-1108928709, -0.112837)  off=00000000 (0, 0)
+12:34:46.812 [info] [diff 3] move=[ctrl+0x140] +0x398  hold=3E21CF1D (1042403101, 0.158017)  off=3DC180C2 (1036091586, 0.0944839)
+12:34:46.813 [info] [diff 3] move=[ctrl+0x140] +0x39C  hold=C3DCE9E0 (-1008932384, -441.827)  off=C3DCECE0 (-1008931616, -441.851)
+12:34:46.814 [info] [diff 3] move=[ctrl+0x140] +0x3A0  hold=441E229D (1142825629, 632.541)  off=441EEBC9 (1142877129, 635.684)
+12:34:46.815 [info] [diff 3] move=[ctrl+0x140] +0x3A4  hold=C41B1D10 (-1004856048, -620.454)  off=C41B04AC (-1004862292, -620.073)
+12:34:46.816 [info] [diff 3] move=[ctrl+0x140]: 24 stable hold-vs-off change(s), 2 per-frame noisy dword(s) ignored
+12:34:46.817 [info] [diff 3] equip (ClientEquipSlotActorComponent): 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:46.817 [info] [diff 3] stat0 (ClientStatusActorComponent) +0x0A0  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:34:46.819 [info] [diff 3] stat0 (ClientStatusActorComponent) +0x4C8  hold=00050968 (330088, 4.62552e-40)  off=0005169D (333469, 4.6729e-40)
+12:34:46.819 [info] [diff 3] stat0 (ClientStatusActorComponent): 2 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:34:46.821 [info] [drift 3] stat1 (ClientGamePlayStateActorComponent) +0x244  hold1=3BBD6732 (1002268466, 0.00578012)  hold2=3C26B28A (1009169034, 0.0101744)  off=3E1C6CBE (1042050238, 0.152759)
+12:34:46.821 [info] [drift 3] stat1 (ClientGamePlayStateActorComponent) +0x248  hold1=3EB038C4 (1051736260, 0.344183)  hold2=00000000 (0, 0)  off=00000000 (0, 0)
+12:34:46.822 [info] [drift 3] stat1 (ClientGamePlayStateActorComponent) +0x250  hold1=00000000 (0, 0)  hold2=39B9F287 (968487559, 0.000354666)  off=00000000 (0, 0)
+12:34:46.823 [info] [drift 3] stat1 (ClientGamePlayStateActorComponent) +0x258  hold1=BE9477E6 (-1097566234, -0.289977)  hold2=3E2F6618 (1043293720, 0.171288)  off=C016DA22 (-1072244190, -2.35706)
+12:34:46.824 [info] [drift 3] stat1 (ClientGamePlayStateActorComponent) +0x260  hold1=40C560A1 (1086677153, 6.16805)  hold2=410CC5C0 (1091356096, 8.79828)  off=C006A458 (-1073306536, -2.10378)
+12:34:46.825 [info] [drift 3] stat1 (ClientGamePlayStateActorComponent) +0x268  hold1=3F301D77 (1060117879, 0.68795)  hold2=BF27D362 (-1087909022, -0.655569)  off=409FFA1D (1084226077, 4.99928)
+12:34:46.826 [info] [diff 3] stat1 (ClientGamePlayStateActorComponent) +0x338  hold=1F4BA620 (525051424, 4.31243e-20)  off=1F4BA7D0 (525051856, 4.31257e-20)
+12:34:46.827 [info] [diff 3] stat1 (ClientGamePlayStateActorComponent) +0x3B0  hold=34B10000 (884015104, 3.29688e-07)  off=34B10100 (884015360, 3.29695e-07)
+12:34:46.828 [info] [diff 3] stat1 (ClientGamePlayStateActorComponent): 2 stable hold-vs-off change(s), 6 per-frame noisy dword(s) ignored
+12:34:47.149 [info] [names 3] 0 name(s) on the wall, 0 off it
+12:35:09.352 [info] [climb] session 4: PointClimb begin this=000005E729AF4B00
+12:35:09.773 [verb] [climb] grab/begin #2 this=000005E729AF4B00
+12:35:09.990 [info] [presence 4] inventory component ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8] (000005E734C53700)
+12:35:11.464 [info] [presence 4] inventory verdict: AxeAdze(1990000)=not found AxeHammer(1990001)=not found Crampons(1990002)=not found  (0 inventory hit(s), 0 equip hit(s))
+12:35:11.760 [verb] [climb] grab/begin #3 this=000005E729AF4B00
+12:35:11.762 [verb] [climb] grab/begin #4 this=000005E729AF4B00
+12:35:12.328 [verb] [climb] grab/begin #5 this=000005E729AF4B00
+12:35:16.141 [verb] [calls/10s] update=0 update2=156 post_update=156 begin=5 end=0 dropped=0
+12:35:16.185 [verb] [climb] PointClimb end this=000005E729AF4B00
+12:35:17.691 [info] [climb] session 4 ended: 6828 ms on the wall, 5 grab(s)
+12:35:17.694 [info] [diff 4] climb (PointClimbMovementMethod) +0x02C  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:35:17.695 [info] [diff 4] climb (PointClimbMovementMethod) +0x034  hold=00000000 (0, 0)  off=00000001 (1, 1.4013e-45)
+12:35:17.696 [info] [diff 4] climb (PointClimbMovementMethod) +0x050  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:35:17.698 [info] [diff 4] climb (PointClimbMovementMethod) +0x090  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:35:17.698 [info] [diff 4] climb (PointClimbMovementMethod) +0x0A4  hold=3CA1CAC4 (1017236164, 0.01975)  off=00000000 (0, 0)
+12:35:17.700 [info] [diff 4] climb (PointClimbMovementMethod) +0x0A8  hold=3F7ACEE8 (1065012968, 0.97972)  off=00000000 (0, 0)
+12:35:17.700 [info] [diff 4] climb (PointClimbMovementMethod) +0x0AC  hold=BDFD7E0D (-1107460595, -0.123776)  off=00000000 (0, 0)
+12:35:17.702 [info] [diff 4] climb (PointClimbMovementMethod) +0x0B0  hold=3E201452 (1042289746, 0.156328)  off=3F800000 (1065353216, 1)
+12:35:17.703 [info] [diff 4] climb (PointClimbMovementMethod) +0x0B4  hold=C632C6B4 (-969750860, -11441.7)  off=00000000 (0, 0)
+12:35:17.703 [info] [diff 4] climb (PointClimbMovementMethod) +0x0B8  hold=441E80F9 (1142849785, 634.015)  off=00000000 (0, 0)
+12:35:17.704 [info] [diff 4] climb (PointClimbMovementMethod) +0x0BC  hold=C59061B8 (-980393544, -4620.21)  off=00000000 (0, 0)
+12:35:17.705 [info] [diff 4] climb (PointClimbMovementMethod) +0x0CC  hold=3CA1CAC4 (1017236164, 0.01975)  off=00000000 (0, 0)
+12:35:17.706 [info] [diff 4] climb (PointClimbMovementMethod) +0x0D0  hold=3F7ACEE8 (1065012968, 0.97972)  off=00000000 (0, 0)
+12:35:17.707 [info] [diff 4] climb (PointClimbMovementMethod) +0x0D4  hold=BDFD7E0D (-1107460595, -0.123776)  off=00000000 (0, 0)
+12:35:17.707 [info] [diff 4] climb (PointClimbMovementMethod) +0x0D8  hold=3E201452 (1042289746, 0.156328)  off=3F800000 (1065353216, 1)
+12:35:17.709 [info] [diff 4] climb (PointClimbMovementMethod) +0x0DC  hold=C632C6B4 (-969750860, -11441.7)  off=00000000 (0, 0)
+12:35:17.710 [info] [diff 4] climb (PointClimbMovementMethod) +0x0E0  hold=441E80F9 (1142849785, 634.015)  off=00000000 (0, 0)
+12:35:17.711 [info] [diff 4] climb (PointClimbMovementMethod) +0x0E4  hold=C59061B8 (-980393544, -4620.21)  off=00000000 (0, 0)
+12:35:17.711 [info] [diff 4] climb (PointClimbMovementMethod) +0x0F4  hold=3CA1CAC4 (1017236164, 0.01975)  off=00000000 (0, 0)
+12:35:17.712 [info] [diff 4] climb (PointClimbMovementMethod) +0x0F8  hold=3F7ACEE8 (1065012968, 0.97972)  off=00000000 (0, 0)
+12:35:17.713 [info] [diff 4] climb (PointClimbMovementMethod) +0x0FC  hold=BDFD7E0D (-1107460595, -0.123776)  off=00000000 (0, 0)
+12:35:17.714 [info] [diff 4] climb (PointClimbMovementMethod) +0x100  hold=3E201452 (1042289746, 0.156328)  off=3F800000 (1065353216, 1)
+12:35:17.715 [info] [diff 4] climb (PointClimbMovementMethod) +0x104  hold=C632C691 (-969750895, -11441.6)  off=00000000 (0, 0)
+12:35:17.716 [info] [diff 4] climb (PointClimbMovementMethod) +0x108  hold=441E1C08 (1142823944, 632.438)  off=00000000 (0, 0)
+12:35:17.716 [info] [diff 4] climb (PointClimbMovementMethod) +0x10C  hold=C5906291 (-980393327, -4620.32)  off=00000000 (0, 0)
+12:35:17.717 [info] [diff 4] climb (PointClimbMovementMethod) +0x11C  hold=FFFCFFF5 (-196619, -nan)  off=00000000 (0, 0)
+12:35:17.718 [info] [diff 4] climb (PointClimbMovementMethod) +0x130  hold=00000003 (3, 4.2039e-45)  off=FFFFFFFF (-1, -nan)
+12:35:17.719 [info] [diff 4] climb (PointClimbMovementMethod) +0x134  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:35:17.720 [info] [diff 4] climb (PointClimbMovementMethod) +0x144  hold=3CA1CAC4 (1017236164, 0.01975)  off=00000000 (0, 0)
+12:35:17.721 [info] [diff 4] climb (PointClimbMovementMethod) +0x148  hold=3F7ACEE8 (1065012968, 0.97972)  off=00000000 (0, 0)
+12:35:17.722 [info] [diff 4] climb (PointClimbMovementMethod) +0x14C  hold=BDFD7E0D (-1107460595, -0.123776)  off=00000000 (0, 0)
+12:35:17.723 [info] [diff 4] climb (PointClimbMovementMethod) +0x150  hold=3E201452 (1042289746, 0.156328)  off=3F800000 (1065353216, 1)
+12:35:17.723 [info] [diff 4] climb (PointClimbMovementMethod) +0x154  hold=C632C6B4 (-969750860, -11441.7)  off=00000000 (0, 0)
+12:35:17.724 [info] [diff 4] climb (PointClimbMovementMethod) +0x158  hold=441E80F9 (1142849785, 634.015)  off=00000000 (0, 0)
+12:35:17.725 [info] [diff 4] climb (PointClimbMovementMethod) +0x15C  hold=C59061B8 (-980393544, -4620.21)  off=00000000 (0, 0)
+12:35:17.726 [info] [diff 4] climb (PointClimbMovementMethod) +0x170  hold=00000003 (3, 4.2039e-45)  off=00000000 (0, 0)
+12:35:17.727 [info] [diff 4] climb (PointClimbMovementMethod) +0x188  hold=3F772807 (1064773639, 0.965455)  off=00000000 (0, 0)
+12:35:17.729 [info] [diff 4] climb (PointClimbMovementMethod) +0x18C  hold=B0800002 (-1333788670, -9.31323e-10)  off=00000000 (0, 0)
+12:35:17.729 [info] [diff 4] climb (PointClimbMovementMethod) +0x190  hold=3E8569A3 (1048930723, 0.260572)  off=3F800000 (1065353216, 1)
+12:35:17.730 [info] [diff 4] climb (PointClimbMovementMethod) +0x194  hold=C632C6E2 (-969750814, -11441.7)  off=00000000 (0, 0)
+12:35:17.731 [info] [diff 4] climb (PointClimbMovementMethod): 65 stable hold-vs-off change(s), 4 per-frame noisy dword(s) ignored
+12:35:17.732 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x098  hold=00000019 (25, 3.50325e-44)  off=00040009 (262153, 3.67355e-40)
+12:35:17.733 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x09C  hold=00008000 (32768, 4.59177e-41)  off=00022000 (139264, 1.9515e-40)
+12:35:17.734 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x164  hold=00000001 (1, 1.4013e-45)  off=00000501 (1281, 1.79506e-42)
+12:35:17.735 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1E0  hold=00000000 (0, 0)  off=B5620000 (-1251868672, -8.41916e-07)
+12:35:17.736 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1E4  hold=00000000 (0, 0)  off=000005E8 (1512, 2.11876e-42)
+12:35:17.736 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x1F8  hold=00000001 (1, 1.4013e-45)  off=00000003 (3, 4.2039e-45)
+12:35:17.737 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x29C  hold=3C875AB2 (1015503538, 0.0165227)  off=BB3421D4 (-1154211372, -0.0027486)
+12:35:17.738 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A0  hold=3E537DB5 (1045659061, 0.206534)  off=3B35F755 (993392469, 0.00277658)
+12:35:17.739 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A4  hold=BD075AB2 (-1123591502, -0.0330455)  off=BC3421D4 (-1137434156, -0.0109944)
+12:35:17.740 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2F8  hold=BF00CDCB (-1090466357, -0.50314)  off=BE9F5616 (-1096853994, -0.311204)
+12:35:17.742 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x300  hold=3F5D3C87 (1063074951, 0.864205)  off=3F7349B2 (1064520114, 0.950343)
+12:35:17.743 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x358  hold=BC80C875 (-1132410763, -0.0157206)  off=BF7FFDED (-1082130963, -0.999968)
+12:35:17.744 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x360  hold=3F7FF7E7 (1065351143, 0.999876)  off=3C026455 (1006789717, 0.00795849)
+12:35:17.744 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x3A8  hold=FFFFFF2F (-209, -nan)  off=FFFFFF31 (-207, -nan)
+12:35:17.746 [info] [diff 4] ctrl=[climb+0x18] (ClientCharacterControlActorComponent): 14 stable hold-vs-off change(s), 12 per-frame noisy dword(s) ignored
+12:35:17.746 [info] [diff 4] anim=[ctrl+0x110]: 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:35:17.747 [info] [diff 4] move=[ctrl+0x140] +0x1B8  hold=0000001B (27, 3.78351e-44)  off=0000001E (30, 4.2039e-44)
+12:35:17.748 [info] [diff 4] move=[ctrl+0x140] +0x2A4  hold=3E800000 (1048576000, 0.25)  off=3EEC52D6 (1055675094, 0.461569)
+12:35:17.749 [info] [diff 4] move=[ctrl+0x140] +0x2A8  hold=3F99999A (1067030938, 1.2)  off=3FF19342 (1072796482, 1.88731)
+12:35:17.750 [info] [diff 4] move=[ctrl+0x140] +0x2B0  hold=5640050B (1447036171, 5.2782e+13)  off=5F000102 (1593835778, 9.22366e+18)
+12:35:17.751 [info] [diff 4] move=[ctrl+0x140] +0x2F4  hold=00000100 (256, 3.58732e-43)  off=00000000 (0, 0)
+12:35:17.751 [info] [diff 4] move=[ctrl+0x140] +0x2FC  hold=00020100 (131328, 1.8403e-40)  off=00000100 (256, 3.58732e-43)
+12:35:17.752 [info] [diff 4] move=[ctrl+0x140]: 6 stable hold-vs-off change(s), 19 per-frame noisy dword(s) ignored
+12:35:17.753 [info] [diff 4] equip (ClientEquipSlotActorComponent): 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:35:17.754 [info] [diff 4] stat0 (ClientStatusActorComponent) +0x0A0  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:35:17.755 [info] [diff 4] stat0 (ClientStatusActorComponent) +0x474  hold=01000000 (16777216, 2.35099e-38)  off=00000000 (0, 0)
+12:35:17.756 [info] [drift 4] stat0 (ClientStatusActorComponent) +0x4C8  hold1=00057818 (358424, 5.02259e-40)  hold2=0005791F (358687, 5.02628e-40)  off=00059048 (364616, 5.10936e-40)
+12:35:17.757 [info] [diff 4] stat0 (ClientStatusActorComponent): 2 stable hold-vs-off change(s), 1 per-frame noisy dword(s) ignored
+12:35:17.758 [info] [drift 4] stat1 (ClientGamePlayStateActorComponent) +0x240  hold1=403422FA (1077158650, 2.81463)  hold2=00000000 (0, 0)  off=4028049C (1076364444, 2.62528)
+12:35:17.758 [info] [drift 4] stat1 (ClientGamePlayStateActorComponent) +0x244  hold1=B9C1C3EC (-1178483732, -0.000369578)  hold2=3B3CC000 (993837056, 0.0028801)  off=3985FAC0 (965081792, 0.000255546)
+12:35:17.759 [info] [drift 4] stat1 (ClientGamePlayStateActorComponent) +0x248  hold1=3D0F33AB (1024406443, 0.0349614)  hold2=40843BDD (1082407901, 4.13231)  off=3E011962 (1040259426, 0.126073)
+12:35:17.760 [info] [drift 4] stat1 (ClientGamePlayStateActorComponent) +0x258  hold1=C0F2187C (-1057875844, -7.56549)  hold2=4161646E (1096901742, 14.087)  off=C0BCFF2C (-1061355732, -5.90615)
+12:35:17.761 [info] [drift 4] stat1 (ClientGamePlayStateActorComponent) +0x260  hold1=4009A9F3 (1074375155, 2.151)  hold2=41BD09D5 (1102907861, 23.6298)  off=4176BFAD (1098301357, 15.4218)
+12:35:17.762 [info] [drift 4] stat1 (ClientGamePlayStateActorComponent) +0x268  hold1=C0EDD36F (-1058155665, -7.43206)  hold2=C1599348 (-1051094200, -13.5985)  off=C09B26DC (-1063573796, -4.84849)
+12:35:17.763 [info] [diff 4] stat1 (ClientGamePlayStateActorComponent): 0 stable hold-vs-off change(s), 6 per-frame noisy dword(s) ignored
+12:35:18.031 [info] [names 4] 0 name(s) on the wall, 0 off it
+12:35:26.154 [verb] [calls/10s] update=0 update2=1 post_update=1 begin=0 end=1 dropped=0
+12:35:29.725 [info] [climb] session 5: PointClimb begin this=000005E729AF4B00
+12:35:30.343 [info] [presence 5] inventory component ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8] (000005E734C53700)
+12:35:32.017 [info] [presence 5] inventory verdict: AxeAdze(1990000)=not found AxeHammer(1990001)=not found Crampons(1990002)=not found  (0 inventory hit(s), 0 equip hit(s))
+12:35:32.429 [verb] [climb] grab/begin #2 this=000005E729AF4B00
+12:35:33.553 [verb] [climb] grab/begin #3 this=000005E729AF4B00
+12:35:34.426 [verb] [climb] grab/begin #4 this=000005E729AF4B00
+12:35:36.232 [verb] [calls/10s] update=0 update2=152 post_update=152 begin=4 end=0 dropped=0
+12:35:36.458 [verb] [climb] PointClimb end this=000005E729AF4B00
+12:35:37.973 [info] [climb] session 5 ended: 6703 ms on the wall, 4 grab(s)
+12:35:37.976 [info] [diff 5] climb (PointClimbMovementMethod) +0x02C  hold=00000100 (256, 3.58732e-43)  off=00000000 (0, 0)
+12:35:37.977 [info] [diff 5] climb (PointClimbMovementMethod) +0x034  hold=00000000 (0, 0)  off=00000001 (1, 1.4013e-45)
+12:35:37.978 [info] [diff 5] climb (PointClimbMovementMethod) +0x050  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:35:37.979 [info] [diff 5] climb (PointClimbMovementMethod) +0x0A4  hold=B3400000 (-1287651328, -4.47035e-08)  off=00000000 (0, 0)
+12:35:37.980 [info] [diff 5] climb (PointClimbMovementMethod) +0x0A8  hold=3F768C81 (1064733825, 0.963081)  off=00000000 (0, 0)
+12:35:37.981 [info] [diff 5] climb (PointClimbMovementMethod) +0x0AC  hold=31800000 (830472192, 3.72529e-09)  off=00000000 (0, 0)
+12:35:37.982 [info] [diff 5] climb (PointClimbMovementMethod) +0x0B0  hold=3E89D5C3 (1049220547, 0.269209)  off=3F800000 (1065353216, 1)
+12:35:37.982 [info] [diff 5] climb (PointClimbMovementMethod) +0x0B4  hold=C632C46A (-969751446, -11441.1)  off=00000000 (0, 0)
+12:35:37.983 [info] [diff 5] climb (PointClimbMovementMethod) +0x0B8  hold=441E743E (1142846526, 633.816)  off=00000000 (0, 0)
+12:35:37.984 [info] [diff 5] climb (PointClimbMovementMethod) +0x0BC  hold=C5905F83 (-980394109, -4619.94)  off=00000000 (0, 0)
+12:35:37.985 [info] [diff 5] climb (PointClimbMovementMethod) +0x0CC  hold=B3400000 (-1287651328, -4.47035e-08)  off=00000000 (0, 0)
+12:35:37.986 [info] [diff 5] climb (PointClimbMovementMethod) +0x0D0  hold=3F768C81 (1064733825, 0.963081)  off=00000000 (0, 0)
+12:35:37.987 [info] [diff 5] climb (PointClimbMovementMethod) +0x0D4  hold=31800000 (830472192, 3.72529e-09)  off=00000000 (0, 0)
+12:35:37.987 [info] [diff 5] climb (PointClimbMovementMethod) +0x0D8  hold=3E89D5C3 (1049220547, 0.269209)  off=3F800000 (1065353216, 1)
+12:35:37.988 [info] [diff 5] climb (PointClimbMovementMethod) +0x0DC  hold=C632C46A (-969751446, -11441.1)  off=00000000 (0, 0)
+12:35:37.989 [info] [diff 5] climb (PointClimbMovementMethod) +0x0E0  hold=441E743E (1142846526, 633.816)  off=00000000 (0, 0)
+12:35:37.990 [info] [diff 5] climb (PointClimbMovementMethod) +0x0E4  hold=C5905F83 (-980394109, -4619.94)  off=00000000 (0, 0)
+12:35:37.991 [info] [diff 5] climb (PointClimbMovementMethod) +0x0F4  hold=B3400000 (-1287651328, -4.47035e-08)  off=00000000 (0, 0)
+12:35:37.992 [info] [diff 5] climb (PointClimbMovementMethod) +0x0F8  hold=3F768C81 (1064733825, 0.963081)  off=00000000 (0, 0)
+12:35:37.992 [info] [diff 5] climb (PointClimbMovementMethod) +0x0FC  hold=31800000 (830472192, 3.72529e-09)  off=00000000 (0, 0)
+12:35:37.993 [info] [diff 5] climb (PointClimbMovementMethod) +0x100  hold=3E89D5C3 (1049220547, 0.269209)  off=3F800000 (1065353216, 1)
+12:35:37.994 [info] [diff 5] climb (PointClimbMovementMethod) +0x104  hold=C632C400 (-969751552, -11441)  off=00000000 (0, 0)
+12:35:37.995 [info] [diff 5] climb (PointClimbMovementMethod) +0x108  hold=441E143E (1142821950, 632.316)  off=00000000 (0, 0)
+12:35:37.996 [info] [diff 5] climb (PointClimbMovementMethod) +0x10C  hold=C59060E1 (-980393759, -4620.11)  off=00000000 (0, 0)
+12:35:37.997 [info] [diff 5] climb (PointClimbMovementMethod) +0x110  hold=C3DC7FA2 (-1008959582, -440.997)  off=00000000 (0, 0)
+12:35:37.997 [info] [diff 5] climb (PointClimbMovementMethod) +0x114  hold=441E11C6 (1142821318, 632.278)  off=00000000 (0, 0)
+12:35:37.998 [info] [diff 5] climb (PointClimbMovementMethod) +0x118  hold=C41B0752 (-1004861614, -620.114)  off=00000000 (0, 0)
+12:35:37.999 [info] [diff 5] climb (PointClimbMovementMethod) +0x11C  hold=FFFCFFF5 (-196619, -nan)  off=00000000 (0, 0)
+12:35:38.000 [info] [diff 5] climb (PointClimbMovementMethod) +0x130  hold=00000001 (1, 1.4013e-45)  off=FFFFFFFF (-1, -nan)
+12:35:38.001 [info] [diff 5] climb (PointClimbMovementMethod) +0x134  hold=00000000 (0, 0)  off=FFFFFFFF (-1, -nan)
+12:35:38.002 [info] [diff 5] climb (PointClimbMovementMethod) +0x144  hold=B3400000 (-1287651328, -4.47035e-08)  off=00000000 (0, 0)
+12:35:38.003 [info] [diff 5] climb (PointClimbMovementMethod) +0x148  hold=3F768C81 (1064733825, 0.963081)  off=00000000 (0, 0)
+12:35:38.003 [info] [diff 5] climb (PointClimbMovementMethod) +0x14C  hold=31800000 (830472192, 3.72529e-09)  off=00000000 (0, 0)
+12:35:38.005 [info] [diff 5] climb (PointClimbMovementMethod) +0x150  hold=3E89D5C3 (1049220547, 0.269209)  off=3F800000 (1065353216, 1)
+12:35:38.006 [info] [diff 5] climb (PointClimbMovementMethod) +0x154  hold=C632C46A (-969751446, -11441.1)  off=00000000 (0, 0)
+12:35:38.007 [info] [diff 5] climb (PointClimbMovementMethod) +0x158  hold=441E743E (1142846526, 633.816)  off=00000000 (0, 0)
+12:35:38.008 [info] [diff 5] climb (PointClimbMovementMethod) +0x15C  hold=C5905F83 (-980394109, -4619.94)  off=00000000 (0, 0)
+12:35:38.009 [info] [diff 5] climb (PointClimbMovementMethod) +0x170  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:35:38.010 [info] [diff 5] climb (PointClimbMovementMethod) +0x184  hold=272C0000 (657195008, 2.38698e-15)  off=00000000 (0, 0)
+12:35:38.011 [info] [diff 5] climb (PointClimbMovementMethod) +0x188  hold=3F7E942B (1065260075, 0.994448)  off=00000000 (0, 0)
+12:35:38.012 [info] [diff 5] climb (PointClimbMovementMethod): 81 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:35:38.013 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x098  hold=00000011 (17, 2.38221e-44)  off=00000101 (257, 3.60134e-43)
+12:35:38.014 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x168  hold=C632C3FD (-969751555, -11441)  off=C632C3BB (-969751621, -11440.9)
+12:35:38.015 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x16C  hold=441E11FD (1142821373, 632.281)  off=441D8860 (1142786144, 630.131)
+12:35:38.016 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x170  hold=C59060EA (-980393750, -4620.11)  off=C5906288 (-980393336, -4620.32)
+12:35:38.017 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x174  hold=40011C24 (1073814564, 2.01734)  off=00000000 (0, 0)
+12:35:38.018 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x178  hold=3FEED18C (1072615820, 1.86577)  off=40AE1955 (1085151573, 5.44059)
+12:35:38.019 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x17C  hold=9188C5D3 (-1853307437, -2.15789e-28)  off=78963827 (2023110695, 2.43745e+34)
+12:35:38.020 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x29C  hold=BD8C1643 (-1114892733, -0.0684018)  off=BFC9515E (-1077325474, -1.5728)
+12:35:38.020 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A0  hold=C00EE6B5 (-1072765259, -2.23283)  off=4106363F (1090926143, 8.38824)
+12:35:38.021 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A4  hold=3EA444C5 (1050952901, 0.320837)  off=C049515E (-1068936866, -3.14559)
+12:35:38.022 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2A8  hold=3EBD74F3 (1052603635, 0.370033)  off=3EB3C674 (1051969140, 0.351123)
+12:35:38.023 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2B0  hold=3F6DD42B (1064162347, 0.929019)  off=BF6FB345 (-1083198651, -0.936329)
+12:35:38.024 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x2F8  hold=BE564CDA (-1101640486, -0.209278)  off=BE872DA2 (-1098437214, -0.26402)
+12:35:38.025 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x300  hold=3F7A54CA (1064981706, 0.977856)  off=3F76EA99 (1064757913, 0.964517)
+12:35:38.025 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x358  hold=BE564CDA (-1101640486, -0.209278)  off=BE872DA2 (-1098437214, -0.26402)
+12:35:38.026 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent) +0x360  hold=3F7A54CA (1064981706, 0.977856)  off=3F76EA99 (1064757913, 0.964517)
+12:35:38.027 [info] [diff 5] ctrl=[climb+0x18] (ClientCharacterControlActorComponent): 16 stable hold-vs-off change(s), 7 per-frame noisy dword(s) ignored
+12:35:38.028 [info] [diff 5] anim=[ctrl+0x110]: 0 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:35:38.029 [info] [diff 5] move=[ctrl+0x140] +0x0A8  hold=B3F48464 (-1275820956, -1.13862e-07)  off=00000000 (0, 0)
+12:35:38.030 [info] [diff 5] move=[ctrl+0x140] +0x0AC  hold=3F768C7F (1064733823, 0.963081)  off=3F7DB80D (1065203725, 0.99109)
+12:35:38.031 [info] [diff 5] move=[ctrl+0x140] +0x0B0  hold=B52A5299 (-1255517543, -6.34501e-07)  off=00000000 (0, 0)
+12:35:38.031 [info] [diff 5] move=[ctrl+0x140] +0x0B4  hold=3E89D5D1 (1049220561, 0.269209)  off=3E0864C4 (1040737476, 0.133197)
+12:35:38.032 [info] [diff 5] move=[ctrl+0x140] +0x0B8  hold=C3DC7FA0 (-1008959584, -440.997)  off=C3DC776D (-1008961683, -440.933)
+12:35:38.033 [info] [diff 5] move=[ctrl+0x140] +0x0BC  hold=441E11C6 (1142821318, 632.278)  off=441D8871 (1142786161, 630.132)
+12:35:38.034 [info] [diff 5] move=[ctrl+0x140] +0x0C0  hold=C41B0750 (-1004861616, -620.114)  off=C41B144A (-1004858294, -620.317)
+12:35:38.035 [info] [diff 5] move=[ctrl+0x140] +0x1B8  hold=0000001B (27, 3.78351e-44)  off=0000001E (30, 4.2039e-44)
+12:35:38.036 [info] [diff 5] move=[ctrl+0x140] +0x2A4  hold=3E800000 (1048576000, 0.25)  off=3EEC52D6 (1055675094, 0.461569)
+12:35:38.037 [info] [diff 5] move=[ctrl+0x140] +0x2A8  hold=3F99999A (1067030938, 1.2)  off=3FF19342 (1072796482, 1.88731)
+12:35:38.037 [info] [diff 5] move=[ctrl+0x140] +0x2B0  hold=ADC0050B (-1379924725, -2.18301e-11)  off=21C00102 (566231298, 1.30107e-18)
+12:35:38.038 [info] [diff 5] move=[ctrl+0x140] +0x2B4  hold=05E8B594 (99136916, 2.18839e-35)  off=05E822CD (99099341, 2.183e-35)
+12:35:38.039 [info] [diff 5] move=[ctrl+0x140] +0x2FC  hold=00020100 (131328, 1.8403e-40)  off=00000100 (256, 3.58732e-43)
+12:35:38.040 [info] [diff 5] move=[ctrl+0x140] +0x368  hold=40262C34 (1076243508, 2.59645)  off=4037F640 (1077409344, 2.8744)
+12:35:38.041 [info] [diff 5] move=[ctrl+0x140] +0x38C  hold=B3F48464 (-1275820956, -1.13862e-07)  off=00000000 (0, 0)
+12:35:38.042 [info] [diff 5] move=[ctrl+0x140] +0x390  hold=3F768C7F (1064733823, 0.963081)  off=3F7DB80D (1065203725, 0.99109)
+12:35:38.043 [info] [diff 5] move=[ctrl+0x140] +0x394  hold=B52A5299 (-1255517543, -6.34501e-07)  off=00000000 (0, 0)
+12:35:38.044 [info] [diff 5] move=[ctrl+0x140] +0x398  hold=3E89D5D1 (1049220561, 0.269209)  off=3E0864C4 (1040737476, 0.133197)
+12:35:38.044 [info] [diff 5] move=[ctrl+0x140] +0x39C  hold=C3DC7FA0 (-1008959584, -440.997)  off=C3DC776D (-1008961683, -440.933)
+12:35:38.045 [info] [diff 5] move=[ctrl+0x140] +0x3A0  hold=441E11C6 (1142821318, 632.278)  off=441D8880 (1142786176, 630.133)
+12:35:38.046 [info] [diff 5] move=[ctrl+0x140] +0x3A4  hold=C41B0750 (-1004861616, -620.114)  off=C41B144A (-1004858294, -620.317)
+12:35:38.047 [info] [diff 5] move=[ctrl+0x140]: 21 stable hold-vs-off change(s), 3 per-frame noisy dword(s) ignored
+12:35:38.048 [info] [diff 5] equip (ClientEquipSlotActorComponent) +0x7F4  hold=00000572 (1394, 1.95341e-42)  off=00000581 (1409, 1.97443e-42)
+12:35:38.049 [info] [diff 5] equip (ClientEquipSlotActorComponent): 1 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:35:38.050 [info] [diff 5] stat0 (ClientStatusActorComponent) +0x0A0  hold=00000001 (1, 1.4013e-45)  off=00000000 (0, 0)
+12:35:38.051 [info] [diff 5] stat0 (ClientStatusActorComponent) +0x4C8  hold=0005C4CA (378058, 5.29772e-40)  off=0005DD2E (384302, 5.38522e-40)
+12:35:38.052 [info] [diff 5] stat0 (ClientStatusActorComponent): 2 stable hold-vs-off change(s), 0 per-frame noisy dword(s) ignored
+12:35:38.054 [info] [drift 5] stat1 (ClientGamePlayStateActorComponent) +0x240  hold1=3E54B8FA (1045739770, 0.207737)  hold2=3ED3E055 (1054072917, 0.413821)  off=00000000 (0, 0)
+12:35:38.054 [info] [drift 5] stat1 (ClientGamePlayStateActorComponent) +0x244  hold1=BAA9A11E (-1163288290, -0.00129417)  hold2=B9E0CF6B (-1176449173, -0.000428791)  off=3DE978D0 (1038710992, 0.114)
+12:35:38.056 [info] [drift 5] stat1 (ClientGamePlayStateActorComponent) +0x248  hold1=3D8EF84D (1032779853, 0.0698095)  hold2=3CFF7A9D (1023376029, 0.0311864)  off=00000000 (0, 0)
+12:35:38.056 [info] [drift 5] stat1 (ClientGamePlayStateActorComponent) +0x258  hold1=3E8C828A (1049395850, 0.274433)  hold2=BE891C65 (-1098310555, -0.267795)  off=3E7541EC (1047871980, 0.239509)
+12:35:38.057 [info] [drift 5] stat1 (ClientGamePlayStateActorComponent) +0x260  hold1=411116DF (1091639007, 9.06808)  hold2=41135FE6 (1091788774, 9.21091)  off=C031F018 (-1070469096, -2.78028)
+12:35:38.058 [info] [drift 5] stat1 (ClientGamePlayStateActorComponent) +0x268  hold1=3D146CD6 (1024748758, 0.0362366)  hold2=3EE4F054 (1055191124, 0.447146)  off=3EA1AA90 (1050782352, 0.315754)
+12:35:38.059 [info] [diff 5] stat1 (ClientGamePlayStateActorComponent): 0 stable hold-vs-off change(s), 6 per-frame noisy dword(s) ignored
+12:35:38.372 [info] [names 5] 0 name(s) on the wall, 0 off it
+12:35:46.295 [verb] [calls/10s] update=0 update2=5 post_update=5 begin=0 end=1 dropped=0
