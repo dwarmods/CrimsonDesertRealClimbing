@@ -1,0 +1,546 @@
+19:40:53.705 [info] [mod] Climbmod ASI 0.1.4-diag (accepts exe 1.0.0.3663 and 1.0.0.3576 only). LogLevel=1 Enabled=1 HookPointClimb=1 Probe=1 MaxProbes=8 AnimSwap=0 KeepAxesDrawn=0
+19:40:53.706 [info] [mod] game build recognised: CrimsonDesert.exe 1.0.0.3663 (Nov 9 2026 update)
+19:40:53.710 [info] [mod] build identity and 6 RTTI vtables verified.
+19:40:53.710 [info] [mod] 5 of 5 PointClimbMovementMethod vtable slots observed (log-only, original always called).
+19:56:17.233 [info] [climb] session 1: PointClimb begin this=00000449F4DC2100
+19:56:17.836 [info] [probe] actor=[climb+0x20]=000004496DF8B100 (ClientChildOnlyInGameActor) components=[actor+0x68]=000004491D6F6E00 count?=[actor+0x70]=57
+19:56:17.840 [info] [probe]   comp[1] actor+0x68>[+0x8] = ClientUserLoginActorComponent
+19:56:17.841 [info] [probe]   comp[3] actor+0x68>[+0x18] = ClientChildContainerActorComponent
+19:56:17.842 [info] [probe]   comp[4] actor+0x68>[+0x20] = ClientStatusActorComponent
+19:56:17.843 [info] [probe]   comp[5] actor+0x68>[+0x28] = ClientSubLevelActorComponent
+19:56:17.844 [info] [probe]   comp[7] actor+0x68>[+0x38] = ClientEquipSlotActorComponent
+19:56:17.846 [info] [probe]   comp[8] actor+0x68>[+0x40] = ClientCharacterControlActorComponent
+19:56:17.849 [info] [probe]   comp[9] actor+0x68>[+0x48] = ClientVehicleActorComponent
+19:56:17.850 [info] [probe]   comp[10] actor+0x68>[+0x50] = ClientDetectActorComponent
+19:56:17.851 [info] [probe]   comp[11] actor+0x68>[+0x58] = ClientAiActorComponent
+19:56:17.852 [info] [probe]   comp[12] actor+0x68>[+0x60] = ClientEffectActorComponent
+19:56:17.853 [info] [probe]   comp[13] actor+0x68>[+0x68] = ClientFrameEventActorComponent
+19:56:17.854 [info] [probe]   comp[14] actor+0x68>[+0x70] = ClientCatchActorComponent
+19:56:17.856 [info] [probe]   comp[15] actor+0x68>[+0x78] = ClientRemoteCatchActorComponent
+19:56:17.858 [info] [probe]   comp[16] actor+0x68>[+0x80] = ClientAttackActorComponent
+19:56:17.859 [info] [probe]   comp[17] actor+0x68>[+0x88] = ClientProjectileActorComponent
+19:56:17.860 [info] [probe]   comp[18] actor+0x68>[+0x90] = ClientTargetActorComponent
+19:56:17.861 [info] [probe]   comp[19] actor+0x68>[+0x98] = ClientInteractionActorComponent
+19:56:17.862 [info] [probe]   comp[20] actor+0x68>[+0xA0] = ClientSelfGameEventHandlerActorComponent
+19:56:17.863 [info] [probe]   comp[21] actor+0x68>[+0xA8] = ClientSelfSequencerActorComponent
+19:56:17.864 [info] [probe]   comp[22] actor+0x68>[+0xB0] = ClientSequencerPlayDataActorComponent
+19:56:17.865 [info] [probe]   comp[23] actor+0x68>[+0xB8] = ClientInventoryActorComponent
+19:56:17.866 [info] [probe]   comp[26] actor+0x68>[+0xD0] = ClientStoreActorComponent
+19:56:17.867 [info] [probe]   comp[27] actor+0x68>[+0xD8] = ClientRepairItemActorComponent
+19:56:17.868 [info] [probe]   comp[28] actor+0x68>[+0xE0] = ClientItemExchangeActorComponent
+19:56:17.869 [info] [probe]   comp[30] actor+0x68>[+0xF0] = ClientSkillActorComponent
+19:56:17.870 [info] [probe]   comp[31] actor+0x68>[+0xF8] = ClientSelfQuestDialogActorComponent
+19:56:17.871 [info] [probe]   comp[32] actor+0x68>[+0x100] = ClientGuildActorComponent
+19:56:17.872 [info] [probe]   comp[33] actor+0x68>[+0x108] = ClientPartyActorComponent
+19:56:17.873 [info] [probe]   comp[34] actor+0x68>[+0x110] = ClientMercenaryClanActorComponent
+19:56:17.874 [info] [probe]   comp[36] actor+0x68>[+0x120] = ClientSelfWantedActorComponent
+19:56:17.874 [info] [probe]   comp[39] actor+0x68>[+0x138] = ClientSelfQuestActorComponent
+19:56:17.876 [info] [probe]   comp[40] actor+0x68>[+0x140] = ClientSelfFriendlyActorComponent
+19:56:17.877 [info] [probe]   comp[41] actor+0x68>[+0x148] = ClientSelfJournalActorComponent
+19:56:17.878 [info] [probe]   comp[42] actor+0x68>[+0x150] = ClientKnowledgeActorComponent
+19:56:17.879 [info] [probe]   comp[43] actor+0x68>[+0x158] = ClientSelfQuickTimeEventActorComponent
+19:56:17.881 [info] [probe]   comp[44] actor+0x68>[+0x160] = ClientMinimapActorComponent
+19:56:17.881 [info] [probe]   comp[45] actor+0x68>[+0x168] = ClientSelfContentsMiscActorComponent
+19:56:17.883 [info] [probe]   comp[46] actor+0x68>[+0x170] = ClientDockingActorComponent
+19:56:17.884 [info] [probe]   comp[47] actor+0x68>[+0x178] = ClientSpecialModeActorComponent
+19:56:17.885 [info] [probe]   comp[48] actor+0x68>[+0x180] = ClientForceFieldActorComponent
+19:56:17.886 [info] [probe]   comp[49] actor+0x68>[+0x188] = ClientSelfFactionActorComponent
+19:56:17.887 [info] [probe]   comp[50] actor+0x68>[+0x190] = CommonTargetFormationActorComponent
+19:56:17.888 [info] [probe]   comp[51] actor+0x68>[+0x198] = CommonGamePlayContentsActorComponent
+19:56:17.889 [info] [probe]   comp[52] actor+0x68>[+0x1A0] = ClientTransformSyncActorComponent
+19:56:17.890 [info] [probe]   comp[53] actor+0x68>[+0x1A8] = ClientNavigationActorComponent
+19:56:17.891 [info] [probe]   comp[54] actor+0x68>[+0x1B0] = ClientInputActorComponent
+19:56:17.892 [info] [probe]   comp[55] actor+0x68>[+0x1B8] = ClientHierarchyActorComponent
+19:56:17.893 [info] [probe]   comp[56] actor+0x68>[+0x1C0] = ClientGamePlayStateActorComponent
+19:56:18.038 [info] [equip 1 wall] [equip+0x40]=-1; 71 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0x60>[raw]+0x48 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0xC18>[raw]+0x24 1000645@equip+0x618>[raw]+0x190>[raw]+0x1F4 1000654@equip+0xA0>[raw]+0x8>[raw]+0x0 1000756@equip+0x618>[raw]+0x190>[raw]+0x84 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000912@equip+0xF18>[raw]+0x1B4 1000942@equip+0x918>[raw]+0x104 1001001@equip+0xF18>[raw]+0x1A4 1001304@equip+0xF18>[raw]+0x84 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0xC18>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048576@equip+0xC60>[raw]+0xF0
+19:56:18.040 [info] [inv layout] +0x008 ptr 000004496DF8B100 ClientChildOnlyInGameActor next=65537
+19:56:18.041 [info] [inv layout] +0x010 ints 65537 0
+19:56:18.042 [info] [inv layout] +0x018 ptr 00000449CEE80C80 ? next=18
+19:56:18.043 [info] [inv layout] +0x020 ints 18 18
+19:56:18.045 [info] [inv layout] +0x030 ints 0 4294967295
+19:56:18.046 [info] [inv layout] +0x048 ptr 000004496C5F6690 ? next=1
+19:56:18.047 [info] [inv layout] +0x050 ints 1 1
+19:56:18.048 [info] [inv layout] +0x058 ints 1 3
+19:56:18.049 [info] [inv layout] +0x060 ints 5 2
+19:56:18.049 [info] [inv layout] +0x068 ptr 000004496D2CB300 ? next=1826374400
+19:56:18.051 [info] [inv layout] +0x070 ptr 000004496CDC4300 ? next=0
+19:56:18.052 [info] [inv layout] +0x0B0 ints 0 4294967295
+19:56:18.053 [info] [inv layout] +0x0B8 ints 4294967295 0
+19:56:18.054 [info] [inv layout] +0x0D0 ints 0 4294967295
+19:56:18.055 [info] [inv layout] +0x0D8 ints 4294967295 0
+19:56:18.056 [info] [inv layout] +0x0E8 ints 2 50
+19:56:18.057 [info] [inv layout] +0x0F0 ints 59 49
+19:56:18.058 [info] [inv layout] +0x0F8 ptr 000004491D983A00 ? next=496515072
+19:56:18.059 [info] [inv layout] +0x100 ptr 000004491D983800 ? next=0
+19:56:18.060 [info] [inv layout] +0x118 ptr 000004496CE23810 ? next=2
+19:56:18.061 [info] [inv layout] +0x120 ints 2 2
+19:56:18.062 [info] [inv layout] +0x138 ints 0 4294967295
+19:56:18.064 [info] [inv layout] +0x140 ptr 00000449906B44B0 ? next=2
+19:56:18.065 [info] [inv layout] +0x148 ints 2 0
+19:56:18.066 [info] [inv layout] +0x188 ptr 0000000500000000 ? next=0
+19:56:18.067 [info] [inv layout] +0x1A8 ints 65535 0
+19:56:18.068 [info] [inv layout] +0x1E0 ptr 0000000500000000 ? next=0
+19:56:28.119 [info] [inv 1] ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8]: walked 6000 blocks, 788 distinct item-key-like values (1000000..2099999)
+19:56:28.121 [info] [inv 1] AxeAdze(1990000): not found
+19:56:28.122 [info] [inv 1] AxeHammer(1990001): not found
+19:56:28.123 [info] [inv 1] Crampons(1990002): not found
+19:56:28.125 [info] [inv 1]   key 1000000 x40 at inv+0x70>[raw]+0xE0
+19:56:28.126 [info] [inv 1]   key 1000001 x5 at inv+0x710>[raw]+0x140>[raw]+0x20>[raw]+0xA4
+19:56:28.127 [info] [inv 1]   key 1000002 x5 at inv+0x100>[raw]+0x0>[raw]+0x140>[raw]+0x104
+19:56:28.128 [info] [inv 1]   key 1000003 x9 at inv+0x710>[raw]+0x140>[raw]+0x20>[raw]+0x54
+19:56:28.129 [info] [inv 1]   key 1000004 x2 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x9C
+19:56:28.130 [info] [inv 1]   key 1000005 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0xB4
+19:56:28.131 [info] [inv 1]   key 1000006 x2 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0xC0
+19:56:28.132 [info] [inv 1]   key 1000007 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x108
+19:56:28.133 [info] [inv 1]   key 1000008 x1 at inv+0x518>[raw]+0x190>[raw]+0xB0>[raw]+0xCC
+19:56:28.134 [info] [inv 1]   key 1000009 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x1FC
+19:56:28.135 [info] [inv 1]   key 1000010 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x12C
+19:56:28.136 [info] [inv 1]   key 1000011 x2 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x114
+19:56:28.137 [info] [inv 1]   key 1000013 x6 at inv+0x710>[raw]+0x140>[raw]+0x20>[raw]+0x1E4
+19:56:28.138 [info] [inv 1]   key 1000014 x141 at inv+0xDA0>[raw]+0x0
+19:56:28.139 [info] [inv 1]   key 1000015 x33 at inv+0xE80>[raw]+0x30
+19:56:28.140 [info] [inv 1]   key 1000016 x5 at inv+0xF8>[raw]+0x18
+19:56:28.141 [info] [inv 1]   key 1000020 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x15C
+19:56:28.142 [info] [inv 1]   key 1000021 x2 at inv+0xAA8>[raw]+0xD8>[raw]+0x84
+19:56:28.143 [info] [inv 1]   key 1000024 x38 at inv+0xE80>[raw]+0x18
+19:56:28.145 [info] [inv 1]   key 1000026 x2 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x168
+19:56:28.146 [info] [inv 1]   key 1000030 x1 at inv+0x118>[raw]+0x60>[raw]+0x124
+19:56:28.147 [info] [inv 1]   key 1000031 x1 at inv+0x48>[raw]+0x68>[raw]+0xF0>[raw]+0x1E0
+19:56:28.147 [info] [inv 1]   key 1000032 x1 at inv+0x118>[raw]+0xC0>[raw]+0x60>[raw]+0x164
+19:56:28.149 [info] [inv 1]   key 1000037 x2 at inv+0xE90>[raw]+0x80>[raw]+0x64
+19:56:28.150 [info] [inv 1]   key 1000041 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x19C
+19:56:28.151 [info] [inv 1]   key 1000044 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x10
+19:56:28.151 [info] [inv 1]   key 1000051 x1 at inv+0x48>[raw]+0x68>[raw]+0xF0>[raw]+0x1E8
+19:56:28.153 [info] [inv 1]   key 1000053 x3 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x1D4
+19:56:28.154 [info] [inv 1]   key 1000055 x2 at inv+0x18>[raw]+0x8>[raw]+0x0>[raw]+0x0
+19:56:28.155 [info] [inv 1]   key 1000059 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x88
+19:56:28.155 [info] [inv 1]   key 1000060 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x28
+19:56:28.157 [info] [inv 1]   key 1000061 x11 at inv+0xF8>[raw]+0x160
+19:56:28.157 [info] [inv 1]   key 1000063 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0x16C
+19:56:28.158 [info] [inv 1]   key 1000064 x1 at inv+0xA18>[raw]+0x148>ActionChartPackage_BaseData+0x18>[raw]+0x144
+19:56:28.159 [info] [inv 1]   key 1000067 x2 at inv+0x48>[raw]+0x68>[raw]+0xF0>[raw]+0x1F8
+19:56:28.161 [info] [inv 1]   key 1000069 x1 at inv+0xA90>[raw]+0x98>ClientFactionManager+0x50>[raw]+0xB8
+19:56:28.161 [info] [inv 1]   key 1000070 x1 at inv+0x100>[raw]+0x68>[raw]+0x1C0>[raw]+0xF4
+19:56:28.163 [info] [inv 1]   key 1000071 x2 at inv+0x710>[raw]+0x140>[raw]+0x18>[raw]+0x4
+19:56:28.163 [info] [inv 1]   key 1000080 x1 at inv+0x100>[raw]+0x70>[raw]+0xE0>[raw]+0xE4
+19:56:28.164 [info] [inv 1]   key 1000082 x1 at inv+0x18>[raw]+0x0>[raw]+0x0>[raw]+0xC8
+19:56:29.967 [info] [climb] session 1 ended: 11140 ms on the wall, 4 grab(s)
+19:56:30.371 [info] [equip 1 off] [equip+0x40]=-1; 94 key-like value(s): 1000014@equip+0x6B0>[raw]+0x30 1000015@equip+0x6B0>[raw]+0x48 1000545@equip+0xC18>[raw]+0x24 1000645@equip+0x618>[raw]+0x190>[raw]+0x1F4 1000654@equip+0xA0>[raw]+0x8>[raw]+0x0 1000756@equip+0x618>[raw]+0x190>[raw]+0x84 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000912@equip+0xF18>[raw]+0x1B4 1000942@equip+0x918>[raw]+0x104 1001001@equip+0xF18>[raw]+0x1A4 1001304@equip+0xF18>[raw]+0x84 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0xC18>[raw]+0x164 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048576@equip+0xC60>[raw]+0xF0 1048577@equip+0x680>[raw]+0x38>[raw]+0x1C0 1048591@equip+0x670>[raw]+0xB0>[raw]+0x0 1048599@equip+0x670>[raw]+0xB0>[raw]+0x30
+19:56:31.672 [info] [stamina? 1] move move+0x178>[raw]+0x11C float wall 0.0182248 -> 0.0178948, off 0.0180389 -> 0.0237544
+19:56:31.674 [info] [stamina? 1] move move+0x178>[raw]+0x120 float wall 0.0182248 -> 0.0178948, off 0.0180389 -> 0.0237544
+19:56:31.675 [info] [stamina? 1] move move+0x178>[raw]+0x14C int wall 272 -> 268, off 251 -> 255
+19:56:31.676 [info] [stamina? 1] move move+0x178>[raw]+0x15C float wall 0.0182248 -> 0.0178948, off 0.0180389 -> 0.0244558
+19:56:31.677 [info] [stamina? 1] move move+0x178>[raw]+0x160 float wall 0.0182248 -> 0.0178948, off 0.0180389 -> 0.0244558
+19:56:31.678 [info] [stamina? 1] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x40 int wall 120 -> 0, off 0 -> 124
+19:56:31.679 [info] [stamina? 1] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x20 float wall 1.17746 -> 1.16721, off 1.10389 -> 1.41718
+19:56:31.680 [info] [state 1] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x54  wall=590  off=576
+19:56:31.681 [info] [stamina? 1] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1E0 int wall 17 -> 0, off 12 -> 16
+19:56:31.682 [info] [state 1] ctrl ctrl+0x90>[raw]+0x1E8>[raw]+0x1B0  wall=30  off=31
+19:56:31.683 [info] [state 1] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x108  wall=0  off=3324419043
+19:56:31.684 [info] [state 1] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x10C  wall=0  off=1142531271
+19:56:31.685 [info] [state 1] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x110  wall=0  off=3312563090
+19:56:31.687 [info] [state 1] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x118  wall=3088  off=364508
+19:56:31.687 [info] [state 1] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x11C  wall=1  off=16777217
+19:56:31.689 [info] [state 1] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x124  wall=24  off=18
+19:56:31.690 [info] [state 1] stat stat+0x490>[raw]+0x178>[raw]+0xA8  wall=127  off=128
+19:56:31.691 [info] [state 1] stat stat+0x490>[raw]+0x178>[raw]+0x108  wall=124  off=125
+19:56:31.692 [info] [state 1] stat stat+0x4F0>[raw]+0xB0>[raw]+0x110  wall=0  off=1829220976
+19:56:31.693 [info] [state 1] stat stat+0x4F0>[raw]+0xB0>[raw]+0x114  wall=0  off=1097
+19:56:31.694 [info] [state 1] stat stat+0x4F0>[raw]+0xB0>[raw]+0x120  wall=65536  off=256
+19:56:31.695 [info] [state 1] 13 wall-vs-off small-int field(s), 8 stamina candidate(s); blocks ctrl=220 move=40 stat=218
+19:57:09.288 [info] [climb] session 2: PointClimb begin this=00000449F4DC2100
+19:57:10.109 [info] [equip 2 wall] [equip+0x40]=-1; 63 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0x30>[raw]+0x1F8 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048576@equip+0xC60>[raw]+0xF0 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC 1114165@equip+0x680>[raw]+0xD0>[raw]+0x108 1179648@equip+0x630>[raw]+0x8>[raw]+0x1C0 1406648@equip+0x640>[raw]+0x50>[raw]+0x104
+19:57:19.260 [info] [inv 2] ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8]: walked 6000 blocks, 780 distinct item-key-like values (1000000..2099999)
+19:57:19.261 [info] [inv 2] AxeAdze(1990000): not found
+19:57:19.262 [info] [inv 2] AxeHammer(1990001): not found
+19:57:19.263 [info] [inv 2] Crampons(1990002): not found
+19:57:19.265 [info] [inv 2]   +added   1000034 x1 at inv+0x118>[raw]+0x180>[raw]+0x100>[raw]+0xC4
+19:57:19.266 [info] [inv 2]   +added   1000079 x1 at inv+0x118>[raw]+0x180>[raw]+0xC0>[raw]+0x1C4
+19:57:19.267 [info] [inv 2]   +added   1000166 x1 at inv+0x118>[raw]+0x180>[raw]+0x30>[raw]+0x1C4
+19:57:19.268 [info] [inv 2]   +added   1000183 x1 at inv+0x18>[raw]+0xB0>[raw]+0x78>[raw]+0xB8>[raw]+0x1E4
+19:57:19.269 [info] [inv 2]   +added   1000221 x1 at inv+0x118>[raw]+0x180>[raw]+0x1F0>[raw]+0x64
+19:57:19.271 [info] [inv 2]   +added   1000351 x1 at inv+0x18>[raw]+0xB0>[raw]+0x78>[raw]+0xD0>[raw]+0x1E4
+19:57:19.272 [info] [inv 2]   +added   1000508 x2 at inv+0x118>[raw]+0x180>[raw]+0x140>[raw]+0xA4
+19:57:19.273 [info] [inv 2]   +added   1000534 x1 at inv+0x118>[raw]+0x180>[raw]+0x30>[raw]+0x144
+19:57:19.274 [info] [inv 2]   +added   1000563 x1 at inv+0x118>[raw]+0x180>[raw]+0x140>[raw]+0x24
+19:57:19.275 [info] [inv 2]   +added   1000724 x2 at inv+0x118>[raw]+0x180>[raw]+0x140>[raw]+0x1E4
+19:57:19.276 [info] [inv 2]   +added   1000743 x1 at inv+0x118>[raw]+0x180>[raw]+0x100>[raw]+0x144
+19:57:19.277 [info] [inv 2]   +added   1000782 x1 at inv+0x100>[raw]+0x110>[raw]+0x20>[raw]+0x104
+19:57:19.277 [info] [inv 2]   +added   1000790 x1 at inv+0x118>[raw]+0x180>[raw]+0x1F0>[raw]+0x144
+19:57:19.279 [info] [inv 2]   +added   1000812 x1 at inv+0x118>[raw]+0x180>[raw]+0x30>[raw]+0x84
+19:57:19.280 [info] [inv 2]   +added   1000844 x1 at inv+0x118>[raw]+0x180>[raw]+0x1F0>[raw]+0x84
+19:57:19.281 [info] [inv 2]   +added   1001045 x1 at inv+0x118>[raw]+0x180>[raw]+0x170>[raw]+0x164
+19:57:19.282 [info] [inv 2]   +added   1001122 x1 at inv+0x118>[raw]+0x180>[raw]+0x70>[raw]+0x1E4
+19:57:19.283 [info] [inv 2]   +added   1001147 x1 at inv+0x710>[raw]+0x90>[raw]+0x130>[raw]+0x134
+19:57:19.284 [info] [inv 2]   +added   1001304 x1 at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x88
+19:57:19.285 [info] [inv 2]   +added   1001472 x1 at inv+0x118>[raw]+0x180>[raw]+0x70>[raw]+0x15C
+19:57:19.286 [info] [inv 2]   -removed 1000030 (was at inv+0x118>[raw]+0x60>[raw]+0x124)
+19:57:19.287 [info] [inv 2]   -removed 1000031 (was at inv+0x48>[raw]+0x68>[raw]+0xF0>[raw]+0x1E0)
+19:57:19.288 [info] [inv 2]   -removed 1000032 (was at inv+0x118>[raw]+0xC0>[raw]+0x60>[raw]+0x164)
+19:57:19.289 [info] [inv 2]   -removed 1000051 (was at inv+0x48>[raw]+0x68>[raw]+0xF0>[raw]+0x1E8)
+19:57:19.291 [info] [inv 2]   -removed 1000070 (was at inv+0x100>[raw]+0x68>[raw]+0x1C0>[raw]+0xF4)
+19:57:19.291 [info] [inv 2]   -removed 1000083 (was at inv+0x100>[raw]+0xA0>[raw]+0x120>[raw]+0xD4)
+19:57:19.293 [info] [inv 2]   -removed 1000087 (was at inv+0xA18>[raw]+0x118>[raw]+0xA8>[raw]+0x1C4)
+19:57:19.293 [info] [inv 2]   -removed 1000091 (was at inv+0xA18>[raw]+0x118>[raw]+0x154)
+19:57:19.294 [info] [inv 2]   -removed 1000092 (was at inv+0xA18>[raw]+0x118>[raw]+0x1C4)
+19:57:19.295 [info] [inv 2]   -removed 1000105 (was at inv+0xA18>[raw]+0x118>[raw]+0xA8>[raw]+0x154)
+19:57:19.296 [info] [inv 2]   -removed 1000134 (was at inv+0x118>[raw]+0x50>[raw]+0x180>[raw]+0x1A4)
+19:57:19.297 [info] [inv 2]   -removed 1000140 (was at inv+0x100>[raw]+0x140>[raw]+0xD0>[raw]+0x1C4)
+19:57:19.298 [info] [inv 2]   -removed 1000164 (was at inv+0x118>[raw]+0x10>[raw]+0x0>[raw]+0x34)
+19:57:19.299 [info] [inv 2]   -removed 1000210 (was at inv+0x100>[raw]+0xA0>[raw]+0x120>[raw]+0x164)
+19:57:19.300 [info] [inv 2]   -removed 1000352 (was at inv+0x100>[raw]+0x8>[raw]+0x1A0>[raw]+0xC4)
+19:57:19.301 [info] [inv 2]   -removed 1000376 (was at inv+0x118>[raw]+0x160>[raw]+0x180>[raw]+0xA4)
+19:57:19.303 [info] [inv 2]   -removed 1000485 (was at inv+0x100>[raw]+0x8>[raw]+0x1A0>[raw]+0x194)
+19:57:19.304 [info] [inv 2]   -removed 1000549 (was at inv+0x118>[raw]+0xC0>[raw]+0x60>[raw]+0xA4)
+19:57:19.305 [info] [inv 2]   -removed 1000557 (was at inv+0x118>[raw]+0xC0>[raw]+0x60>[raw]+0x144)
+19:57:19.306 [info] [inv 2]   -removed 1000574 (was at inv+0x118>[raw]+0x10>[raw]+0x0>[raw]+0x54)
+19:57:19.307 [info] [inv 2] since last probe: 128 key(s) added, 136 removed
+19:57:21.035 [info] [climb] session 2 ended: 10234 ms on the wall, 8 grab(s)
+19:57:21.387 [info] [equip 2 off] [equip+0x40]=-1; 69 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1019904@equip+0xD10>[raw]+0xC8 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048576@equip+0x6C0>[raw]+0x150>[raw]+0x17C 1048577@equip+0x680>[raw]+0x38>[raw]+0x1C0 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC
+19:57:22.825 [info] [state 2] move move+0x5D0  wall=4294836214  off=0
+19:57:22.827 [info] [state 2] move move+0x5FC  wall=0  off=65535
+19:57:22.827 [info] [state 2] move move+0x600  wall=2232930816  off=0
+19:57:22.829 [info] [state 2] move move+0x604  wall=1098  off=0
+19:57:22.829 [info] [state 2] move move+0x610  wall=4  off=0
+19:57:22.831 [info] [stamina? 2] move move+0x178>[raw]+0x50 int wall 471 -> 305, off 411 -> 416
+19:57:22.831 [info] [stamina? 2] move move+0x178>[raw]+0x14C int wall 312 -> 282, off 275 -> 290
+19:57:22.833 [info] [stamina? 2] move move+0x2D0>[raw]+0xF0 float wall 42.4926 -> 42.4272, off 46.0728 -> 50.965
+19:57:22.833 [info] [state 2] ctrl ctrl+0x528  wall=3209067977  off=0
+19:57:22.835 [info] [state 2] ctrl ctrl+0x530  wall=3213580103  off=0
+19:57:22.835 [info] [state 2] ctrl ctrl+0x20>[raw]+0x8  wall=1024  off=0
+19:57:22.836 [info] [state 2] ctrl ctrl+0x48>[raw]+0x94  wall=170  off=171
+19:57:22.837 [info] [state 2] ctrl ctrl+0x80>[raw]+0xD4  wall=1024  off=0
+19:57:22.838 [info] [state 2] ctrl ctrl+0xE8>[raw]+0xE8  wall=1  off=0
+19:57:22.839 [info] [state 2] ctrl ctrl+0xE8>[raw]+0xEC  wall=1  off=0
+19:57:22.840 [info] [state 2] ctrl ctrl+0x108>[raw]+0xB0  wall=8192  off=0
+19:57:22.841 [info] [state 2] ctrl ctrl+0x238>[raw]+0x1B8  wall=0  off=338496
+19:57:22.842 [info] [state 2] ctrl ctrl+0x238>[raw]+0x1BC  wall=0  off=1097
+19:57:22.843 [info] [state 2] ctrl ctrl+0x238>[raw]+0x1F8  wall=405248  off=0
+19:57:22.845 [info] [state 2] ctrl ctrl+0x238>[raw]+0x1FC  wall=1097  off=0
+19:57:22.846 [info] [state 2] ctrl ctrl+0x4A0>[raw]+0x68  wall=3209067977  off=0
+19:57:22.847 [info] [state 2] ctrl ctrl+0x4A0>[raw]+0x70  wall=3213580103  off=0
+19:57:22.847 [info] [state 2] ctrl ctrl+0x4C0>[raw]+0x48  wall=3209067977  off=0
+19:57:22.849 [info] [state 2] ctrl ctrl+0x4C0>[raw]+0x50  wall=3213580103  off=0
+19:57:22.849 [info] [state 2] ctrl ctrl+0x4E0>[raw]+0x28  wall=3209067977  off=0
+19:57:22.851 [info] [state 2] ctrl ctrl+0x4E0>[raw]+0x30  wall=3213580103  off=0
+19:57:22.851 [info] [stamina? 2] ctrl ctrl+0x20>[raw]+0x110>[raw]+0xD8 float wall 15183.3 -> 14926.1, off 12902.3 -> 13874
+19:57:22.853 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x0  wall=638614844  off=0
+19:57:22.853 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x4  wall=635207609  off=0
+19:57:22.855 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0xC  wall=0  off=4294967295
+19:57:22.855 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x40  wall=145  off=0
+19:57:22.856 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x50  wall=0  off=2074713070
+19:57:22.857 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x54  wall=0  off=638614844
+19:57:22.859 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x5C  wall=4294967295  off=0
+19:57:22.859 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x64  wall=4294967295  off=0
+19:57:22.860 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x8C  wall=1024  off=0
+19:57:22.862 [info] [state 2] ctrl ctrl+0x38>[raw]+0x10>[raw]+0x90  wall=0  off=171
+19:57:22.863 [info] [state 2] ctrl ctrl+0x38>[raw]+0x18>[raw]+0x0  wall=0  off=2074713070
+19:57:22.864 [info] [state 2] ctrl ctrl+0x38>[raw]+0x18>[raw]+0x4  wall=0  off=638614844
+19:57:22.865 [info] [state 2] ctrl ctrl+0x38>[raw]+0x18>[raw]+0xC  wall=4294967295  off=0
+19:57:22.865 [info] [state 2] ctrl ctrl+0x38>[raw]+0x18>[raw]+0x14  wall=4294967295  off=0
+19:57:22.866 [info] [state 2] ctrl ctrl+0x38>[raw]+0x18>[raw]+0x3C  wall=1024  off=0
+19:57:22.867 [info] [state 2] ctrl ctrl+0x38>[raw]+0x18>[raw]+0x40  wall=0  off=171
+19:57:22.868 [info] [state 2] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x2C  wall=65537  off=1
+19:57:22.869 [info] [stamina? 2] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x40 float wall 1.26676 -> 1.24792, off 1.17328 -> 1.25291
+19:57:22.870 [info] [stamina? 2] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x54 int wall 743 -> 653, off 317 -> 384
+19:57:22.871 [info] [stamina? 2] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1E0 int wall 83 -> 69, off 31 -> 40
+19:57:22.873 [info] [stamina? 2] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1E4 int wall 31 -> 15, off 15 -> 17
+19:57:22.874 [info] [stamina? 2] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1E8 int wall 324 -> 320, off 134 -> 160
+19:57:22.875 [info] [stamina? 2] ctrl ctrl+0xE8>[raw]+0x10>[raw]+0x19C float wall 0.543683 -> 0.320353, off 0.160023 -> 0.570615
+19:57:22.875 [info] [stamina? 2] stat stat+0x90>[raw]+0x30>[raw]+0xD8 float wall 15162.3 -> 14665.8, off 12902.3 -> 14505.8
+19:57:22.877 [info] [state 2] 40 wall-vs-off small-int field(s), 11 stamina candidate(s); blocks ctrl=220 move=40 stat=220
+19:57:34.323 [info] [climb] session 3: PointClimb begin this=00000449F4DC2100
+19:57:35.104 [info] [equip 3 wall] [equip+0x40]=-1; 68 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0xC0>[raw]+0xD8 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048577@equip+0x680>[raw]+0x38>[raw]+0x1C0 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC 1114165@equip+0x680>[raw]+0xD0>[raw]+0x108
+19:57:46.225 [info] [inv 3] ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8]: walked 6000 blocks, 722 distinct item-key-like values (1000000..2099999)
+19:57:46.226 [info] [inv 3] AxeAdze(1990000): not found
+19:57:46.227 [info] [inv 3] AxeHammer(1990001): not found
+19:57:46.228 [info] [inv 3] Crampons(1990002): not found
+19:57:46.230 [info] [inv 3]   +added   1000141 x1 at inv+0x7E8>[raw]+0xB0>[raw]+0xA0>[raw]+0x4
+19:57:46.231 [info] [inv 3]   +added   1000145 x1 at inv+0x7E8>[raw]+0xB0>[raw]+0xA8>[raw]+0x4
+19:57:46.232 [info] [inv 3]   +added   1000900 x1 at inv+0x18>[raw]+0x0>[raw]+0x0>[raw]+0x190
+19:57:46.233 [info] [inv 3]   +added   1003776 x1 at inv+0x7E8>[raw]+0x90>[raw]+0x100>[raw]+0x18
+19:57:46.234 [info] [inv 3]   +added   1010505 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x144
+19:57:46.235 [info] [inv 3]   +added   1010509 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x184
+19:57:46.236 [info] [inv 3]   +added   1010515 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x84
+19:57:46.237 [info] [inv 3]   +added   1010518 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0xC4
+19:57:46.238 [info] [inv 3]   +added   1010526 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x104
+19:57:46.239 [info] [inv 3]   +added   1018880 x1 at inv+0x7E8>[raw]+0x90>[raw]+0xB8>[raw]+0x198
+19:57:46.240 [info] [inv 3]   +added   1022543 x1 at inv+0x7E8>[raw]+0xC0>[raw]+0x0>[raw]+0x14C
+19:57:46.241 [info] [inv 3]   +added   1042599 x1 at inv+0x7E8>[raw]+0xC0>[raw]+0x1F8>[raw]+0x1C4
+19:57:46.242 [info] [inv 3]   +added   1042728 x1 at inv+0x7E8>[raw]+0xC0>[raw]+0x1F8>[raw]+0x104
+19:57:46.243 [info] [inv 3]   +added   1045138 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x198>[raw]+0xC4
+19:57:46.245 [info] [inv 3]   +added   1046287 x1 at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1F0>[raw]+0x184
+19:57:46.246 [info] [inv 3]   +added   1062170 x1 at inv+0x7B8>[raw]+0x130>[raw]+0xF0>[raw]+0x30
+19:57:46.247 [info] [inv 3]   +added   1245223 x1 at inv+0x890>FrameEventAccessor+0x150>SceneLevelData+0x178>[raw]+0x120
+19:57:46.248 [info] [inv 3]   +added   1273953 x1 at inv+0x7B8>[raw]+0x168>[raw]+0x38>[raw]+0x88
+19:57:46.249 [info] [inv 3]   +added   1327232 x1 at inv+0x7E8>[raw]+0x90>[raw]+0x100>[raw]+0x1C8
+19:57:46.250 [info] [inv 3]   +added   1376768 x1 at inv+0x7B8>[raw]+0x168>[raw]+0x30>[raw]+0x19C
+19:57:46.251 [info] [inv 3]   -removed 1000183 (was at inv+0x18>[raw]+0xB0>[raw]+0x78>[raw]+0xB8>[raw]+0x1E4)
+19:57:46.252 [info] [inv 3]   -removed 1000351 (was at inv+0x18>[raw]+0xB0>[raw]+0x78>[raw]+0xD0>[raw]+0x1E4)
+19:57:46.254 [info] [inv 3]   -removed 1000360 (was at inv+0x18>[raw]+0x48>[raw]+0x180>[raw]+0x98>[raw]+0x1E4)
+19:57:46.254 [info] [inv 3]   -removed 1001304 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x88)
+19:57:46.256 [info] [inv 3]   -removed 1002775 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x90)
+19:57:46.256 [info] [inv 3]   -removed 1004246 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0xA0)
+19:57:46.258 [info] [inv 3]   -removed 1005330 (was at inv+0x18>[raw]+0xB0>[raw]+0x78>[raw]+0xA8>[raw]+0x10C)
+19:57:46.258 [info] [inv 3]   -removed 1005717 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0xB0)
+19:57:46.259 [info] [inv 3]   -removed 1005718 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x1A8)
+19:57:46.260 [info] [inv 3]   -removed 1007188 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0xB8)
+19:57:46.261 [info] [inv 3]   -removed 1007189 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x1B0)
+19:57:46.262 [info] [inv 3]   -removed 1008659 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0xC0)
+19:57:46.263 [info] [inv 3]   -removed 1008660 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x1B8)
+19:57:46.264 [info] [inv 3]   -removed 1010130 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0xC8)
+19:57:46.265 [info] [inv 3]   -removed 1010131 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x1C0)
+19:57:46.266 [info] [inv 3]   -removed 1011146 (was at inv+0x18>[raw]+0xB0>[raw]+0x58>[raw]+0x10>[raw]+0x10C)
+19:57:46.267 [info] [inv 3]   -removed 1011222 (was at inv+0x18>[raw]+0xB0>[raw]+0x58>[raw]+0x140>[raw]+0x16C)
+19:57:46.268 [info] [inv 3]   -removed 1011223 (was at inv+0x18>[raw]+0xB0>[raw]+0x78>[raw]+0x60>[raw]+0xC4)
+19:57:46.269 [info] [inv 3]   -removed 1011601 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0xD0)
+19:57:46.270 [info] [inv 3]   -removed 1011602 (was at inv+0x7B8>[raw]+0xE0>[raw]+0x198>[raw]+0x1C8)
+19:57:46.271 [info] [inv 3] since last probe: 33 key(s) added, 91 removed
+19:57:48.100 [info] [climb] session 3 ended: 12172 ms on the wall, 9 grab(s)
+19:57:48.382 [info] [equip 3 off] [equip+0x40]=-1; 71 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0x30>[raw]+0x138 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048577@equip+0x680>[raw]+0x38>[raw]+0x1C0 1048580@equip+0x6C0>[raw]+0xF0>[raw]+0x178 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC
+19:57:49.906 [info] [state 3] move move+0x3F8  wall=0  off=1086377373
+19:57:49.908 [info] [state 3] move move+0x3FC  wall=0  off=3205403005
+19:57:49.908 [info] [state 3] move move+0x404  wall=0  off=3205403005
+19:57:49.910 [info] [state 3] move move+0x408  wall=0  off=3205548532
+19:57:49.911 [info] [state 3] move move+0x410  wall=0  off=3195097239
+19:57:49.912 [info] [state 3] move move+0x5B4  wall=0  off=1024036248
+19:57:49.913 [info] [state 3] move move+0x5B8  wall=0  off=3324416714
+19:57:49.914 [info] [state 3] move move+0x5BC  wall=0  off=1142659249
+19:57:49.914 [info] [state 3] move move+0x5C0  wall=0  off=3312356884
+19:57:49.916 [info] [state 3] move move+0x5C4  wall=0  off=3290770598
+19:57:49.916 [info] [state 3] move move+0x5C8  wall=0  off=1142659249
+19:57:49.918 [info] [state 3] move move+0x5CC  wall=0  off=3293329487
+19:57:49.918 [info] [state 3] move move+0x5D0  wall=0  off=4294836214
+19:57:49.920 [info] [state 3] move move+0x5D4  wall=0  off=3203727950
+19:57:49.920 [info] [state 3] move move+0x5DC  wall=0  off=1063307561
+19:57:49.921 [info] [state 3] move move+0x5FC  wall=65535  off=32
+19:57:49.922 [info] [state 3] move move+0x600  wall=0  off=3251849984
+19:57:49.923 [info] [state 3] move move+0x604  wall=0  off=1098
+19:57:49.924 [info] [state 3] move move+0x610  wall=0  off=4
+19:57:49.925 [info] [state 3] move move+0x618  wall=0  off=1061496217
+19:57:49.926 [info] [state 3] move move+0x2D0>[raw]+0x20  wall=2  off=3
+19:57:49.927 [info] [state 3] move move+0x2D0>[raw]+0xC0  wall=0  off=3205548532
+19:57:49.928 [info] [state 3] move move+0x2D0>[raw]+0xC8  wall=0  off=3195097239
+19:57:49.929 [info] [state 3] move move+0x2D0>[raw]+0xE0  wall=0  off=2147483648
+19:57:49.930 [info] [state 3] move move+0x2D0>[raw]+0xE4  wall=0  off=3249248773
+19:57:49.931 [info] [state 3] move move+0x2D0>[raw]+0xE8  wall=0  off=2147483648
+19:57:49.932 [info] [state 3] move move+0x2D0>[raw]+0x1B0  wall=0  off=3205943902
+19:57:49.933 [info] [state 3] move move+0x2D0>[raw]+0x1B8  wall=0  off=3205943902
+19:57:49.934 [info] [state 3] move move+0x450>[raw]+0x170  wall=0  off=3205943902
+19:57:49.935 [info] [state 3] move move+0x450>[raw]+0x178  wall=0  off=3205943902
+19:57:49.935 [info] [state 3] move move+0x4D8>[raw]+0xC  wall=20  off=12
+19:57:49.937 [info] [state 3] move move+0x4D8>[raw]+0x28  wall=20  off=12
+19:57:49.937 [info] [state 3] move move+0x4E0>[raw]+0xC  wall=0  off=3
+19:57:49.938 [info] [state 3] move move+0x4E0>[raw]+0x28  wall=0  off=3
+19:57:49.939 [info] [state 3] move move+0x4F8>[raw]+0x120  wall=1268  off=2858390080
+19:57:49.940 [info] [state 3] move move+0x4F8>[raw]+0x128  wall=994453184  off=0
+19:57:49.941 [info] [state 3] move move+0x4F8>[raw]+0x12C  wall=1098  off=0
+19:57:49.942 [info] [state 3] move move+0x608>[raw]+0x0  wall=0  off=3163586560
+19:57:49.943 [info] [state 3] move move+0x608>[raw]+0x8  wall=0  off=3148087296
+19:57:49.944 [info] [state 3] move move+0x608>[raw]+0xC  wall=0  off=3163689907
+19:57:49.945 [info] [stamina? 3] ctrl ctrl+0x90>[raw]+0x10C float wall 2 -> 1.1, off 1.15 -> 1.2
+19:57:49.946 [info] [stamina? 3] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0xC float wall 0.0233388 -> 0.0185194, off 0.0201652 -> 0.0240527
+19:57:49.947 [info] [stamina? 3] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1C float wall 0.0233388 -> 0.0185194, off 0.0201652 -> 0.0240527
+19:57:49.948 [info] [stamina? 3] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x24 float wall 0.0233388 -> 0.0185194, off 0.0201652 -> 0.0240527
+19:57:49.949 [info] [stamina? 3] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x3C float wall 0.0214717 -> 0.0170378, off 0.018552 -> 0.0221285
+19:57:49.950 [info] [stamina? 3] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x44 float wall 0.0214717 -> 0.0170378, off 0.018552 -> 0.0221285
+19:57:49.951 [info] [stamina? 3] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1E0 int wall 26 -> 20, off 21 -> 22
+19:57:49.952 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x24 float wall 0.451771 -> 0.440941, off 0.369261 -> 0.446031
+19:57:49.953 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x54 float wall 0.154363 -> 0.134557, off 0.124844 -> 0.139121
+19:57:49.954 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x60 float wall 0.120454 -> 0.0864218, off 0.145835 -> 0.152072
+19:57:49.955 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x64 float wall 0.17291 -> 0.140125, off 0.188198 -> 0.197266
+19:57:49.956 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x70 float wall 0.143898 -> 0.128776, off 0.11682 -> 0.129003
+19:57:49.957 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x90 float wall 0.9897 -> 0.98818, off 0.995163 -> 0.996542
+19:57:49.957 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x98 float wall 0.190884 -> 0.162945, off 0.231585 -> 0.232142
+19:57:49.958 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0xA4 float wall 1.00542 -> 0.998384, off 1.01981 -> 1.02129
+19:57:49.960 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0xB0 float wall 0.296795 -> 0.279837, off 0.27235 -> 0.284594
+19:57:49.961 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0xC8 float wall 1.03601 -> 1.03109, off 1.04202 -> 1.04217
+19:57:49.962 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0xE0 float wall 0.0881118 -> 0.0650011, off 0.142306 -> 0.148466
+19:57:49.962 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0xF4 float wall 0.970315 -> 0.966791, off 0.992785 -> 0.994207
+19:57:49.963 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x104 float wall 1.04741 -> 1.043, off 1.04694 -> 1.04766
+19:57:49.964 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x118 float wall 0.0842288 -> 0.0279986, off 0.0816971 -> 0.12113
+19:57:49.965 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x120 float wall 0.086465 -> 0.0304147, off 0.0843252 -> 0.123196
+19:57:49.966 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x174 float wall 0.576195 -> 0.574279, off 0.57526 -> 0.589605
+19:57:49.967 [info] [stamina? 3] ctrl ctrl+0xB8>[raw]+0xB8>[raw]+0x188 float wall 0.04237 -> 0.027321, off 0.065247 -> 0.0807541
+19:57:49.968 [info] [state 3] 40 wall-vs-off small-int field(s), 24 stamina candidate(s); blocks ctrl=220 move=38 stat=220
+19:57:52.920 [info] [climb] session 4: PointClimb begin this=00000449F4DC2100
+19:57:53.683 [info] [equip 4 wall] [equip+0x40]=-1; 69 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0x60>[raw]+0x168 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048576@equip+0x680>[raw]+0x38>[raw]+0x1C0 1048580@equip+0x6C0>[raw]+0xF0>[raw]+0x178 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC
+19:58:04.863 [info] [inv 4] ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8]: walked 6000 blocks, 759 distinct item-key-like values (1000000..2099999)
+19:58:04.865 [info] [inv 4] AxeAdze(1990000): not found
+19:58:04.866 [info] [inv 4] AxeHammer(1990001): not found
+19:58:04.867 [info] [inv 4] Crampons(1990002): not found
+19:58:04.869 [info] [inv 4]   +added   1000360 x1 at inv+0x18>[raw]+0x48>[raw]+0x180>[raw]+0x98>[raw]+0x1E4
+19:58:04.870 [info] [inv 4]   +added   1001674 x1 at inv+0x48>[raw]+0xB0>[raw]+0x118>[raw]+0x1B8
+19:58:04.872 [info] [inv 4]   +added   1002792 x1 at inv+0x518>[raw]+0x70>[raw]+0x20>[raw]+0x1C8
+19:58:04.873 [info] [inv 4]   +added   1003394 x1 at inv+0x48>[raw]+0xB0>[raw]+0x118>[raw]+0xD8
+19:58:04.874 [info] [inv 4]   +added   1010804 x1 at inv+0x718>[raw]+0x130>ClientSequencerStageManager+0x1C0>[raw]+0x1D0
+19:58:04.875 [info] [inv 4]   +added   1010923 x2 at inv+0x7B8>[raw]+0xF0>[raw]+0x8
+19:58:04.876 [info] [inv 4]   +added   1010924 x3 at inv+0x7B8>[raw]+0xF0>[raw]+0x20
+19:58:04.877 [info] [inv 4]   +added   1010925 x4 at inv+0x7B8>[raw]+0xF0>[raw]+0x38
+19:58:04.878 [info] [inv 4]   +added   1010926 x5 at inv+0x7B8>[raw]+0xF0>[raw]+0x50
+19:58:04.880 [info] [inv 4]   +added   1010927 x6 at inv+0x7B8>[raw]+0xF0>[raw]+0x68
+19:58:04.881 [info] [inv 4]   +added   1010928 x7 at inv+0x7B8>[raw]+0xF0>[raw]+0x80
+19:58:04.882 [info] [inv 4]   +added   1010929 x8 at inv+0x7B8>[raw]+0xF0>[raw]+0x98
+19:58:04.883 [info] [inv 4]   +added   1010930 x9 at inv+0x7B8>[raw]+0xF0>[raw]+0xB0
+19:58:04.884 [info] [inv 4]   +added   1010931 x10 at inv+0x7B8>[raw]+0xF0>[raw]+0xC8
+19:58:04.885 [info] [inv 4]   +added   1010932 x11 at inv+0x7B8>[raw]+0xF0>[raw]+0xE0
+19:58:04.886 [info] [inv 4]   +added   1010933 x12 at inv+0x7B8>[raw]+0xF0>[raw]+0xF8
+19:58:04.887 [info] [inv 4]   +added   1010934 x13 at inv+0x7B8>[raw]+0xF0>[raw]+0x110
+19:58:04.888 [info] [inv 4]   +added   1010935 x14 at inv+0x7B8>[raw]+0xF0>[raw]+0x128
+19:58:04.889 [info] [inv 4]   +added   1010936 x15 at inv+0x7B8>[raw]+0xF0>[raw]+0x140
+19:58:04.890 [info] [inv 4]   +added   1010937 x15 at inv+0x7B8>[raw]+0xF0>[raw]+0x158
+19:58:04.891 [info] [inv 4]   -removed 1000141 (was at inv+0x7E8>[raw]+0xB0>[raw]+0xA0>[raw]+0x4)
+19:58:04.893 [info] [inv 4]   -removed 1000145 (was at inv+0x7E8>[raw]+0xB0>[raw]+0xA8>[raw]+0x4)
+19:58:04.894 [info] [inv 4]   -removed 1003776 (was at inv+0x7E8>[raw]+0x90>[raw]+0x100>[raw]+0x18)
+19:58:04.895 [info] [inv 4]   -removed 1010505 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x144)
+19:58:04.896 [info] [inv 4]   -removed 1010509 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x184)
+19:58:04.897 [info] [inv 4]   -removed 1010515 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x84)
+19:58:04.898 [info] [inv 4]   -removed 1010518 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0xC4)
+19:58:04.899 [info] [inv 4]   -removed 1010526 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1B8>[raw]+0x104)
+19:58:04.900 [info] [inv 4]   -removed 1018880 (was at inv+0x7E8>[raw]+0x90>[raw]+0xB8>[raw]+0x198)
+19:58:04.901 [info] [inv 4]   -removed 1022543 (was at inv+0x7E8>[raw]+0xC0>[raw]+0x0>[raw]+0x14C)
+19:58:04.902 [info] [inv 4]   -removed 1042599 (was at inv+0x7E8>[raw]+0xC0>[raw]+0x1F8>[raw]+0x1C4)
+19:58:04.903 [info] [inv 4]   -removed 1042728 (was at inv+0x7E8>[raw]+0xC0>[raw]+0x1F8>[raw]+0x104)
+19:58:04.904 [info] [inv 4]   -removed 1045138 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x198>[raw]+0xC4)
+19:58:04.906 [info] [inv 4]   -removed 1046287 (was at inv+0x890>FrameEventAccessor+0x98>[raw]+0x1F0>[raw]+0x184)
+19:58:04.906 [info] [inv 4]   -removed 1062170 (was at inv+0x7B8>[raw]+0x130>[raw]+0xF0>[raw]+0x30)
+19:58:04.907 [info] [inv 4]   -removed 1076736 (was at inv+0x870>[raw]+0x28>[raw]+0x1A0>[raw]+0x1F4)
+19:58:04.908 [info] [inv 4]   -removed 1180159 (was at inv+0x870>[raw]+0x120>[raw]+0x198>[raw]+0x88)
+19:58:04.909 [info] [inv 4]   -removed 1273953 (was at inv+0x7B8>[raw]+0x168>[raw]+0x38>[raw]+0x88)
+19:58:04.910 [info] [inv 4]   -removed 1327232 (was at inv+0x7E8>[raw]+0x90>[raw]+0x100>[raw]+0x1C8)
+19:58:04.911 [info] [inv 4]   -removed 1376768 (was at inv+0x7B8>[raw]+0x168>[raw]+0x30>[raw]+0x19C)
+19:58:04.912 [info] [inv 4] since last probe: 70 key(s) added, 33 removed
+19:58:06.702 [info] [climb] session 4 ended: 12234 ms on the wall, 10 grab(s)
+19:58:07.064 [info] [equip 4 off] [equip+0x40]=-1; 67 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048577@equip+0x670>[raw]+0x80>[raw]+0x80 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC 1114165@equip+0x680>[raw]+0xD0>[raw]+0x108 1179648@equip+0x630>[raw]+0x8>[raw]+0x1C0
+19:58:08.479 [info] [state 4] move move+0x3FC  wall=0  off=3194921323
+19:58:08.481 [info] [state 4] move move+0x404  wall=0  off=3198598213
+19:58:08.483 [info] [state 4] move move+0x408  wall=0  off=3194916727
+19:58:08.483 [info] [state 4] move move+0x410  wall=0  off=3198573904
+19:58:08.485 [info] [state 4] move move+0x500  wall=2  off=1
+19:58:08.486 [info] [state 4] move move+0x5B4  wall=0  off=952852480
+19:58:08.487 [info] [state 4] move move+0x5B8  wall=0  off=3324416952
+19:58:08.487 [info] [state 4] move move+0x5BC  wall=0  off=1142646995
+19:58:08.489 [info] [state 4] move move+0x5C0  wall=0  off=3312352236
+19:58:08.489 [info] [state 4] move move+0x5C4  wall=0  off=3290774393
+19:58:08.491 [info] [state 4] move move+0x5C8  wall=0  off=1142646995
+19:58:08.492 [info] [state 4] move move+0x5CC  wall=0  off=3293310896
+19:58:08.493 [info] [state 4] move move+0x5D0  wall=0  off=4294836214
+19:58:08.493 [info] [state 4] move move+0x5D4  wall=0  off=3130149647
+19:58:08.494 [info] [state 4] move move+0x5DC  wall=0  off=3122061009
+19:58:08.495 [info] [state 4] move move+0x5FC  wall=65535  off=5
+19:58:08.496 [info] [state 4] move move+0x600  wall=0  off=1742738944
+19:58:08.497 [info] [state 4] move move+0x604  wall=0  off=1098
+19:58:08.499 [info] [state 4] move move+0x610  wall=0  off=4
+19:58:08.499 [info] [state 4] move move+0x618  wall=0  off=1065336022
+19:58:08.501 [info] [state 4] move move+0x624  wall=0  off=256
+19:58:08.502 [info] [state 4] move move+0x2D0>[raw]+0x20  wall=2  off=1
+19:58:08.503 [info] [state 4] move move+0x2D0>[raw]+0xC0  wall=0  off=3196709825
+19:58:08.503 [info] [state 4] move move+0x2D0>[raw]+0xC8  wall=0  off=3200086954
+19:58:08.504 [info] [state 4] move move+0x2D0>[raw]+0x1B0  wall=0  off=3196908480
+19:58:08.505 [info] [state 4] move move+0x2D0>[raw]+0x1B8  wall=0  off=3200384936
+19:58:08.506 [info] [state 4] move move+0x450>[raw]+0x170  wall=0  off=3196908480
+19:58:08.507 [info] [state 4] move move+0x450>[raw]+0x178  wall=0  off=3200384936
+19:58:08.508 [info] [state 4] move move+0x4D8>[raw]+0xC  wall=0  off=12
+19:58:08.509 [info] [state 4] move move+0x4D8>[raw]+0x28  wall=0  off=12
+19:58:08.510 [info] [state 4] move move+0x4F8>[raw]+0x8  wall=510888672  off=0
+19:58:08.511 [info] [state 4] move move+0x4F8>[raw]+0xC  wall=1098  off=0
+19:58:08.512 [info] [state 4] move move+0x608>[raw]+0x0  wall=0  off=3146121216
+19:58:08.513 [info] [state 4] move move+0x608>[raw]+0x4  wall=3190661120  off=0
+19:58:08.514 [info] [state 4] move move+0x608>[raw]+0x8  wall=0  off=3149791232
+19:58:08.515 [info] [state 4] move move+0x608>[raw]+0xC  wall=0  off=3146128459
+19:58:08.516 [info] [state 4] move move+0x608>[raw]+0x14  wall=0  off=3149822415
+19:58:08.517 [info] [state 4] move move+0x608>[raw]+0x18  wall=0  off=3144679424
+19:58:08.518 [info] [state 4] move move+0x608>[raw]+0x1C  wall=3192426496  off=0
+19:58:08.519 [info] [state 4] move move+0x608>[raw]+0x20  wall=0  off=3148349440
+19:58:08.520 [info] [stamina? 4] ctrl ctrl+0x1F8 int wall 2 -> 1, off 3 -> 5
+19:58:08.521 [info] [stamina? 4] ctrl ctrl+0x90>[raw]+0x10 int wall 5593078 -> 5589334, off 5522518 -> 5536054
+19:58:08.522 [info] [stamina? 4] ctrl ctrl+0x90>[raw]+0x30 float wall 1.53333 -> 1.5, off 2 -> 8
+19:58:08.523 [info] [stamina? 4] ctrl ctrl+0x238>[raw]+0x1B0 int wall 278 -> 274, off 283 -> 291
+19:58:08.524 [info] [stamina? 4] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x20 float wall 1.19785 -> 1.12981, off 1.26177 -> 1.27233
+19:58:08.525 [info] [stamina? 4] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x40 float wall 1.03719 -> 1.0244, off 1.19235 -> 1.20938
+19:58:08.526 [info] [stamina? 4] ctrl ctrl+0x78>ActionChartPackageSet+0x1D8>[raw]+0x1E4 int wall 10 -> 3, off 9 -> 10
+19:58:08.527 [info] [stamina? 4] stat stat+0x18>[raw]+0x150 int wall 5593078 -> 5589334, off 5522518 -> 5536054
+19:58:08.528 [info] [stamina? 4] stat stat+0x18>[raw]+0x170 float wall 1.53333 -> 1.5, off 2 -> 8
+19:58:08.529 [info] [state 4] 40 wall-vs-off small-int field(s), 9 stamina candidate(s); blocks ctrl=220 move=38 stat=220
+19:58:10.369 [info] [climb] session 5: PointClimb begin this=00000449F4DC2100
+19:58:11.127 [info] [equip 5 wall] [equip+0x40]=-1; 74 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0x30>[raw]+0x48 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048576@equip+0x670>[raw]+0x148>[raw]+0x30 1048577@equip+0x680>[raw]+0x38>[raw]+0x1C0 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC
+19:58:21.079 [info] [inv 5] ClientInventoryActorComponent at climb+0x20>actor+0x68>[+0xB8]: walked 6000 blocks, 759 distinct item-key-like values (1000000..2099999)
+19:58:21.081 [info] [inv 5] AxeAdze(1990000): not found
+19:58:21.083 [info] [inv 5] AxeHammer(1990001): not found
+19:58:21.083 [info] [inv 5] Crampons(1990002): not found
+19:58:21.085 [info] [inv 5]   +added   1019414 x1 at inv+0x518>[raw]+0x70>[raw]+0x20>[raw]+0x1C8
+19:58:21.086 [info] [inv 5]   +added   1022592 x1 at inv+0x48>[raw]+0xA8>[raw]+0x1F0>[raw]+0x140
+19:58:21.087 [info] [inv 5]   +added   1030515 x1 at inv+0xDA0>[raw]+0x170>[raw]+0x138>[raw]+0x98
+19:58:21.088 [info] [inv 5]   +added   1035209 x1 at inv+0xF28>[raw]+0x0>ExperienceLevelSaveData+0x160>FrameEventAccessor+0x1D0
+19:58:21.089 [info] [inv 5]   +added   1037274 x1 at inv+0x718>[raw]+0x130>ClientSequencerStageManager+0x1C0>[raw]+0x1D0
+19:58:21.090 [info] [inv 5]   +added   1441783 x1 at inv+0xE78>[raw]+0x20>[raw]+0x48>[raw]+0x154
+19:58:21.091 [info] [inv 5]   +added   1662592 x1 at inv+0xE78>[raw]+0x188>[raw]+0x70>[raw]+0x70
+19:58:21.092 [info] [inv 5]   +added   1687424 x3 at inv+0xA18>[raw]+0x158>[raw]+0xB8>[raw]+0x18C
+19:58:21.094 [info] [inv 5]   +added   1704800 x2 at inv+0xE78>[raw]+0x188>[raw]+0x60>[raw]+0x20
+19:58:21.095 [info] [inv 5]   +added   1707488 x2 at inv+0xE78>[raw]+0x188>[raw]+0x60>[raw]+0x10
+19:58:21.096 [info] [inv 5]   +added   1838080 x4 at inv+0xE78>[raw]+0x188>[raw]+0x60>[raw]+0xB0
+19:58:21.097 [info] [inv 5]   +added   1998848 x1 at inv+0xDA0>[raw]+0xD8>[raw]+0x1F0>[raw]+0x98
+19:58:21.098 [info] [inv 5]   +added   2098176 x1 at inv+0x7B8>[raw]+0x130>[raw]+0x140>[raw]+0xEC
+19:58:21.099 [info] [inv 5]   -removed 1002792 (was at inv+0x518>[raw]+0x70>[raw]+0x20>[raw]+0x1C8)
+19:58:21.100 [info] [inv 5]   -removed 1010804 (was at inv+0x718>[raw]+0x130>ClientSequencerStageManager+0x1C0>[raw]+0x1D0)
+19:58:21.100 [info] [inv 5]   -removed 1012859 (was at inv+0xDA0>[raw]+0x170>[raw]+0x138>[raw]+0x98)
+19:58:21.102 [info] [inv 5]   -removed 1024638 (was at inv+0xF28>[raw]+0x0>ExperienceLevelSaveData+0x160>FrameEventAccessor+0x1D0)
+19:58:21.103 [info] [inv 5]   -removed 1025024 (was at inv+0x710>[raw]+0x70>[raw]+0x130>[raw]+0x78)
+19:58:21.104 [info] [inv 5]   -removed 1075315 (was at inv+0xE78>[raw]+0x20>[raw]+0x48>[raw]+0xD8)
+19:58:21.105 [info] [inv 5]   -removed 1202944 (was at inv+0xDA0>[raw]+0x58>[raw]+0x18>[raw]+0x1A8)
+19:58:21.106 [info] [inv 5]   -removed 1286144 (was at inv+0xDA0>[raw]+0x18>[raw]+0x108>[raw]+0x38)
+19:58:21.107 [info] [inv 5]   -removed 1338938 (was at inv+0xA18>[raw]+0x68>[raw]+0x160>[raw]+0x38)
+19:58:21.108 [info] [inv 5]   -removed 1666176 (was at inv+0xE78>[raw]+0x188>[raw]+0x70>[raw]+0x70)
+19:58:21.109 [info] [inv 5]   -removed 1704128 (was at inv+0xE78>[raw]+0x188>[raw]+0x60>[raw]+0x20)
+19:58:21.110 [info] [inv 5]   -removed 1707872 (was at inv+0xE78>[raw]+0x188>[raw]+0x60>[raw]+0x10)
+19:58:21.111 [info] [inv 5]   -removed 1837696 (was at inv+0xE78>[raw]+0x188>[raw]+0x60>[raw]+0xC0)
+19:58:21.112 [info] [inv 5] since last probe: 13 key(s) added, 13 removed
+19:58:26.396 [info] [climb] session 5 ended: 14516 ms on the wall, 7 grab(s)
+19:58:26.824 [info] [equip 5 off] [equip+0x40]=-1; 71 key-like value(s): 1000014@equip+0x6C0>[raw]+0x1C0 1000015@equip+0x6B0>[raw]+0x1B0>[raw]+0x168 1000169@equip+0x7D0>[raw]+0x8>[raw]+0x14 1000293@equip+0x7D0>[raw]+0x8>[raw]+0xA4 1000545@equip+0x618>[raw]+0x130>[raw]+0x24 1000653@equip+0xA0>[raw]+0x8>[raw]+0xD0 1000656@equip+0xA0>[raw]+0x8>[raw]+0x0 1000680@equip+0x7D0>[raw]+0x180>[raw]+0xC4 1000805@equip+0x58>[raw]+0x8 1000818@equip+0x918>[raw]+0x114 1000819@equip+0x918>[raw]+0x174 1000898@equip+0xA0>[raw]+0x8>[raw]+0x1A0 1000942@equip+0x918>[raw]+0x104 1001321@equip+0x58>[raw]+0xD4 1004141@equip+0x618>[raw]+0x130>[raw]+0x164 1004147@equip+0x7D0>[raw]+0x8>[raw]+0xC4 1013514@equip+0xA0>[raw]+0x84 1013521@equip+0x9E0>[raw]+0x84 1046658@equip+0xA0>[raw]+0x184 1048575@equip+0x6C0>[raw]+0x50>[raw]+0xC8 1048577@equip+0x680>[raw]+0x38>[raw]+0x1C0 1049090@equip+0x680>[raw]+0x38>[raw]+0x1A8 1050113@equip+0x690>[raw]+0x28>[raw]+0x1DC 1114165@equip+0x680>[raw]+0xD0>[raw]+0x108
+19:58:28.124 [info] [state 5] move move+0xA8  wall=950627695  off=0
+19:58:28.135 [info] [state 5] move move+0xB0  wall=983448199  off=0
+19:58:28.136 [info] [state 5] move move+0x2FC  wall=131328  off=256
+19:58:28.138 [info] [state 5] move move+0x38C  wall=950627695  off=0
+19:58:28.138 [info] [state 5] move move+0x394  wall=983448199  off=0
+19:58:28.139 [info] [state 5] move move+0x3F8  wall=0  off=3241556264
+19:58:28.140 [info] [state 5] move move+0x3FC  wall=0  off=3205564014
+19:58:28.141 [info] [state 5] move move+0x404  wall=0  off=3190616830
+19:58:28.142 [info] [state 5] move move+0x408  wall=0  off=3205570128
+19:58:28.143 [info] [state 5] move move+0x410  wall=0  off=3190670777
+19:58:28.144 [info] [state 5] move move+0x4B8  wall=0  off=510888672
+19:58:28.145 [info] [state 5] move move+0x4BC  wall=0  off=1098
+19:58:28.146 [info] [state 5] move move+0x4C0  wall=0  off=2325261120
+19:58:28.147 [info] [state 5] move move+0x4C4  wall=0  off=1098
+19:58:28.148 [info] [state 5] move move+0x500  wall=0  off=2
+19:58:28.149 [info] [state 5] move move+0x520  wall=0  off=65536
+19:58:28.150 [info] [state 5] move move+0x534  wall=1083516495  off=0
+19:58:28.150 [info] [state 5] move move+0x53C  wall=0  off=1083528704
+19:58:28.152 [info] [state 5] move move+0x5B4  wall=0  off=3097411584
+19:58:28.153 [info] [state 5] move move+0x5B8  wall=0  off=3324417070
+19:58:28.154 [info] [state 5] move move+0x5BC  wall=0  off=1142646994
+19:58:28.155 [info] [state 5] move move+0x5C0  wall=0  off=3312351829
+19:58:28.156 [info] [state 5] move move+0x5C4  wall=0  off=3290776282
+19:58:28.157 [info] [state 5] move move+0x5C8  wall=0  off=1142646994
+19:58:28.158 [info] [state 5] move move+0x5CC  wall=0  off=3293309269
+19:58:28.159 [info] [state 5] move move+0x5D0  wall=0  off=4294836214
+19:58:28.160 [info] [state 5] move move+0x5D4  wall=0  off=3130149647
+19:58:28.161 [info] [state 5] move move+0x5DC  wall=0  off=3122061009
+19:58:28.162 [info] [state 5] move move+0x5FC  wall=65535  off=5
+19:58:28.163 [info] [state 5] move move+0x600  wall=0  off=1742738944
+19:58:28.164 [info] [state 5] move move+0x604  wall=0  off=1098
+19:58:28.165 [info] [state 5] move move+0x610  wall=0  off=4
+19:58:28.166 [info] [state 5] move move+0x618  wall=0  off=1065349840
+19:58:28.167 [info] [state 5] move move+0x624  wall=0  off=256
+19:58:28.168 [info] [state 5] move move+0x170>[raw]+0x150  wall=95  off=93
+19:58:28.169 [info] [stamina? 5] move move+0x178>[raw]+0x11C float wall 0.0212524 -> 0.0212077, off 0.0169043 -> 0.0204673
+19:58:28.170 [info] [stamina? 5] move move+0x178>[raw]+0x120 float wall 0.0212524 -> 0.0212077, off 0.0169043 -> 0.0204673
+19:58:28.171 [info] [state 5] move move+0x178>[raw]+0x14C  wall=266  off=319
+19:58:28.172 [info] [state 5] move move+0x2D0>[raw]+0x20  wall=0  off=3
+19:58:28.173 [info] [state 5] move move+0x2D0>[raw]+0xC0  wall=0  off=3205570128
+19:58:28.174 [info] [state 5] move move+0x2D0>[raw]+0xC8  wall=0  off=3190670777
+19:58:28.175 [info] [state 5] move move+0x2D0>[raw]+0xD0  wall=0  off=3156010539
+19:58:28.176 [info] [stamina? 5] move move+0x4E8>[raw]+0x1B0 int wall 21 -> 19, off 17 -> 18
+19:58:28.177 [info] [stamina? 5] move move+0x4F0>[raw]+0x90 int wall 98 -> 97, off 95 -> 97
+19:58:28.178 [info] [stamina? 5] ctrl ctrl+0x164 int wall 1025 -> 1, off 1 -> 1025
+19:58:28.179 [info] [stamina? 5] ctrl ctrl+0x88>[raw]+0x24 float wall 0.842889 -> 0.017886, off 0.0174262 -> 1.42883
+19:58:28.180 [info] [state 5] 40 wall-vs-off small-int field(s), 6 stamina candidate(s); blocks ctrl=220 move=35 stat=220

@@ -148,3 +148,27 @@ the GamePlayState +0x240..+0x268 drifts are per-frame vectors, not stamina.
 0.1.4-diag = 0.1.3 probes plus: a warning when the INI next to the ASI is from another version
 (stale deploy), and a one-time [inv layout] dump of the inventory component (typed/raw pointers with
 the following count dword, small ints) so the item list can be located even if the walk misses it.
+
+## 0.1.5-diag (Nov 15 2026)
+
+0.1.4 run (19:56-19:58, 5 climbs; Stas: all three items carried in climb 1, then all dropped, then
+picked up one at a time: Adze, Hammer, Crampons; never equipped):
+- 1990000/1/2 "not found" in all 5 probes although the items were in the bag -> search bug, not absence.
+- The registered keys are right: the gear pack's CDMW shops/groups output registers 1990000/1/2
+  (StoreInfo 6600 and item groups), and DMM's mount log injects the pack's iteminfo.
+- The 0.1.4 walk read 0x1000 bytes from the component root (past its real size) and wandered into
+  faction managers, frame events and neighbouring objects; 6000-block budget always exhausted,
+  so add/remove churn (128/136) is walk-order noise, not inventory changes.
+- [equip+0x40] stayed -1 on and off the wall (empty hands), so the in-hand control never armed.
+- Inventory component layout: containers at +0x18 (n=18), +0x48 (1), +0x118 (2), +0x140 (2),
+  +0xF8/+0x100, +0x68/+0x70.
+- Stamina lead: [[status+0x90]+0x30]+0xD8 (= [[ctrl+0x20]+0x110]+0xD8) float fell 15162->14666 on the
+  wall and rose 12902->14506 off it (session 2 only); other candidates were not repeatable.
+
+0.1.5-diag drops the broad walks and adds walk-independent evidence:
+- [census] every 4-byte-aligned copy of 1990000/1/2 in committed writable memory (game image,
+  uncached/GPU mappings, our buffer and stack excluded), counts per key and copies new/gone since the
+  previous climb; [owners] pointers to (or up to 0x100 before) the first 4 copies of each key, counted
+  per climb with new/gone owners - catches inventories that point at the ItemInfo row.
+- [inv] narrowed walk: only the component's container fields, only Item/Inventory typed objects.
+- [track] 1 Hz value of the stamina lead and climb-state fields (move mode, ctrl+0x164, status+0x477).
