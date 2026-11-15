@@ -248,175 +248,235 @@ namespace
         return c;
     }
 
-    // ---- [inv] / [equip] --------------------------------------------------------
-    struct KeyInfo { int count = 0; std::string chain; };
-    std::map<uint32_t, KeyInfo> g_prevInv; bool g_havePrevInv = false;
-    uint32_t g_inHand = 0;
+    // ---- [census] heap-wide count of the climbmod item keys ------------------------
+    // ItemInfo rows for 1990000/1/2 live in loaded game data whether or not the player
+    // carries them; inventory entries are extra copies. So the per-key hit count and
+    // which addresses appear/disappear between climbs (with different gear carried)
+    // is a direct, walk-independent presence signal. Read-only, worker thread.
+    struct Census { std::vector<uintptr_t> hits[3]; double mb = 0; DWORD ms = 0; bool truncated = false; };
+    Census g_prevCensus; bool g_haveCensus = false;
 
-    std::map<uint32_t, KeyInfo> KeyScan(const std::vector<Blk>& blks)
+    template <class F> void ForEachRwRegion(F&& f, DWORD budgetMs, bool& truncated)
     {
-        std::map<uint32_t, KeyInfo> m;
-        for (auto& b : blks)
-            for (size_t o = 0; o + 4 <= b.d.size(); o += 4)
+        const auto& g = mem::Game();
+        // Own VirtualAlloc region, so skipping "our" memory skips exactly this buffer.
+        struct Buf { uint8_t* p; size_t n; uint8_t* data() { return p; } size_t size() const { return n; } };
+        static Buf buf{ (uint8_t*)VirtualAlloc(nullptr, 1u << 20, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE), 1u << 20 };
+        if (!buf.p) { truncated = true; return; }
+        const DWORD t0 = GetTickCount();
+        uintptr_t a = 0x10000;
+        MEMORY_BASIC_INFORMATION mbi;
+        while (a < 0x00007FFFFFFF0000ull && VirtualQuery((void*)a, &mbi, sizeof mbi) && !g_stop)
+        {
+            const uintptr_t base = (uintptr_t)mbi.BaseAddress, end = base + mbi.RegionSize;
+            const DWORD prot = mbi.Protect & 0xFF;
+            const bool rw = prot == PAGE_READWRITE || prot == PAGE_WRITECOPY || prot == PAGE_EXECUTE_READWRITE;
+            const bool inImage = base >= g.base && base < g.base + g.size;
+            // Never count our own scratch: the read buffer and this thread's stack.
+            const uintptr_t me = (uintptr_t)&mbi, bp = (uintptr_t)buf.data();
+            const bool ours = (me >= base && me < end) || (bp + buf.size() > base && bp < end);
+            const bool slow = (mbi.Protect & (PAGE_NOCACHE | PAGE_WRITECOMBINE)) != 0; // GPU/uncached mappings
+            if (mbi.State == MEM_COMMIT && rw && !(mbi.Protect & PAGE_GUARD) && !inImage && !ours && !slow)
+                for (uintptr_t p = base; p < end; p += buf.size())
+                {
+                    const size_t n = (size_t)std::min<uintptr_t>(buf.size(), end - p);
+                    if (mem::Read(p, buf.data(), n)) f(p, buf.data(), n);
+                    if (GetTickCount() - t0 > budgetMs) { truncated = true; return; }
+                }
+            a = end;
+        }
+    }
+
+    Census TakeCensus()
+    {
+        Census c; const DWORD t0 = GetTickCount();
+        ForEachRwRegion([&](uintptr_t p, const uint8_t* d, size_t n) {
+            c.mb += n / 1048576.0;
+            for (size_t o = 0; o + 4 <= n; o += 4)
             {
-                uint32_t v; memcpy(&v, &b.d[o], 4);
-                if (!KeyLike(v)) continue;
-                auto& k = m[v];
-                if (!k.count++) { char t[24]; snprintf(t, sizeof t, "+0x%zX", o); k.chain = b.chain + t; }
+                uint32_t v; memcpy(&v, d + o, 4);
+                if (v - kItemAxeAdze <= 2u) { auto& h = c.hits[v - kItemAxeAdze]; if (h.size() < 512) h.push_back(p + o); }
             }
-        return m;
+        }, 25000, c.truncated);
+        c.ms = GetTickCount() - t0;
+        return c;
     }
 
-    void InventoryProbe(const Comps& c, int sess)
-    {
-        if (!c.inv) { LOGI("[inv %d] no ClientInventoryActorComponent on the climbing actor", sess); return; }
-        static bool layoutDone = false;
-        if (!layoutDone)
-        {
-            // One-time layout of the component: typed pointers, raw pointers (+ the dword after
-            // them, often an array count) and small ints, so the item list can be found by hand
-            // if the walk below misses it.
-            layoutDone = true;
-            uint8_t hdr[0x200] = {};
-            const size_t n = ReadUpTo(c.inv, hdr, sizeof hdr);
-            for (size_t o = 8; o + 8 <= n; o += 8)
-            {
-                uintptr_t p; memcpy(&p, hdr + o, 8);
-                uint32_t lo = (uint32_t)p, hi = (uint32_t)(p >> 32);
-                if (mem::PlausibleHeap(p) && !mem::InImage(p))
-                    LOGI("[inv layout] +0x%03zX ptr %p %s next=%u", o, (void*)p, Short(mem::RttiOfObject(p)).c_str(), o + 12 <= n ? *(uint32_t*)(hdr + o + 8) : 0);
-                else if (p && (lo <= 100000 || hi <= 100000) && !mem::InImage(p))
-                    LOGI("[inv layout] +0x%03zX ints %u %u", o, lo, hi);
-            }
-        }
-        auto blks = Walk(c.inv, "inv", 6, 6000, 0x200, 0x1000);
-        auto keys = KeyScan(blks);
-        LOGI("[inv %d] %s at %s: walked %zu blocks, %zu distinct item-key-like values (1000000..2099999)",
-             sess, Short(mem::RttiOfObject(c.inv)).c_str(), c.invPath.c_str(), blks.size(), keys.size());
-        const uint32_t ck[3] = { kItemAxeAdze, kItemAxeHammer, kItemBoots };
-        const char* cn[3] = { "AxeAdze", "AxeHammer", "Crampons" };
-        for (int i = 0; i < 3; ++i)
-        {
-            auto it = keys.find(ck[i]);
-            if (it == keys.end()) { LOGI("[inv %d] %s(%u): not found", sess, cn[i], ck[i]); continue; }
-            LOGI("[inv %d] %s(%u): PRESENT x%d, first at %s", sess, cn[i], ck[i], it->second.count, it->second.chain.c_str());
-        }
-        // Context of the first climbmod hit (count/slot fields sit next to the key).
-        for (auto& b : blks)
-            for (size_t o = 0; o + 4 <= b.d.size(); o += 4)
-            {
-                uint32_t v; memcpy(&v, &b.d[o], 4);
-                if (!IsKey(v)) continue;
-                uint32_t ctx[16] = {}; mem::Read(b.addr + o - 0x20, ctx, sizeof ctx);
-                LOGI("[inv %d] ctx %u @%s+0x%zX: %08X %08X %08X %08X %08X %08X %08X %08X | %08X %08X %08X %08X %08X %08X %08X %08X",
-                     sess, v, b.chain.c_str(), o, ctx[0], ctx[1], ctx[2], ctx[3], ctx[4], ctx[5], ctx[6], ctx[7], ctx[8], ctx[9], ctx[10], ctx[11], ctx[12], ctx[13], ctx[14], ctx[15]);
-                goto ctxdone;
-            }
-    ctxdone:
-        if (g_inHand) LOGI("[inv %d] control: in-hand item %u from equip is %s in the inventory walk", sess, g_inHand, keys.count(g_inHand) ? "PRESENT" : "absent");
-        if (!g_havePrevInv)
-        {
-            int k = 0;
-            for (auto& kv : keys) { if (k++ >= 40) break; LOGI("[inv %d]   key %u x%d at %s", sess, kv.first, kv.second.count, kv.second.chain.c_str()); }
-        }
-        else
-        {
-            int add = 0, rem = 0;
-            for (auto& kv : keys) if (!g_prevInv.count(kv.first) && add++ < 20) LOGI("[inv %d]   +added   %u x%d at %s", sess, kv.first, kv.second.count, kv.second.chain.c_str());
-            for (auto& kv : g_prevInv) if (!keys.count(kv.first) && rem++ < 20) LOGI("[inv %d]   -removed %u (was at %s)", sess, kv.first, kv.second.chain.c_str());
-            LOGI("[inv %d] since last probe: %d key(s) added, %d removed", sess, add, rem);
-        }
-        g_prevInv = keys; g_havePrevInv = true;
-    }
+    struct Range { uintptr_t lo, hi; std::string chain; };
+    std::vector<Range> g_invRanges; // blocks of the narrowed inventory walk (latest probe)
 
-    void EquipProbe(const Comps& c, int sess, const char* when)
+    const Range* InInv(uintptr_t a)
     {
-        if (!c.equip) return;
-        uint32_t hand = 0; mem::Get(c.equip + 0x40, hand);
-        if (KeyLike(hand)) g_inHand = hand;
-        auto keys = KeyScan(Walk(c.equip, "equip", 2, 300, 0x200, 0x1000));
-        std::string line; int k = 0;
-        for (auto& kv : keys) { if (k++ >= 24) break; char t[160]; snprintf(t, sizeof t, " %u@%s", kv.first, kv.second.chain.c_str()); line += t; }
-        LOGI("[equip %d %s] [equip+0x40]=%d; %zu key-like value(s):%s", sess, when, (int)hand, keys.size(), line.c_str());
-    }
-
-    // ---- [state] -----------------------------------------------------------------
-    using Snap = std::vector<Blk>;
-    struct SnapSet { Snap ctrl, move, stat, climb; };
-
-    SnapSet TakeSnaps(uintptr_t self, const Comps& c)
-    {
-        SnapSet s;
-        uintptr_t move = 0; mem::Get(c.ctrl + 0x140, move);
-        s.climb = Walk(self, "climb", 0, 1, 0x400, 0x400);
-        s.ctrl = Walk(c.ctrl, "ctrl", 2, 220, 0x200, 0x800);
-        s.move = Walk(move, "move", 1, 60, 0x200, 0x800);
-        s.stat = Walk(c.nStat ? c.stat[0] : 0, "stat", 2, 220, 0x200, 0x800);
-        return s;
-    }
-
-    const Blk* Match(const Snap& s, const Blk& b)
-    {
-        for (auto& x : s) if (x.addr == b.addr && x.chain == b.chain) return &x;
+        for (auto& r : g_invRanges) if (a >= r.lo && a < r.hi) return &r;
         return nullptr;
     }
 
-    bool SaneF(float f) { return f == f && f > 0.01f && f < 100000.f; }
+    // Who points at (or up to 0x100 before) each key copy? If the inventory stores a
+    // pointer to the ItemInfo row instead of the key, the number of owners of the row
+    // changes with every pickup/drop even though the key copies themselves do not.
+    using Owners = std::map<uintptr_t, std::vector<uintptr_t>>; // target -> pointer locations
+    Owners g_prevOwners; bool g_haveOwners = false;
 
-    void DiffState(int sess, const char* label, const Snap& h1, const Snap& h2, const Snap& o1, const Snap* o2, int& flags, int& drains)
+    Owners OwnerSearch(const std::vector<std::pair<uintptr_t, uint32_t>>& targets, bool& trunc)
     {
-        for (auto& a : h1)
-        {
-            const Blk* b = Match(h2, a); const Blk* o = Match(o1, a); const Blk* p = o2 ? Match(*o2, a) : nullptr;
-            if (!b || !o) continue;
-            const size_t n = std::min(std::min(a.d.size(), b->d.size()), o->d.size());
-            for (size_t off = 0; off + 4 <= n; off += 4)
+        Owners res;
+        if (targets.empty()) return res;
+        uintptr_t lo = ~(uintptr_t)0, hi = 0;
+        for (auto& t : targets) { lo = std::min(lo, t.first - 0x100); hi = std::max(hi, t.first); }
+        ForEachRwRegion([&](uintptr_t p, const uint8_t* d, size_t n) {
+            for (size_t o = 0; o + 8 <= n; o += 8)
             {
-                uint32_t va, vb, vo; memcpy(&va, &a.d[off], 4); memcpy(&vb, &b->d[off], 4); memcpy(&vo, &o->d[off], 4);
-                if (va == vb && va != vo && (va <= 4096 || vo <= 4096) && flags < 40)
-                {
-                    const bool star = va == 18 || va == 52 || va == 59 || va == 60;
-                    LOGI("[state %d] %s%s %s+0x%zX  wall=%u  off=%u", sess, star ? "* " : "", label, a.chain.c_str(), off, va, vo);
-                    ++flags;
-                }
-                if (p && off + 4 <= p->d.size() && drains < 24)
-                {
-                    uint32_t vp; memcpy(&vp, &p->d[off], 4);
-                    float fa, fb, fo, fp; memcpy(&fa, &va, 4); memcpy(&fb, &vb, 4); memcpy(&fo, &vo, 4); memcpy(&fp, &vp, 4);
-                    const bool fdrain = SaneF(fa) && SaneF(fb) && SaneF(fo) && SaneF(fp) && fb < fa && fp > fo;
-                    const bool idrain = va < 10000000u && vb < va && vp > vo && vo < 10000000u;
-                    if (fdrain || idrain)
-                    {
-                        if (fdrain) LOGI("[stamina? %d] %s %s+0x%zX float wall %g -> %g, off %g -> %g", sess, label, a.chain.c_str(), off, fa, fb, fo, fp);
-                        else LOGI("[stamina? %d] %s %s+0x%zX int wall %u -> %u, off %u -> %u", sess, label, a.chain.c_str(), off, va, vb, vo, vp);
-                        ++drains;
-                    }
-                }
+                uintptr_t q; memcpy(&q, d + o, 8);
+                if (q < lo || q >= hi || (q & 7)) continue;
+                for (auto& t : targets)
+                    if (q < t.first && t.first - q <= 0x100) { auto& v = res[t.first]; if (v.size() < 256) v.push_back(p + o); break; }
             }
-        }
+        }, 25000, trunc);
+        return res;
     }
 
-    void DiffAll(int sess, const SnapSet& h1, const SnapSet& h2, const SnapSet& o1, const SnapSet* o2)
+    void LogOwners(int sess, const std::vector<std::pair<uintptr_t, uint32_t>>& targets)
     {
-        int flags = 0, drains = 0;
-        DiffState(sess, "move", h1.move, h2.move, o1.move, o2 ? &o2->move : nullptr, flags, drains);
-        DiffState(sess, "ctrl", h1.ctrl, h2.ctrl, o1.ctrl, o2 ? &o2->ctrl : nullptr, flags, drains);
-        DiffState(sess, "climb", h1.climb, h2.climb, o1.climb, o2 ? &o2->climb : nullptr, flags, drains);
-        DiffState(sess, "stat", h1.stat, h2.stat, o1.stat, o2 ? &o2->stat : nullptr, flags, drains);
-        LOGI("[state %d] %d wall-vs-off small-int field(s), %d stamina candidate(s)%s; blocks ctrl=%zu move=%zu stat=%zu",
-             sess, flags, drains, o2 ? "" : " (no second off-wall sample: climbed again within 1.5 s)", h1.ctrl.size(), h1.move.size(), h1.stat.size());
+        bool trunc = false;
+        Owners o = OwnerSearch(targets, trunc);
+        for (auto& t : targets)
+        {
+            const auto& cur = o[t.first];
+            int add = 0, rem = 0;
+            if (g_haveOwners)
+            {
+                const auto& old = g_prevOwners[t.first];
+                for (auto a : cur) if (std::find(old.begin(), old.end(), a) == old.end()) ++add;
+                for (auto a : old) if (std::find(cur.begin(), cur.end(), a) == cur.end()) ++rem;
+            }
+            LOGI("[owners %d] key %u copy %p: %zu pointer(s) to it%s (+%d new, -%d gone since previous climb)%s", sess, t.second, (void*)t.first,
+                 cur.size(), cur.size() >= 256 ? "+" : "", add, rem, trunc ? " [scan truncated]" : "");
+            int shown = 0;
+            for (auto a : cur)
+            {
+                const bool isNew = g_haveOwners && std::find(g_prevOwners[t.first].begin(), g_prevOwners[t.first].end(), a) == g_prevOwners[t.first].end();
+                if (g_haveOwners && !isNew) continue;
+                if (shown++ >= 6) break;
+                uintptr_t q = 0; mem::Get(a, q);
+                const Range* r = InInv(a);
+                uint32_t ctx[8] = {}; mem::Read(a - 0x10, ctx, sizeof ctx);
+                LOGI("[owners %d]   %s[%p] -> +0x%zX  %s%s  ctx %08X %08X %08X %08X | %08X %08X %08X %08X", sess, isNew ? "NEW " : "", (void*)a,
+                     (size_t)(t.first - q), r ? "in inv walk " : "", r ? r->chain.c_str() : "", ctx[0], ctx[1], ctx[2], ctx[3], ctx[4], ctx[5], ctx[6], ctx[7]);
+            }
+        }
+        g_prevOwners = std::move(o); g_haveOwners = true;
+    }
+
+    void CensusProbe(int sess)
+    {
+        Census c = TakeCensus();
+        const char* nm[3] = { "AxeAdze(1990000)", "AxeHammer(1990001)", "Crampons(1990002)" };
+        LOGI("[census %d] scanned %.0f MB of writable memory in %lu ms%s: %s x%zu, %s x%zu, %s x%zu", sess, c.mb, (unsigned long)c.ms,
+             c.truncated ? " (TRUNCATED at 25 s)" : "", nm[0], c.hits[0].size(), nm[1], c.hits[1].size(), nm[2], c.hits[2].size());
+        std::vector<std::pair<uintptr_t, uint32_t>> fresh;
+        for (int k = 0; k < 3; ++k)
+        {
+            const auto& cur = c.hits[k];
+            if (g_haveCensus)
+            {
+                const auto& old = g_prevCensus.hits[k];
+                int add = 0, rem = 0;
+                for (auto a : cur) if (std::find(old.begin(), old.end(), a) == old.end()) { ++add; if (fresh.size() < 6) fresh.push_back({ a, kItemAxeAdze + k }); }
+                for (auto a : old) if (std::find(cur.begin(), cur.end(), a) == cur.end()) ++rem;
+                LOGI("[census %d] %s: %d new copies, %d gone since the previous climb", sess, nm[k], add, rem);
+            }
+            else for (auto a : cur) if (fresh.size() < 6) fresh.push_back({ a, kItemAxeAdze + k });
+            int shown = 0;
+            for (auto a : cur)
+            {
+                if (shown++ >= 8) break;
+                uint32_t ctx[12] = {}; mem::Read(a - 0x10, ctx, sizeof ctx);
+                const Range* r = InInv(a);
+                LOGI("[census %d]   %u @%p%s%s: %08X %08X %08X %08X [%08X] %08X %08X %08X %08X %08X %08X %08X", sess, kItemAxeAdze + k, (void*)a,
+                     r ? " in inv walk " : "", r ? r->chain.c_str() : "", ctx[0], ctx[1], ctx[2], ctx[3], ctx[4], ctx[5], ctx[6], ctx[7], ctx[8], ctx[9], ctx[10], ctx[11]);
+            }
+        }
+        std::vector<std::pair<uintptr_t, uint32_t>> targets;
+        for (int k = 0; k < 3; ++k) for (size_t i = 0; i < c.hits[k].size() && i < 4; ++i) targets.push_back({ c.hits[k][i], kItemAxeAdze + k });
+        LogOwners(sess, targets);
+        for (auto& f : fresh) LOGI("[census %d] new copy of %u at %p", sess, f.second, (void*)f.first);
+        g_prevCensus = std::move(c); g_haveCensus = true;
+    }
+
+    // ---- [inv] narrowed walk ----------------------------------------------------
+    // Only the component's own container fields (from the 0.1.4 layout dump), and only
+    // typed objects whose class name mentions Item/Inventory: the 0.1.4 walk leaked into
+    // faction managers, frame events and neighbouring heap objects.
+    void InventoryProbe(const Comps& c, int sess)
+    {
+        g_invRanges.clear();
+        if (!c.inv) { LOGI("[inv %d] no ClientInventoryActorComponent on the climbing actor", sess); return; }
+        static const uint32_t roots[] = { 0x18, 0x48, 0x68, 0x70, 0xF8, 0x100, 0x118, 0x140 };
+        std::string line;
+        for (uint32_t ro : roots)
+        {
+            uintptr_t p = 0; uint32_t cnt = 0; mem::Get(c.inv + ro, p); mem::Get(c.inv + ro + 8, cnt);
+            if (!mem::PlausibleHeap(p)) continue;
+            struct N { uintptr_t a; int d; std::string chain; };
+            char rn[24]; snprintf(rn, sizeof rn, "inv+0x%X", ro);
+            std::vector<N> q{ { p, 1, std::string(rn) } };
+            std::unordered_set<uintptr_t> seen{ p };
+            int keyLike = 0, ours = 0; static uint8_t buf[0x200];
+            for (size_t qi = 0; qi < q.size() && q.size() < 1500; ++qi)
+            {
+                const N nd = q[qi]; const size_t n = ReadUpTo(nd.a, buf, sizeof buf); if (!n) continue;
+                g_invRanges.push_back({ nd.a, nd.a + n, nd.chain });
+                for (size_t o = 0; o + 4 <= n; o += 4)
+                {
+                    uint32_t v; memcpy(&v, buf + o, 4);
+                    if (KeyLike(v)) ++keyLike;
+                    if (IsKey(v)) { ++ours; LOGI("[inv %d] climbmod key %u at %s+0x%zX", sess, v, nd.chain.c_str(), o); }
+                }
+                if (nd.d >= 4) continue;
+                for (size_t o = 0; o + 8 <= n; o += 8)
+                {
+                    uintptr_t x; memcpy(&x, buf + o, 8);
+                    if (!mem::PlausibleHeap(x) || mem::InImage(x) || !seen.insert(x).second) continue;
+                    const char* r = mem::RttiOfObject(x);
+                    if (r && !strstr(r, "Item") && !strstr(r, "Inventory")) continue;
+                    char t[24]; snprintf(t, sizeof t, "+0x%zX>", o);
+                    q.push_back({ x, nd.d + 1, nd.chain + t + (r ? Short(r) : std::string("[raw]")) });
+                }
+            }
+            char s[96]; snprintf(s, sizeof s, " %s(n=%u):%zu blk/%d keys/%d ours", rn, cnt, q.size(), keyLike, ours); line += s;
+        }
+        LOGI("[inv %d] narrowed walk:%s", sess, line.c_str());
+    }
+
+    // ---- [track] 1 Hz candidates for stamina and climb state ----------------------
+    // 0.1.4 session 2: [[stat+0x90]+0x30]+0xD8 (same object as [[ctrl+0x20]+0x110]+0xD8)
+    // fell 15162->14666 on the wall and rose 12902->14506 off it: stamina-like.
+    void Track(const Comps& c, bool onWall)
+    {
+        if (!c.ctrl || !c.nStat) return;
+        uintptr_t s1 = 0, s2 = 0, a1 = 0, a2 = 0, move = 0;
+        mem::Get(c.stat[0] + 0x90, s1); mem::Get(s1 + 0x30, s2);
+        mem::Get(c.ctrl + 0x20, a1); mem::Get(a1 + 0x110, a2);
+        mem::Get(c.ctrl + 0x140, move);
+        float f[6] = {}; mem::Read(s2 + 0xD0, f, sizeof f);
+        uint32_t mode = 0, ctl164 = 0; uint8_t flag477 = 0;
+        mem::Get(move + 0x10, mode); mem::Get(c.ctrl + 0x164, ctl164); mem::Get(c.stat[0] + 0x477, flag477);
+        static float last = -1; static uint32_t lastMode = 0xFFFFFFFF;
+        if (f[2] == last && mode == lastMode && !onWall) return;
+        last = f[2]; lastMode = mode;
+        LOGI("[track] %s S=%p%s +0xD0..E4: %g %g [%g] %g %g %g | move.mode=%u ctrl+0x164=%u stat+0x477=%u",
+             onWall ? "WALL" : "off ", (void*)s2, s2 == a2 ? "" : " (ctrl path differs)", f[0], f[1], f[2], f[3], f[4], f[5], mode, ctl164, flag477);
     }
 
     // ---- worker --------------------------------------------------------------
     DWORD WINAPI Worker(LPVOID)
     {
         constexpr unsigned kU2 = 1; // index of update2 in kSlotLabel
-        DWORD lastSummary = GetTickCount(), lastU2Change = 0, sessStart = 0, endedAt = 0;
+        DWORD lastSummary = GetTickCount(), lastU2Change = 0, sessStart = 0, endedAt = 0, lastTrack = 0;
         long prev[kSlots] = {}, lastU2 = 0;
-        bool climbing = false; int sess = 0, grabs = 0, probed = 0;
+        bool climbing = false, probedThis = false, haveComps = false; int sess = 0, grabs = 0, probed = 0;
         uintptr_t self = 0;
-        Comps comps; SnapSet h1, h2, o1;
-        enum { Idle, WantH1, WantH2, WantOff, WantOff2 } phase = Idle;
+        Comps comps;
         while (!g_stop)
         {
             WaitForSingleObject(g_event, 100);
@@ -433,41 +493,34 @@ namespace
                     self = e.self; ++grabs; lastU2Change = now;
                     if (!climbing)
                     {
-                        if (phase == WantOff2) { LOGI("[state %d] climbed again before the second off-wall sample", sess); DiffAll(sess, h1, h2, o1, nullptr); phase = Idle; }
-                        climbing = true; ++sess; grabs = 1; sessStart = e.tick;
+                        climbing = true; ++sess; grabs = 1; sessStart = e.tick; probedThis = false;
                         LOGI("[climb] session %d: PointClimb begin this=%p", sess, (void*)e.self);
-                        if (g_set.equipScan && probed < g_set.maxScans && phase == Idle) phase = WantH1;
                     }
                     else LOGV("[climb] grab/begin #%d this=%p", grabs, (void*)e.self);
                 }
                 else LOGV("[climb] PointClimb end this=%p", (void*)e.self);
             }
-            if (climbing && phase == WantH1 && now - sessStart >= 600)
+            if (climbing && !probedThis && now - sessStart >= 600)
             {
-                ++probed;
-                comps = FindComps(self, probed == 1);
-                EquipProbe(comps, sess, "wall");
-                InventoryProbe(comps, sess);
-                h1 = TakeSnaps(self, comps);
-                phase = WantH2;
-            }
-            else if (climbing && phase == WantH2 && now - sessStart >= 1400)
-            {
-                h2 = TakeSnaps(self, comps);
-                phase = WantOff;
+                probedThis = true;
+                comps = FindComps(self, !haveComps); haveComps = true;
+                if (g_set.equipScan && probed < g_set.maxScans)
+                {
+                    ++probed;
+                    InventoryProbe(comps, sess);
+                    CensusProbe(sess);
+                }
             }
             if (climbing && now - lastU2Change > 1500)
             {
                 climbing = false; endedAt = now;
                 LOGI("[climb] session %d ended: %lu ms on the wall, %d grab(s)", sess, (unsigned long)(lastU2Change - sessStart), grabs);
-                if (phase == WantOff) { o1 = TakeSnaps(self, comps); EquipProbe(comps, sess, "off"); phase = WantOff2; }
-                else { if (phase != Idle) LOGI("[climb] session %d too short for the wall-vs-off diff (need >1.4 s on the wall).", sess); phase = Idle; }
             }
-            if (!climbing && phase == WantOff2 && now - endedAt >= 1500)
+            // 1 Hz tracking while on the wall and for 8 s after leaving it.
+            if (haveComps && now - lastTrack >= 1000 && (climbing || now - endedAt < 8000))
             {
-                SnapSet o2 = TakeSnaps(self, comps);
-                DiffAll(sess, h1, h2, o1, &o2);
-                phase = Idle;
+                lastTrack = now;
+                Track(comps, climbing);
             }
             if (now - lastSummary >= 10000)
             {

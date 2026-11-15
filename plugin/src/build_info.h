@@ -7,7 +7,7 @@
 // every vtable, then every slot value we touch. Any other build: fail closed.
 namespace cm::build
 {
-    inline constexpr const char* kVersion = "0.1.4-diag";
+    inline constexpr const char* kVersion = "0.1.5-diag";
 
     struct Vt { uint32_t rva; const char* rtti; };
     // PointClimbMovementMethod slots (ICharacterMovementMethod layout):
