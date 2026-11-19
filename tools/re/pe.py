@@ -1,5 +1,5 @@
 import pefile,struct,re,capstone
-import os; EXE=os.environ.get('CD_EXE','CrimsonDesert.exe')
+EXE='/workspace/exe/CrimsonDesert.exe'
 d=open(EXE,'rb').read()
 pe=pefile.PE(EXE,fast_load=True)
 IB=pe.OPTIONAL_HEADER.ImageBase

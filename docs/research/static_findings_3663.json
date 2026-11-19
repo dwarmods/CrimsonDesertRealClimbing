@@ -1,0 +1,10 @@
+{"exe":"CrimsonDesert.exe 1.0.0.3663","sha256":"8be67178d9b9a149c361a731051665e0ba4d441e250ae1dfe645bd6e524345c8",
+ "TimeDateStamp":"0x6af5d198","SizeOfImage":"0x144e9000","CheckSum":"0x13ff2bd0",
+ "vtables":{".?AVPointClimbMovementMethod@pa@@":"0x59a2b48",".?AVLadderClimbMovementMethod@pa@@":"0x59a2ba0",".?AVICharacterMovementMethod@pa@@":"0x59a2e10",
+  ".?AVClientEquipSlotActorComponent@pa@@":"0x59c90f8",".?AVCommonEquipSlotActorComponent@pa@@":"0x5d43420",".?AVServerEquipSlotActorComponent@pa@@":"0x5f6c518",
+  ".?AVClientSkillActorComponent@pa@@":"0x59d02f0",".?AVAICondition_CheckEquipSlotNameItem@pa@@":"0x5cf8918"},
+ "pointclimb_slots":{"1_update":{"rva":"0x78dee0","similarity_to_3576":0.671},"4_update2":{"rva":"0x78e5f0","similarity_to_3576":1.0},
+  "6_post_update":{"rva":"0x78e9a0","similarity_to_3576":1.0},"7_begin":{"rva":"0x78d520","similarity_to_3576":0.867,"note":"member offsets only"},
+  "8_end":{"rva":"0x78d930","similarity_to_3576":0.955,"note":"member offsets only"}},
+ "owner_offset":"0x18",
+ "equip_condition_worker":{"rva":"0x189c900","old_rva":"0x1837150","reads":"actor->[+0x68]->[+0x38] then calls 0x22fade0 (old 0x228a440)","match":"unique masked 40-instruction signature, similarity 1.0"}}
