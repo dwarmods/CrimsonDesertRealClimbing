@@ -23,9 +23,9 @@ class BuildTable(unittest.TestCase):
 
     def test_known_builds(self):
         b = builds()
-        self.assertEqual(set(b), {"k3576", "k3663"})
+        self.assertEqual(set(b), {"k3663", "k3732"})
         order = re.search(r"kBuilds\[\] = \{([^}]*)\}", HDR).group(1)
-        self.assertEqual([s.strip(" &") for s in order.split(",")], ["k3663", "k3576"])
+        self.assertEqual([s.strip(" &") for s in order.split(",")], ["k3732", "k3663"])
 
     def test_each_build_complete_and_distinct(self):
         b = builds()
@@ -43,11 +43,19 @@ class BuildTable(unittest.TestCase):
 
     def test_rtti_names_identical_across_builds(self):
         b = builds()
-        self.assertEqual(b["k3576"]["rtti"], b["k3663"]["rtti"])
+        self.assertEqual(b["k3663"]["rtti"], b["k3732"]["rtti"])
 
     def test_diag_defaults_never_modify_game(self):
         for key in ("AnimSwap", "KeepAxesDrawn"):
             self.assertRegex(INI, rf"(?m)^{key}=0\s*$")
+
+    def test_ini_keys_are_read_by_plugin(self):
+        src = (ROOT / "src" / "climbdiag.cpp").read_text()
+        for key in re.findall(r"(?m)^([A-Za-z]+)=", INI):
+            self.assertIn(f'L"{key}"', src, f"INI key {key} is not read by the plugin")
+
+    def test_default_log_level_is_targeted(self):
+        self.assertRegex(INI, r"(?m)^LogLevel=1\s*$")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,37 @@
+{
+ "equip_condition_worker": {
+  "rva_3663": "0x189c900",
+  "rva_3732": "0x189e790",
+  "sim": 1.0
+ },
+ "ClientInventoryActorComponent": {
+  "slots": 47,
+  "identical": 37,
+  "median": 1.0,
+  "min": 0.167
+ },
+ "ClientStatusActorComponent": {
+  "slots": 106,
+  "identical": 84,
+  "median": 1.0,
+  "min": 0.067
+ },
+ "ClientCharacterControlActorComponent": {
+  "slots": 105,
+  "identical": 84,
+  "median": 1.0,
+  "min": 0.067
+ },
+ "ClientChildOnlyInGameActor": {
+  "slots": 162,
+  "identical": 134,
+  "median": 1.0,
+  "min": 0.077
+ },
+ "ClientEquipSlotActorComponent": {
+  "slots": 67,
+  "identical": 54,
+  "median": 1.0,
+  "min": 0.083
+ }
+}

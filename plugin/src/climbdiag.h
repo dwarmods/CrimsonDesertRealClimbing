@@ -5,7 +5,7 @@ namespace cm
     struct Settings
     {
         bool enabled = true;
-        int  logLevel = 2;
+        int  logLevel = 1;
         bool hookPointClimb = true;
         bool equipScan = true;
         int  maxScans = 8;

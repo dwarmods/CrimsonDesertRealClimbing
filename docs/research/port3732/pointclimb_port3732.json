@@ -1,0 +1,230 @@
+{
+ "vtables": {
+  ".?AVPointClimbMovementMethod@pa@@": {
+   "old": [
+    "0x59a2b48"
+   ],
+   "new": [
+    "0x59a7c90"
+   ],
+   "all_new": [
+    [
+     "0x59a7c90",
+     0
+    ]
+   ]
+  },
+  ".?AVLadderClimbMovementMethod@pa@@": {
+   "old": [
+    "0x59a2ba0"
+   ],
+   "new": [
+    "0x59a7c38"
+   ],
+   "all_new": [
+    [
+     "0x59a7c38",
+     0
+    ]
+   ]
+  },
+  ".?AVClientEquipSlotActorComponent@pa@@": {
+   "old": [
+    "0x59c90f8"
+   ],
+   "new": [
+    "0x59ce1d8"
+   ],
+   "all_new": [
+    [
+     "0x59ce1d8",
+     0
+    ]
+   ]
+  },
+  ".?AVCommonEquipSlotActorComponent@pa@@": {
+   "old": [
+    "0x5d43420"
+   ],
+   "new": [
+    "0x5d48810"
+   ],
+   "all_new": [
+    [
+     "0x5d48810",
+     0
+    ]
+   ]
+  },
+  ".?AVServerEquipSlotActorComponent@pa@@": {
+   "old": [
+    "0x5f6c518"
+   ],
+   "new": [
+    "0x5f71898"
+   ],
+   "all_new": [
+    [
+     "0x5f71898",
+     0
+    ]
+   ]
+  },
+  ".?AVClientSkillActorComponent@pa@@": {
+   "old": [
+    "0x59d02f0"
+   ],
+   "new": [
+    "0x59d53e8"
+   ],
+   "all_new": [
+    [
+     "0x59d53e8",
+     0
+    ]
+   ]
+  },
+  ".?AVICharacterMovementMethod@pa@@": {
+   "old": [
+    "0x59a2e10"
+   ],
+   "new": [
+    "0x59a7e50"
+   ],
+   "all_new": [
+    [
+     "0x59a7e50",
+     0
+    ]
+   ]
+  },
+  ".?AVClientInventoryActorComponent@pa@@": {
+   "old": [
+    "0x59ca678"
+   ],
+   "new": [
+    "0x59cf760"
+   ],
+   "all_new": [
+    [
+     "0x59cf760",
+     0
+    ]
+   ]
+  },
+  ".?AVClientStatusActorComponent@pa@@": {
+   "old": [
+    "0x5998b60"
+   ],
+   "new": [
+    "0x599dc40"
+   ],
+   "all_new": [
+    [
+     "0x599dc40",
+     0
+    ]
+   ]
+  },
+  ".?AVClientCharacterControlActorComponent@pa@@": {
+   "old": [
+    "0x59c1660"
+   ],
+   "new": [
+    "0x59c6748"
+   ],
+   "all_new": [
+    [
+     "0x59c6748",
+     0
+    ]
+   ]
+  },
+  ".?AVClientChildOnlyInGameActor@pa@@": {
+   "old": [
+    "0x5990bf0"
+   ],
+   "new": [
+    "0x59961d0"
+   ],
+   "all_new": [
+    [
+     "0x59961d0",
+     0
+    ]
+   ]
+  }
+ },
+ "pointclimb_slots": {
+  "0": {
+   "rva_3663": "0x78d490",
+   "rva_3732": "0x78d9b0",
+   "sim": 0.19,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "1": {
+   "rva_3663": "0x78dee0",
+   "rva_3732": "0x78e400",
+   "sim": 0.378,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "2": {
+   "rva_3663": "0xbf51b0",
+   "rva_3732": "0xbf5c00",
+   "sim": 1.0,
+   "override_3663": false,
+   "override_3732": false
+  },
+  "3": {
+   "rva_3663": "0x78e5e0",
+   "rva_3732": "0x78ed00",
+   "sim": 1.0,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "4": {
+   "rva_3663": "0x78e5f0",
+   "rva_3732": "0x78ed10",
+   "sim": 1.0,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "5": {
+   "rva_3663": "0x3a6d80",
+   "rva_3732": "0x3a7190",
+   "sim": 1.0,
+   "override_3663": false,
+   "override_3732": false
+  },
+  "6": {
+   "rva_3663": "0x78e9a0",
+   "rva_3732": "0x78f0c0",
+   "sim": 1.0,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "7": {
+   "rva_3663": "0x78d520",
+   "rva_3732": "0x78da40",
+   "sim": 1.0,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "8": {
+   "rva_3663": "0x78d930",
+   "rva_3732": "0x78de50",
+   "sim": 1.0,
+   "override_3663": true,
+   "override_3732": true
+  },
+  "9": {
+   "rva_3663": "0x3a6d80",
+   "rva_3732": "0x3a7190",
+   "sim": 1.0,
+   "override_3663": false,
+   "override_3732": false
+  }
+ }
+}

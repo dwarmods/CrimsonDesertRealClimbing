@@ -79,3 +79,114 @@ to the motion player.
 ## Build
 `./build.sh` (Linux, `pip install ziglang`) -> dist/ClimbmodASI.asi.
 
+## 0.1.2-diag (Nov 15 2026)
+
+What the 0.1.1 run (exe 3663, 01:03-01:05 log) proved:
+- Hooks fine. `begin` (slot 7) fires on EVERY grab/reposition (54x in ~2 min), `end` (slot 8) only once;
+  `update2`/`post_update` tick ~25-37/s only while on the wall; slot 1 `update` never fires for PointClimb.
+  So "on the wall" = update2 ticking; a climb session ends when update2 stops for >1.5 s.
+- climb object is persistent (same `this`), owner [climb+0x18] = ClientCharacterControlActorComponent,
+  [climb+0x20] = the character actor (ClientChildOnlyInGameActor), its component array [actor+0x68],
+  entry [+0x38] = ClientEquipSlotActorComponent (RTTI-verified, matches static actor->+0x68->+0x38).
+- Item keys 1990000-2 were NOT found as dwords in the equip component, one raw hop, or 600 objects of
+  graph walk. Equip-slot detection is not established (and is now moot: design is inventory presence).
+
+Design (Stas, Nov 15): no equipping. Presence in INVENTORY drives everything:
+- one axe (1990000 or 1990001) -> single-hand plant/hold clip + one hand prop; both -> dual clip + both props;
+  crampons (1990002) -> boot visual/foot benefit independently. Props shown only while climbing, hidden after.
+  Player equipment is never modified.
+- climb-skill stamina costs scaled per item present (INI multipliers, stacked; one axe < two axes, + crampons),
+  Stamina Master style scaling of the resource use restricted to climb skills. Replaces equip stat 1000037
+  (which should later be removed from the gear pack items so the bonus is not double-counted when equipped).
+- rope rest (authored rope_rest clips, animation-only, no items) slowly regenerates stamina, INI rate relative
+  to ground regen.
+Resources already shipped unrouted in gear pack 0.3.0:
+`character/motion/1_pc/1_phm/climbmod/climbmod_piolet_{dual,left,right}_plant_hold_00.paa`.
+
+0.1.2-diag probes (read-only, worker thread, LogLevel 1 is targeted; no graph dumps):
+- [presence] component list of the climbing actor by RTTI, *InventoryActorComponent found by name, deep
+  key search (4000 blocks) under inventory and equip components, verdict per item + 64-byte context
+  around each key (count/slot fields).
+- [diff] snapshots of climb, ctrl, [ctrl+0x110] anim, [ctrl+0x140] mover, equip, stat components and key
+  blocks at +0.6 s and +1.4 s on the wall and again off the wall; logs only fields stable on the wall and
+  different off it (animation node/index, stow state). [drift] logs stat-component fields changing while
+  on the wall (stamina drain).
+- [names] climb/axe/weapon-like strings reachable from ctrl, flagged ONLY-ON-WALL.
+Still unproven, so not implemented: animation selector hook, hand-prop attach, stamina scaling, rope regen.
+
+## 0.1.3-diag (Nov 15 2026)
+
+What the 0.1.2-diag run (01:34-01:38, 5 sessions) proved:
+- The actor at [climb+0x20] has 57 components; [actor+0x68][+0xB8] = ClientInventoryActorComponent,
+  [+0x20] = ClientStatusActorComponent, [+0x38] = equip, [+0x40] = character control.
+- 0 hits for 1990000/1/2 under the inventory in all sessions, but 0.1.2 had no control: it never
+  checked that ANY item key was reachable, so "not carried" and "search can't reach the item list"
+  were indistinguishable.
+- Item keys are plain u32 in memory: off the wall [equip+0x40] = 1000771 (the in-hand item key),
+  while on the wall it is -1 (hand emptied = the vanilla stow on climb).
+- Wall-vs-off leads: [[ctrl+0x140]+0x10] = 4 on the wall vs 3 off (movement mode);
+  ClientStatusActorComponent +0x477 byte = 1 on the wall, 0 off (3 of 3 sessions);
+  [ctrl+0x110] is not an RTTI object (no diffs there); the names probe found nothing (names are hashed).
+  Stamina is not inside the first 0x800 bytes of ClientStatusActorComponent.
+
+0.1.3-diag: [inv] walks the inventory 6 levels / 6000 blocks, lists every item-key-like value
+(1000000..2099999) with count and path, uses the in-hand key as a control, and logs keys added/removed
+since the previous climb; [equip] logs key-like values in the equip component on and off the wall;
+[state] diffs ctrl/move/stat subtrees (2 levels) on the wall x2 vs off x2: small-int fields that
+flip (anim node / mode / stow), and values that fall on the wall and rise off it (stamina candidates).
+
+## 0.1.4-diag (Nov 15 2026)
+
+The 12:28 run meant for 0.1.3 actually ran **0.1.2-diag**: its log header says 0.1.2-diag, and the
+game folder held the 0.1.2 ASI next to the 0.1.1 INI (LogLevel=2, MaxProbes defaulted). The DMM copy
+was 0.1.3 but was never mounted into the game folder. Result of that run (5 climbs, protocol 1-4
+plus one extra): the 0.1.2 key search reported 1990000/1/2 "not found" in every climb, including
+the ones where Stas carried the gear, so that search cannot see the inventory items. 0.1.3's
+controlled walk never ran. Stamina: no candidate (0.1.2 only sampled the status component header);
+the GamePlayState +0x240..+0x268 drifts are per-frame vectors, not stamina.
+
+0.1.4-diag = 0.1.3 probes plus: a warning when the INI next to the ASI is from another version
+(stale deploy), and a one-time [inv layout] dump of the inventory component (typed/raw pointers with
+the following count dword, small ints) so the item list can be located even if the walk misses it.
+
+## 0.1.5-diag (Nov 15 2026)
+
+0.1.4 run (19:56-19:58, 5 climbs; Stas: all three items carried in climb 1, then all dropped, then
+picked up one at a time: Adze, Hammer, Crampons; never equipped):
+- 1990000/1/2 "not found" in all 5 probes although the items were in the bag -> search bug, not absence.
+- The registered keys are right: the gear pack's CDMW shops/groups output registers 1990000/1/2
+  (StoreInfo 6600 and item groups), and DMM's mount log injects the pack's iteminfo.
+- The 0.1.4 walk read 0x1000 bytes from the component root (past its real size) and wandered into
+  faction managers, frame events and neighbouring objects; 6000-block budget always exhausted,
+  so add/remove churn (128/136) is walk-order noise, not inventory changes.
+- [equip+0x40] stayed -1 on and off the wall (empty hands), so the in-hand control never armed.
+- Inventory component layout: containers at +0x18 (n=18), +0x48 (1), +0x118 (2), +0x140 (2),
+  +0xF8/+0x100, +0x68/+0x70.
+- Stamina lead: [[status+0x90]+0x30]+0xD8 (= [[ctrl+0x20]+0x110]+0xD8) float fell 15162->14666 on the
+  wall and rose 12902->14506 off it (session 2 only); other candidates were not repeatable.
+
+0.1.5-diag drops the broad walks and adds walk-independent evidence:
+- [census] every 4-byte-aligned copy of 1990000/1/2 in committed writable memory (game image,
+  uncached/GPU mappings, our buffer and stack excluded), counts per key and copies new/gone since the
+  previous climb; [owners] pointers to (or up to 0x100 before) the first 4 copies of each key, counted
+  per climb with new/gone owners - catches inventories that point at the ItemInfo row.
+- [inv] narrowed walk: only the component's container fields, only Item/Inventory typed objects.
+- [track] 1 Hz value of the stamina lead and climb-state fields (move mode, ctrl+0x164, status+0x477).
+
+## 0.1.6-diag (Nov 19 2026) - port to exe 1.0.0.3732
+
+- Gate accepts exe 1.0.0.3732 (PE TimeDateStamp 0x6AFDC0CF, SizeOfImage 0x13C7E000,
+  CheckSum 0x13787B92) and 1.0.0.3663. 1.0.0.3576 was dropped.
+- All 6 RTTI vtables were found again by type name on 3732. PointClimbMovementMethod
+  slots 4/6/7/8 are byte-identical to 3663 apart from relocations (similarity 1.0).
+  Slot 1 was recompiled but is the same vtable slot with the same role. An offline
+  gate replay (`research/verify_gate.py`) passes for both builds.
+- Component layout is unchanged: the equip worker still reads `[[actor+0x68]+0x38]`.
+  Inventory `[actor+0x68]+0xB8`, status `+0x20`, and control `+0x40` are carried over.
+  The plugin finds components by RTTI name at runtime, so a moved slot is logged
+  rather than misread.
+- Probes are unchanged from 0.1.5 (heap census, owner tracking, narrowed inventory walk,
+  1 Hz track). Everything is read-only and fails closed.
+- Known limit on 3732: the game's ItemInfo row format changed. DMM (and CDMW 0.12.0-alpha.5)
+  cannot read it yet, so the gear pack's items 1990000/1/2 are not registered in-game.
+  The pickup census cannot find them until the gear pack is rebuilt with a 3732-aware tool.
