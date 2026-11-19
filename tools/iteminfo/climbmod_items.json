@@ -1,0 +1,16 @@
+{
+  "_comment": "Climbmod's own item definitions (gear pack 0.4.0). Rows are built locally by port_rows_3732.py from the player's own game files; no game rows are stored here.",
+  "items": [
+    {"key": 1990000, "string_key": "Climb_IceAxe_Adze_OneHandAxe", "name": "Ice Axe (Adze)", "donor_template": 210071,
+     "icon": "ItemIcon_Prefab_cd_phm_01_axe_9001_02_R", "prefabs": ["cd_phm_01_axe_9001_02_v1e54a387", "cd_phm_01_axe_9001_02_v48101418"],
+     "hands": "right (slot 0) and left (slots 1/13) prefab variants", "multichange_records": "299000000-299000018"},
+    {"key": 1990001, "string_key": "Climb_IceAxe_Hammer_OneHandAxe", "name": "Ice Axe (Hammer)", "donor_template": 210071,
+     "icon": "ItemIcon_Prefab_cd_phm_01_axe_9002_02_R", "prefabs": ["cd_phm_01_axe_9002_02_v1e54a387", "cd_phm_01_axe_9002_02_v48101418"],
+     "hands": "right (slot 0) and left (slots 1/13) prefab variants", "multichange_records": "299000100-299000118"},
+    {"key": 1990002, "string_key": "Climb_OldCrampon_Boots_Foot", "name": "Old Crampon Boots", "donor_template": 131027,
+     "icon": "ItemIcon_Prefab_cd_phm_00_foot_9001_Index10", "prefabs": ["cd_phm_00_foot_9001_v6fa9a0f5"]}
+  ],
+  "fields_set_on_donor_copy": ["_key", "_stringKey", "_itemName", "_itemDesc", "_itemIconList", "_multiChangeInfoList", "_enchantDataList", "_prefabDataList"],
+  "removed_in_0_4_0": {"stat": 1000037, "why": "global stamina stat replaced by ClimbmodASI's climb-only scaling; the donor templates do not carry it, so removing it restores the donor's own stat list shape"},
+  "shop": {"store": "Store_Camp_Equipment", "store_key": 6600, "stock_each": 2, "delivered_by": "DMM format-3 array_append on storeinfo stock_data_list"}
+}
