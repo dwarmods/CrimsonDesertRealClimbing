@@ -1,13 +1,13 @@
 #pragma once
 #include <cstdint>
 // Every constant here was read off the exe on disk by research/pe.py,
-// research/static_findings.py (3576) and research/port3663*.py (3663).
+// research/static_findings.py  and research/port3663*.py (3663).
 // Nothing is trusted at runtime without being re-checked against the live
 // image: PE identity first (selects the table below), then the RTTI name behind
 // every vtable, then every slot value we touch. Any other build: fail closed.
 namespace cm::build
 {
-    inline constexpr const char* kVersion = "0.1.5-diag";
+    inline constexpr const char* kVersion = "0.1.6-diag";
 
     struct Vt { uint32_t rva; const char* rtti; };
     // PointClimbMovementMethod slots (ICharacterMovementMethod layout):
@@ -24,21 +24,6 @@ namespace cm::build
         Vt pointClimb, ladderClimb, clientEquipSlot, commonEquipSlot, serverEquipSlot, clientSkill;
         uint32_t slotRva[kSlotCount];
         uint32_t ownerOffset; // [this+0x18] read by begin/end on both builds
-    };
-
-    // Crimson Desert 2.04.08, CrimsonDesert.exe 1.0.0.3576,
-    // sha256 c94ad6c3ea54970a6d2da7a2719753210a7728a91698ed3405dd9125470ed98f
-    inline constexpr BuildDef k3576 {
-        "CrimsonDesert.exe 1.0.0.3576 (2.04.08)",
-        0x6AED2E85u, 0x13CC4000u, 0x137C1424u,
-        { 0x05926780u, ".?AVPointClimbMovementMethod@pa@@" },
-        { 0x059267D8u, ".?AVLadderClimbMovementMethod@pa@@" },
-        { 0x0594D478u, ".?AVClientEquipSlotActorComponent@pa@@" },
-        { 0x05CC7960u, ".?AVCommonEquipSlotActorComponent@pa@@" },
-        { 0x05EF28B0u, ".?AVServerEquipSlotActorComponent@pa@@" },
-        { 0x05954400u, ".?AVClientSkillActorComponent@pa@@" },
-        { 0x00761A30u, 0x00761FA0u, 0x00762350u, 0x00761070u, 0x00761480u },
-        0x18,
     };
 
     // Nov 9 2026 update, CrimsonDesert.exe 1.0.0.3663,
@@ -61,7 +46,29 @@ namespace cm::build
         0x18,
     };
 
-    inline constexpr const BuildDef* kBuilds[] = { &k3663, &k3576 };
+    // Nov 19 2026 update, CrimsonDesert.exe 1.0.0.3732,
+    // sha256 dfcf5c507d09aa0e09cf9766db866fd1e7cf513b9dd7fdc72a8f121ba2d9a9d5
+    // research/port3732.py: each RTTI name still has exactly one vtable with the
+    // same slot count; PointClimb slots 4/6/7/8 are instruction-identical to 3663
+    // (similarity 1.0, so [this+0x18]/[this+0x20] reads are unchanged); slot 1
+    // (update, never called for PointClimb in practice) was recompiled (sim 0.38)
+    // but is still an override in the same position. The equip worker still reads
+    // actor->[+0x68]->[+0x38] (research/port3732_layout.py).
+    inline constexpr BuildDef k3732 {
+        "CrimsonDesert.exe 1.0.0.3732 (Nov 19 2026 update)",
+        0x6AFDC0CFu, 0x13C7E000u, 0x13787B92u,
+        { 0x059A7C90u, ".?AVPointClimbMovementMethod@pa@@" },
+        { 0x059A7C38u, ".?AVLadderClimbMovementMethod@pa@@" },
+        { 0x059CE1D8u, ".?AVClientEquipSlotActorComponent@pa@@" },
+        { 0x05D48810u, ".?AVCommonEquipSlotActorComponent@pa@@" },
+        { 0x05F71898u, ".?AVServerEquipSlotActorComponent@pa@@" },
+        { 0x059D53E8u, ".?AVClientSkillActorComponent@pa@@" },
+        { 0x0078E400u, 0x0078ED10u, 0x0078F0C0u, 0x0078DA40u, 0x0078DE50u },
+        0x18,
+    };
+
+    // Newest first. 1.0.0.3576 was dropped in 0.1.6 (superseded twice).
+    inline constexpr const BuildDef* kBuilds[] = { &k3732, &k3663 };
 
     // climbmod item keys.
     inline constexpr uint32_t kItemAxeAdze   = 1990000u;

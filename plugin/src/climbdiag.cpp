@@ -84,10 +84,10 @@ namespace
             if (nt->FileHeader.TimeDateStamp == b->timeDateStamp && nt->OptionalHeader.SizeOfImage == b->sizeOfImage &&
                 nt->OptionalHeader.CheckSum == b->checkSum) { g_b = b; return true; }
         snprintf(why, n, "PE identity TimeDateStamp=%08lX SizeOfImage=%08lX CheckSum=%08lX matches neither "
-                 "exe 1.0.0.3663 (%08X/%08X/%08X) nor 1.0.0.3576 (%08X/%08X/%08X)",
+                 "exe 1.0.0.3732 (%08X/%08X/%08X) nor 1.0.0.3663 (%08X/%08X/%08X)",
                  (unsigned long)nt->FileHeader.TimeDateStamp, (unsigned long)nt->OptionalHeader.SizeOfImage,
-                 (unsigned long)nt->OptionalHeader.CheckSum, k3663.timeDateStamp, k3663.sizeOfImage, k3663.checkSum,
-                 k3576.timeDateStamp, k3576.sizeOfImage, k3576.checkSum);
+                 (unsigned long)nt->OptionalHeader.CheckSum, k3732.timeDateStamp, k3732.sizeOfImage, k3732.checkSum,
+                 k3663.timeDateStamp, k3663.sizeOfImage, k3663.checkSum);
         return false;
     }
     bool VtableOk(const Vt& v)
@@ -552,7 +552,7 @@ void Start(HMODULE self)
 
     ReadSettings();
     log::Open((g_dir + L"ClimbmodASI.log").c_str(), g_set.logLevel);
-    LOGI("[mod] Climbmod ASI %s (accepts exe 1.0.0.3663 and 1.0.0.3576 only). LogLevel=%d Enabled=%d HookPointClimb=%d "
+    LOGI("[mod] Climbmod ASI %s (accepts exe 1.0.0.3732 and 1.0.0.3663 only). LogLevel=%d Enabled=%d HookPointClimb=%d "
          "Probe=%d MaxProbes=%d AnimSwap=%d KeepAxesDrawn=%d", kVersion, g_set.logLevel, g_set.enabled, g_set.hookPointClimb,
          g_set.equipScan, g_set.maxScans, g_set.animSwap, g_set.keepAxesDrawn);
     {
