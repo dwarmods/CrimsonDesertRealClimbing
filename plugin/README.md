@@ -172,3 +172,21 @@ picked up one at a time: Adze, Hammer, Crampons; never equipped):
   per climb with new/gone owners - catches inventories that point at the ItemInfo row.
 - [inv] narrowed walk: only the component's container fields, only Item/Inventory typed objects.
 - [track] 1 Hz value of the stamina lead and climb-state fields (move mode, ctrl+0x164, status+0x477).
+
+## 0.1.6-diag (Nov 19 2026) - port to exe 1.0.0.3732
+
+- Gate accepts exe 1.0.0.3732 (PE TimeDateStamp 0x6AFDC0CF, SizeOfImage 0x13C7E000,
+  CheckSum 0x13787B92) and 1.0.0.3663. 1.0.0.3576 was dropped.
+- All 6 RTTI vtables were found again by type name on 3732. PointClimbMovementMethod
+  slots 4/6/7/8 are byte-identical to 3663 apart from relocations (similarity 1.0).
+  Slot 1 was recompiled but is the same vtable slot with the same role. An offline
+  gate replay (`research/verify_gate.py`) passes for both builds.
+- Component layout is unchanged: the equip worker still reads `[[actor+0x68]+0x38]`.
+  Inventory `[actor+0x68]+0xB8`, status `+0x20`, and control `+0x40` are carried over.
+  The plugin finds components by RTTI name at runtime, so a moved slot is logged
+  rather than misread.
+- Probes are unchanged from 0.1.5 (heap census, owner tracking, narrowed inventory walk,
+  1 Hz track). Everything is read-only and fails closed.
+- Known limit on 3732: the game's ItemInfo row format changed. DMM (and CDMW 0.12.0-alpha.5)
+  cannot read it yet, so the gear pack's items 1990000/1/2 are not registered in-game.
+  The pickup census cannot find them until the gear pack is rebuilt with a 3732-aware tool.

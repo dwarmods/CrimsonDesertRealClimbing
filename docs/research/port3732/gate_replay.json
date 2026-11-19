@@ -1,0 +1,22 @@
+{
+ "k3663": {
+  "identity": true,
+  ".?AVPointClimbMovementMethod@pa@@": true,
+  ".?AVLadderClimbMovementMethod@pa@@": true,
+  ".?AVClientEquipSlotActorComponent@pa@@": true,
+  ".?AVCommonEquipSlotActorComponent@pa@@": true,
+  ".?AVServerEquipSlotActorComponent@pa@@": true,
+  ".?AVClientSkillActorComponent@pa@@": true,
+  "slots": true
+ },
+ "k3732": {
+  "identity": true,
+  ".?AVPointClimbMovementMethod@pa@@": true,
+  ".?AVLadderClimbMovementMethod@pa@@": true,
+  ".?AVClientEquipSlotActorComponent@pa@@": true,
+  ".?AVCommonEquipSlotActorComponent@pa@@": true,
+  ".?AVServerEquipSlotActorComponent@pa@@": true,
+  ".?AVClientSkillActorComponent@pa@@": true,
+  "slots": true
+ }
+}
